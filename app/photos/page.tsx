@@ -1,6 +1,6 @@
 "use client";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { useSearchParams } from "next/navigation";
 import Nav, { NAV_WIDTH } from "../components/Nav";
 import { useLang } from "../context/lang";
 import { TOP_BAR_HEIGHT } from "../lib/constants";
@@ -74,9 +74,8 @@ const seriesData = {
 
 export default function Photos() {
   const { lang } = useLang();
-  const searchParams = useSearchParams();
   const series = seriesData[lang];
-  const activeId = searchParams.get("filter") ?? "urban-quiet";
+  const [activeId, setActiveId] = useState("urban-quiet");
   const activeSeries = series.find(s => s.id === activeId) ?? series[0];
   const photos = photoGrids[activeId as keyof typeof photoGrids] ?? [];
 
@@ -108,9 +107,25 @@ export default function Photos() {
               fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
               fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
             }}>{ui.title}</h1>
-            <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.2em", color: "var(--faint)" }}>
-              {ui.count}
-            </span>
+            {/* Series tabs replacing count */}
+            <div style={{ display: "flex", gap: 20, alignItems: "baseline" }}>
+              {seriesData[lang].map(s => {
+                const isActive = activeId === s.id;
+                return (
+                  <button key={s.id}
+                    onClick={() => setActiveId(s.id)}
+                    style={{
+                      fontFamily: "var(--font-geist),sans-serif",
+                      fontSize: 9, letterSpacing: "0.2em",
+                      color: isActive ? "var(--dark)" : "var(--faint)",
+                      background: "none", border: "none", cursor: "pointer",
+                      borderBottom: isActive ? "1px solid var(--dark)" : "1px solid transparent",
+                      paddingBottom: 2, transition: "color 0.15s",
+                    }}
+                  >{s.title.toUpperCase()}</button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Photo grid */}

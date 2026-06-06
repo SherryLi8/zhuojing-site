@@ -117,9 +117,9 @@ function Wheel({ size = 108, text = "DESIGN · WORDS · PHOTOS · ABOUT · " }: 
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const works = [
-  { title: "Zentea",             category: "Brand Identity", year: "2023", note: "Tea as ritual. A brand language built from silence and ceremony." },
-  { title: "Seasons",            category: "Brand Identity", year: "2022", note: "A flower store that changes with the light. Identity rooted in impermanence." },
-  { title: "The Period",         category: "Type Design",    year: "2023", note: "A typeface that holds the weight of what comes before the full stop." },
+  { title: "Zentea",   category: "Brand Identity", year: "2023", note: "Tea as ritual. A brand language built from silence and ceremony.",              img: "/Images/ZENTEA/主图.png" },
+  { title: "Seasons",  category: "Brand Identity", year: "2022", note: "A flower store that changes with the light. Identity rooted in impermanence.", img: "" },
+  { title: "The Period", category: "Type Design",  year: "2023", note: "A typeface that holds the weight of what comes before the full stop.",         img: "" },
 ];
 
 const photos = [
@@ -198,11 +198,13 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
           {/* ── Work ── */}
           <AnimatePresence mode="wait">
             {sub === 0 && (
-              <motion.div key={`work-${workIdx}`} style={contentStyle}
+              <motion.div key={`work-${workIdx}`}
+                style={{ ...contentStyle, justifyContent: "space-between", alignItems: "center", gap: "4vw" }}
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                 transition={{ duration: 0.65, ease: [0.25, 0, 0, 1] }}
               >
-                <div>
+                {/* Text */}
+                <div style={{ flexShrink: 0 }}>
                   <div style={{ fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}>
                     {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {works[workIdx].category} · {works[workIdx].year}
                   </div>
@@ -220,6 +222,23 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                     VIEW PROJECT →
                   </Link>
                 </div>
+
+                {/* Image */}
+                {works[workIdx].img ? (
+                  <motion.div
+                    key={`work-img-${workIdx}`}
+                    initial={{ opacity: 0, clipPath: "inset(6% 0 6% 0)" }}
+                    animate={{ opacity: 1, clipPath: "inset(0% 0 0% 0)" }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ flexShrink: 0, height: "72vh", width: "32vw", overflow: "hidden" }}
+                  >
+                    <img src={works[workIdx].img} alt={works[workIdx].title}
+                      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  </motion.div>
+                ) : (
+                  <div style={{ flexShrink: 0, height: "72vh", width: "32vw", background: "var(--placeholder)" }} />
+                )}
               </motion.div>
             )}
 

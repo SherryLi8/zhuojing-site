@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
 import Nav, { NAV_WIDTH } from "../components/Nav";
 import { TOP_BAR_HEIGHT } from "../components/TopBar";
 import { useLang } from "../context/lang";
@@ -17,7 +16,22 @@ export const works = [
     num: "01", title: "Zentea",
     tag: "brand-identity", tagLabel: "Brand Identity", year: "2023",
     note: "Tea as ritual. A brand language built from silence and ceremony.",
-    img: "",
+    img: "/Images/ZENTEA/主图.png",
+    images: [
+      "/Images/ZENTEA/主图.png",
+      "/Images/ZENTEA/stationery.png",
+      "/Images/ZENTEA/小册子.png",
+      "/Images/ZENTEA/礼品卡.png",
+      "/Images/ZENTEA/明信片.png",
+      "/Images/ZENTEA/盒装.jpg",
+      "/Images/ZENTEA/袋子.png",
+      "/Images/ZENTEA/地光.png",
+      "/Images/ZENTEA/Window%20Banner%20Mockup_%E5%89%AF%E6%9C%AC.png",
+      "/Images/ZENTEA/Wayfinding_%E5%89%AF%E6%9C%AC.png",
+      "/Images/ZENTEA/Menu%20Mockup_%E5%89%AF%E6%9C%AC.jpg",
+      "/Images/ZENTEA/ZENTEA%20WEBPAGE_%E5%89%AF%E6%9C%AC.png",
+      "/Images/ZENTEA/社媒.png",
+    ],
   },
   {
     num: "02", title: "Seasons",
@@ -95,14 +109,23 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
   }
   return (
     <div>
-      {/* Image */}
-      <div style={{
-        width: "100%", height: "60vh",
-        background: work.img ? undefined : "var(--placeholder)",
-        marginBottom: 28, overflow: "hidden", flexShrink: 0,
-      }}>
-        {work.img && <img src={work.img} alt={work.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />}
-      </div>
+      {/* Images — gallery if multiple, single placeholder if none */}
+      {"images" in work && (work as typeof work & { images?: string[] }).images?.length ? (
+        <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 28 }}>
+          {((work as typeof work & { images: string[] }).images).map((src, i) => (
+            <img key={i} src={src} alt={`${work.title} ${i + 1}`}
+              style={{ width: "100%", height: "auto", display: "block" }} />
+          ))}
+        </div>
+      ) : (
+        <div style={{
+          width: "100%", height: "60vh",
+          background: work.img ? undefined : "var(--placeholder)",
+          marginBottom: 28, overflow: "hidden", flexShrink: 0,
+        }}>
+          {work.img && <img src={work.img} alt={work.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />}
+        </div>
+      )}
 
       {/* Title */}
       <div style={{
@@ -139,10 +162,15 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
+const FILTERS = [
+  { key: "brand-identity", en: "Brand Identity", zh: "品牌设计" },
+  { key: "editorial",      en: "Editorial",      zh: "编辑设计" },
+  { key: "uxui",           en: "UX/UI",           zh: "UX/UI"   },
+] as const;
+
 export default function Design() {
-  const searchParams = useSearchParams();
   const { lang } = useLang();
-  const activeFilter = searchParams.get("filter") ?? "all";
+  const [activeFilter, setActiveFilter] = useState<string>("all");
   const [hovered,  setHovered]  = useState<typeof works[0] | null>(null);
   const [selected, setSelected] = useState<typeof works[0] | null>(null);
 
@@ -180,10 +208,25 @@ export default function Design() {
               fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
               fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
             }}>{lang === "en" ? "Design" : "设计"}</h1>
-            <span style={{
-              fontFamily: "var(--font-geist),sans-serif",
-              fontSize: 10, letterSpacing: "0.2em", color: "var(--faint)",
-            }}>{filtered.length}{lang === "en" ? " PROJECTS" : " 个项目"}</span>
+            {/* Filter tabs */}
+            <div style={{ display: "flex", gap: 20, alignItems: "baseline" }}>
+              {FILTERS.map(f => {
+                const isActive = activeFilter === f.key;
+                return (
+                  <button key={f.key}
+                    onClick={() => setActiveFilter(isActive ? "all" : f.key)}
+                    style={{
+                      fontFamily: "var(--font-geist),sans-serif",
+                      fontSize: 9, letterSpacing: "0.2em",
+                      color: isActive ? "var(--dark)" : "var(--faint)",
+                      background: "none", border: "none", cursor: "pointer",
+                      borderBottom: isActive ? "1px solid var(--dark)" : "1px solid transparent",
+                      paddingBottom: 2, transition: "color 0.15s",
+                    }}
+                  >{lang === "en" ? f.en : f.zh}</button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Project rows */}
