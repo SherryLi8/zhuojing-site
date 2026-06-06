@@ -167,7 +167,7 @@ const works = [
 const P = "/Images/Photos";
 const photos = [
   { title: "New York",    series: "In Between",  year: "2022", img: `${P}/1. New York/Featured.jpg` },
-  { title: "Guiyang",     series: "Home Ground", year: "2022", img: `${P}/2.Guiyang/未命名-2.jpg` },
+  { title: "Guiyang",     series: "Home Ground", year: "2022", img: `${P}/2.Guiyang/LP.jpg` },
   { title: "Los Angeles", series: "Silver",      year: "2023", img: `${P}/Los Angeles/LP主图.jpg` },
   { title: "USC",         series: "Residency",   year: "2024", img: `${P}/USC/LP主图.JPG` },
   { title: "Yosemite",    series: "Exposure",    year: "2023", img: `${P}/Yosemite/000236660001_副本.jpg` },
