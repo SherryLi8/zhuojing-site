@@ -308,7 +308,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                       style={{
                         display: "grid", gridTemplateColumns: "1fr 88px 52px",
                         alignItems: "baseline", padding: "26px 0",
-                        borderTop: "1px solid var(--line)",
+                        borderTop: i === 0 ? "none" : "1px solid var(--line)",
                         cursor: w.pub ? "pointer" : "default",
                         textDecoration: "none",
                       }}
@@ -324,7 +324,6 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                       <span style={{ fontSize: 9, color: "var(--faint)", textAlign: "right", fontFamily: "var(--font-geist),sans-serif" }}>{w.date}</span>
                     </motion.a>
                   ))}
-                  <div style={{ borderTop: "1px solid var(--line)" }}/>
                 </div>
               </motion.div>
             )}
@@ -548,11 +547,11 @@ function AboutBlock() {
       </div>
       <motion.div initial={{ opacity: 0 }} animate={vis ? { opacity: 1 } : {}}
         transition={{ duration: 0.5, delay: 1.0 }}
-        style={{ display: "flex", gap: 28, fontSize: 10, letterSpacing: "0.18em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif" }}
       >
-        <span>MFA Design · USC</span>
-        <span>BFA Web & Multimedia · SVA</span>
-        <Link href="/about" style={{ color: "var(--dim)" }}>FULL BIO →</Link>
+        <Link href="/about" style={{
+          fontFamily: "var(--font-geist),sans-serif",
+          fontSize: 10, letterSpacing: "0.18em", color: "var(--dim)",
+        }}>FULL BIO →</Link>
       </motion.div>
     </div>
   );
