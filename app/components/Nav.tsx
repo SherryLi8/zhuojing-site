@@ -32,24 +32,31 @@ export default function Nav() {
       <nav>
         {SITE_NAV.map(cat => {
           const isActive = pathname.startsWith(cat.href);
-          const label    = cat.label[lang];
-
+          const label = cat.label[lang];
           return (
-            <div key={cat.id} style={{ marginBottom: isActive && "sub" in cat ? 2 : 8 }}>
-
-              {/* Top-level link — Newsreader italic */}
-              <Link href={cat.href} style={{ textDecoration: "none" }}>
+            <Link key={cat.id} href={cat.href} style={{ textDecoration: "none", display: "block" }}>
+              <div style={{ display: "flex", alignItems: "center", padding: "5px 0" }}>
+                {/* Tick mark — longer + opaque when active */}
                 <div style={{
+                  width: isActive ? 10 : 4,
+                  height: 1,
+                  background: "var(--dim)",
+                  marginRight: 8,
+                  flexShrink: 0,
+                  opacity: isActive ? 1 : 0.22,
+                  transition: "width 0.3s ease, opacity 0.3s ease",
+                }} />
+                {/* Label — only visible on active page */}
+                <span style={{
                   fontFamily: "var(--font-newsreader),serif",
                   fontStyle: "italic", fontWeight: 200,
-                  fontSize: 14,
-                  color: isActive ? "var(--dark)" : "var(--faint)",
-                  padding: "4px 0",
-                  transition: "color 0.2s",
-                }}>{label}</div>
-              </Link>
-
-            </div>
+                  fontSize: 13, color: "var(--dim)",
+                  opacity: isActive ? 1 : 0,
+                  transition: "opacity 0.3s ease",
+                  whiteSpace: "nowrap",
+                }}>{label}</span>
+              </div>
+            </Link>
           );
         })}
       </nav>
