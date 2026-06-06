@@ -5,20 +5,28 @@ import Nav, { NAV_WIDTH } from "../components/Nav";
 import { useLang } from "../context/lang";
 import { TOP_BAR_HEIGHT } from "../lib/constants";
 
+const NY = "/Images/Photos/1. New York";
+
 // ─── Photo grids (shared, language-independent) ───────────────────────────────
 const photoGrids = {
   "urban-quiet": [
-    { id: "uq1", aspect: "3/2" }, { id: "uq2", aspect: "2/3" },
-    { id: "uq3", aspect: "3/2" }, { id: "uq4", aspect: "1/1" },
-    { id: "uq5", aspect: "2/3" },
+    { id: "uq1", aspect: "3/2", src: "" }, { id: "uq2", aspect: "2/3", src: "" },
+    { id: "uq3", aspect: "3/2", src: "" }, { id: "uq4", aspect: "1/1", src: "" },
+    { id: "uq5", aspect: "2/3", src: "" },
   ],
   "fieldwork": [
-    { id: "fw1", aspect: "2/3" }, { id: "fw2", aspect: "3/2" },
-    { id: "fw3", aspect: "2/3" }, { id: "fw4", aspect: "3/2" },
+    { id: "fw1", aspect: "2/3", src: "" }, { id: "fw2", aspect: "3/2", src: "" },
+    { id: "fw3", aspect: "2/3", src: "" }, { id: "fw4", aspect: "3/2", src: "" },
   ],
   "in-between": [
-    { id: "ib1", aspect: "3/2" }, { id: "ib2", aspect: "3/2" },
-    { id: "ib3", aspect: "2/3" }, { id: "ib4", aspect: "3/4" },
+    { id: "ib1", aspect: "3/2", src: `${NY}/20220212-IMG_0614_副本.jpg` },
+    { id: "ib2", aspect: "2/3", src: `${NY}/IMG_0577_副本.jpg` },
+    { id: "ib3", aspect: "3/2", src: `${NY}/20220212-IMG_0612_副本.jpg` },
+    { id: "ib4", aspect: "2/3", src: `${NY}/20220208-IMG_0605_副本.jpg` },
+    { id: "ib5", aspect: "3/2", src: `${NY}/20220130-IMG_0287_副本.jpg` },
+    { id: "ib6", aspect: "2/3", src: `${NY}/20220213-IMG_0628_副本.jpg` },
+    { id: "ib7", aspect: "3/2", src: `${NY}/Cropped_副本.jpg` },
+    { id: "ib8", aspect: "2/3", src: `${NY}/20220212-20220212-IMG_6925_副本.jpg` },
   ],
 };
 
@@ -42,8 +50,8 @@ const seriesData = {
     {
       id: "in-between",
       title: "In Between",
-      location: "New York", year: "2024",
-      count: 4,
+      location: "New York", year: "2022",
+      count: 8,
       note: "Everything happens in the margins. The threshold, the pause, the transit.",
     },
   ],
@@ -65,8 +73,8 @@ const seriesData = {
     {
       id: "in-between",
       title: "过渡",
-      location: "纽约", year: "2024",
-      count: 4,
+      location: "纽约", year: "2022",
+      count: 8,
       note: "一切都发生在边缘。阈值、停顿、过渡。",
     },
   ],
@@ -128,40 +136,23 @@ export default function Photos() {
             </div>
           </div>
 
-          {/* Photo grid */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            {/* Row 1: wide + portrait — fixed height */}
-            <div style={{ display: "grid", gridTemplateColumns: "62% 1fr", gap: 10, height: "38vh" }}>
-              {photos[0] && (
-                <motion.div
-                  key={activeId + "0"}
-                  initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                  transition={{ duration: 0.4 }}
-                  style={{ height: "100%", overflow: "hidden", background: "var(--placeholder)" }}
-                />
-              )}
-              {photos[1] && (
-                <motion.div
-                  key={activeId + "1"}
-                  initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.05 }}
-                  style={{ height: "100%", overflow: "hidden", background: "var(--placeholder)" }}
-                />
-              )}
-            </div>
-            {/* Row 2: remaining photos — fixed height */}
-            {photos.length > 2 && (
-              <div style={{ display: "grid", gridTemplateColumns: `repeat(${photos.length - 2}, 1fr)`, gap: 10, height: "36vh" }}>
-                {photos.slice(2).map((p, i) => (
-                  <motion.div
-                    key={activeId + (i + 2)}
-                    initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                    transition={{ duration: 0.4, delay: 0.08 + i * 0.04 }}
-                    style={{ height: "100%", overflow: "hidden", background: "var(--placeholder)" }}
-                  />
-                ))}
-              </div>
-            )}
+          {/* Photo grid — masonry-style two-column */}
+          <div style={{ columns: 2, columnGap: 10 }}>
+            {photos.map((p, i) => (
+              <motion.div
+                key={activeId + p.id}
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                style={{ breakInside: "avoid", marginBottom: 10, overflow: "hidden", background: "var(--placeholder)" }}
+              >
+                {p.src ? (
+                  <img src={p.src} alt={`${activeSeries.title} ${i + 1}`}
+                    style={{ width: "100%", display: "block", aspectRatio: p.aspect, objectFit: "cover" }} />
+                ) : (
+                  <div style={{ aspectRatio: p.aspect, background: "var(--placeholder)" }} />
+                )}
+              </motion.div>
+            ))}
           </div>
         </div>
 

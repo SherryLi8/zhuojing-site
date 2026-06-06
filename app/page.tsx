@@ -117,15 +117,15 @@ function Wheel({ size = 108, text = "DESIGN · WORDS · PHOTOS · ABOUT · " }: 
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const works = [
-  { title: "Zentea",   category: "Brand Identity", year: "2023", note: "Tea as ritual. A brand language built from silence and ceremony.",              img: "/Images/ZENTEA/主图.png" },
+  { title: "Zentea",   category: "Brand Identity", year: "2024", note: "Tea as ritual. A brand language built from silence and ceremony.",              img: "/Images/ZENTEA/主图.png" },
   { title: "Seasons",  category: "Brand Identity", year: "2022", note: "A flower store that changes with the light. Identity rooted in impermanence.", img: "" },
   { title: "The Period", category: "Type Design",  year: "2023", note: "A typeface that holds the weight of what comes before the full stop.",         img: "" },
 ];
 
 const photos = [
-  { title: "Tokyo",     series: "Urban Quiet",  year: "2024" },
-  { title: "Yunnan",    series: "Fieldwork",    year: "2023" },
-  { title: "New York",  series: "In Between",   year: "2024" },
+  { title: "Tokyo",     series: "Urban Quiet",  year: "2024", img: "" },
+  { title: "Yunnan",    series: "Fieldwork",    year: "2023", img: "" },
+  { title: "New York",  series: "In Between",   year: "2024", img: "/Images/Photos/1. New York/Featured.jpg" },
 ];
 
 const writings = [
@@ -283,8 +283,17 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                       aspectRatio: "2/3",
                       background: "var(--placeholder)",
                       flexShrink: 0,
+                      overflow: "hidden",
                     }}
-                  />
+                  >
+                    {photos[photoIdx].img && (
+                      <img
+                        src={photos[photoIdx].img}
+                        alt={photos[photoIdx].title}
+                        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                      />
+                    )}
+                  </motion.div>
                 </motion.div>
               </AnimatePresence>
             )}
