@@ -326,14 +326,15 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
+// Row 1: ALL, Branding, Editorial, Packaging — Row 2: Typography, UX/UI, Product, Creative
 const FILTERS = [
-  { key: "brand-identity", en: "Branding",        zh: "品牌"     },
-  { key: "editorial",      en: "Editorial",      zh: "编辑设计" },
-  { key: "typography",     en: "Typography",     zh: "字体设计" },
-  { key: "packaging",      en: "Packaging",      zh: "包装设计" },
-  { key: "uxui",           en: "UX/UI",          zh: "UX/UI"   },
-  { key: "product",        en: "Product",        zh: "产品设计" },
-  { key: "creative",       en: "Creative",       zh: "创意"     },
+  { key: "brand-identity", en: "Branding",   zh: "品牌"     },
+  { key: "editorial",      en: "Editorial",  zh: "编辑设计" },
+  { key: "packaging",      en: "Packaging",  zh: "包装设计" },
+  { key: "typography",     en: "Typography", zh: "字体设计" },
+  { key: "uxui",           en: "UX/UI",      zh: "UX/UI"   },
+  { key: "product",        en: "Product",    zh: "产品设计" },
+  { key: "creative",       en: "Creative",   zh: "创意"     },
 ] as const;
 
 export default function Design() {
@@ -368,7 +369,7 @@ export default function Design() {
         }}>
           {/* Section header */}
           <div style={{
-            display: "flex", alignItems: "baseline", justifyContent: "space-between",
+            display: "flex", alignItems: "flex-start", justifyContent: "space-between",
             marginBottom: 40, paddingBottom: 20,
             borderBottom: "1px solid var(--line)",
           }}>
@@ -376,8 +377,8 @@ export default function Design() {
               fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
               fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
             }}>{lang === "en" ? "Design" : "设计"}</h1>
-            {/* Filter tabs — single row, underline on inner span = text-width centered */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 14px", alignItems: "baseline", justifyContent: "flex-end", maxWidth: "58%" }}>
+            {/* Filter tabs — 4-col grid → exactly 2 rows of 4 */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, max-content)", gap: "8px 14px" }}>
               {[{ key: "all", en: "ALL", zh: "全部" } as const, ...FILTERS].map((f) => {
                 const isActive = activeFilter === f.key;
                 return (

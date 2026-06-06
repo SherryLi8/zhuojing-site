@@ -60,6 +60,18 @@ const photoGrids: Record<string, { id: string; aspect: string; src: string }[]> 
     { id: "yo9", aspect: "3/2", src: `${P}/Yosemite/000236660022_副本.jpg` },
     { id: "yo10", aspect: "3/2", src: `${P}/Yosemite/000236660027_副本.jpg` },
   ],
+  "florida": [
+    { id: "fl1",  aspect: "3/2", src: `${P}/Florida/IMG_2288_%E5%89%AF%E6%9C%AC.JPG` },
+    { id: "fl2",  aspect: "3/2", src: `${P}/Florida/IMG_2333_%E5%89%AF%E6%9C%AC.JPG` },
+    { id: "fl3",  aspect: "3/2", src: `${P}/Florida/IMG_2368_%E5%89%AF%E6%9C%AC.JPG` },
+    { id: "fl4",  aspect: "3/2", src: `${P}/Florida/IMG_2449_%E5%89%AF%E6%9C%AC.JPG` },
+    { id: "fl5",  aspect: "3/2", src: `${P}/Florida/IMG_2645_%E5%89%AF%E6%9C%AC.JPG` },
+    { id: "fl6",  aspect: "3/2", src: `${P}/Florida/IMG_2825_%E5%89%AF%E6%9C%AC.JPG` },
+    { id: "fl7",  aspect: "3/2", src: `${P}/Florida/IMG_3170_%E5%89%AF%E6%9C%AC.JPG` },
+    { id: "fl8",  aspect: "3/2", src: `${P}/Florida/IMG_3818_%E5%89%AF%E6%9C%AC.jpg` },
+    { id: "fl9",  aspect: "3/2", src: `${P}/Florida/IMG_3825_%E5%89%AF%E6%9C%AC.jpg` },
+    { id: "fl10", aspect: "3/2", src: `${P}/Florida/IMG_3904_%E5%89%AF%E6%9C%AC.JPG` },
+  ],
 };
 
 // ─── Series data ──────────────────────────────────────────────────────────────
@@ -70,13 +82,15 @@ const seriesData = {
     { id: "los-angeles",  title: "Silver",       location: "Los Angeles",  year: "2023", count: 8,  note: "Light that arrives sideways. Film grain as atmosphere." },
     { id: "usc",          title: "Residency",    location: "USC",          year: "2024", count: 10, note: "The institution as landscape. Weeks at a time, observed in passing." },
     { id: "yosemite",     title: "Exposure",     location: "Yosemite",     year: "2023", count: 10, note: "Scale that unmakes you. The valley holds everything it needs to." },
+    { id: "florida",      title: "Shore",        location: "Florida",      year: "2022", count: 10, note: "Heat, water, stillness. The south at its most unhurried." },
   ],
   zh: [
-    { id: "new-york",     title: "过渡",   location: "纽约",   year: "2022", count: 8,  note: "一切都发生在边缘。阈值、停顿、过渡。" },
-    { id: "guiyang",      title: "故土",   location: "贵阳",   year: "2022", count: 5,  note: "熟悉的陌生感。用借来的距离重新看一座家乡。" },
-    { id: "los-angeles",  title: "银盐",   location: "洛杉矶", year: "2023", count: 8,  note: "侧面抵达的光。胶片颗粒作为氛围。" },
-    { id: "usc",          title: "驻留",   location: "南加大", year: "2024", count: 10, note: "校园作为风景。几周时光，在路过中被观察。" },
-    { id: "yosemite",     title: "曝光",   location: "约塞米蒂", year: "2023", count: 10, note: "令人失去尺度感的规模。山谷容纳了所需的一切。" },
+    { id: "new-york",     title: "过渡",     location: "纽约",      year: "2022", count: 8,  note: "一切都发生在边缘。阈值、停顿、过渡。" },
+    { id: "guiyang",      title: "故土",     location: "贵阳",      year: "2022", count: 5,  note: "熟悉的陌生感。用借来的距离重新看一座家乡。" },
+    { id: "los-angeles",  title: "银盐",     location: "洛杉矶",   year: "2023", count: 8,  note: "侧面抵达的光。胶片颗粒作为氛围。" },
+    { id: "usc",          title: "驻留",     location: "南加大",   year: "2024", count: 10, note: "校园作为风景。几周时光，在路过中被观察。" },
+    { id: "yosemite",     title: "曝光",     location: "约塞米蒂", year: "2023", count: 10, note: "令人失去尺度感的规模。山谷容纳了所需的一切。" },
+    { id: "florida",      title: "岸边",     location: "佛罗里达", year: "2022", count: 10, note: "热、水、静。最不慌不忙的南方。" },
   ],
 };
 
