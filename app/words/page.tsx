@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
+import PageNav from "../components/PageNav";
 import { useLang } from "../context/lang";
 import { TOP_BAR_HEIGHT } from "../components/TopBar";
 
@@ -133,11 +135,12 @@ export default function Words() {
             const isDim = hovered && hovered.id !== entry.id;
             const baseOpacity = entry.published ? 1 : 0.5;
             return (
-              <div
+              <motion.div
                 key={entry.id}
                 onMouseEnter={() => setHovered(entry)}
                 onMouseLeave={() => setHovered(null)}
-                style={{ opacity: isDim ? 0.15 : baseOpacity, transition: "opacity 0.15s" }}
+                animate={{ opacity: isDim ? 0.15 : baseOpacity }}
+                transition={{ duration: 0.2 }}
               >
                 <Tag
                   {...(entry.published ? {
@@ -169,7 +172,7 @@ export default function Words() {
                     {entry.date}
                   </span>
                 </Tag>
-              </div>
+              </motion.div>
             );
           })}
 
@@ -180,33 +183,52 @@ export default function Words() {
 
         {/* ── Right: detail panel ── */}
         <div style={{ position: "sticky", top: TOP_BAR_HEIGHT, height: `calc(100vh - ${TOP_BAR_HEIGHT}px)`, padding: "48px 32px", overflowY: "auto" }}>
-          {hovered ? (
-            <div>
-              <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.22em", color: "var(--faint)", marginBottom: 20 }}>
-                {hovered.tag.toUpperCase()} · {hovered.date}
-              </div>
-              <div style={{
-                fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-                fontSize: "clamp(18px,1.6vw,22px)", color: "var(--dark)",
-                lineHeight: 1.25, marginBottom: 20,
-              }}>{hovered.title}</div>
-              <p style={{
-                fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)", lineHeight: 1.75,
-              }}>{hovered.desc}</p>
-              {hovered.published && (
-                <a href={hovered.href} target={hovered.external ? "_blank" : undefined}
-                  rel={hovered.external ? "noopener noreferrer" : undefined}
-                  style={{ display: "block", marginTop: 24, fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.22em", color: "var(--faint)", textDecoration: "none", borderBottom: "1px solid var(--line)", paddingBottom: 2, width: "fit-content" }}>
-                  READ →
-                </a>
-              )}
-            </div>
-          ) : (
-            <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.18em", color: "var(--faint)" }}>
-              HOVER AN ENTRY
-            </div>
-          )}
+          {/* Page navigation */}
+          <PageNav />
+
+          {/* Detail content — animated on hover change */}
+          <AnimatePresence mode="wait">
+            {hovered ? (
+              <motion.div
+                key={hovered.id}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.28, ease: [0.25, 0, 0, 1] }}
+              >
+                <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.22em", color: "var(--faint)", marginBottom: 20 }}>
+                  {hovered.tag.toUpperCase()} · {hovered.date}
+                </div>
+                <div style={{
+                  fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                  fontSize: "clamp(18px,1.6vw,22px)", color: "var(--dark)",
+                  lineHeight: 1.25, marginBottom: 20,
+                }}>{hovered.title}</div>
+                <p style={{
+                  fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
+                  fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)", lineHeight: 1.75,
+                }}>{hovered.desc}</p>
+                {hovered.published && (
+                  <a href={hovered.href} target={hovered.external ? "_blank" : undefined}
+                    rel={hovered.external ? "noopener noreferrer" : undefined}
+                    style={{ display: "block", marginTop: 24, fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.22em", color: "var(--faint)", textDecoration: "none", borderBottom: "1px solid var(--line)", paddingBottom: 2, width: "fit-content" }}>
+                    READ →
+                  </a>
+                )}
+              </motion.div>
+            ) : (
+              <motion.div
+                key="empty"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.18em", color: "var(--faint)" }}
+              >
+                HOVER AN ENTRY
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
       </div>

@@ -46,13 +46,13 @@ export default function Nav() {
                   opacity: isActive ? 1 : 0.22,
                   transition: "width 0.3s ease, opacity 0.3s ease",
                 }} />
-                {/* Label — only visible on active page */}
+                {/* Label — always visible; active=dark, inactive=faint */}
                 <span style={{
                   fontFamily: "var(--font-newsreader),serif",
                   fontStyle: "italic", fontWeight: 200,
-                  fontSize: 13, color: "var(--dim)",
-                  opacity: isActive ? 1 : 0,
-                  transition: "opacity 0.3s ease",
+                  fontSize: 13,
+                  color: isActive ? "var(--dark)" : "var(--faint)",
+                  transition: "color 0.3s ease",
                   whiteSpace: "nowrap",
                 }}>{label}</span>
               </div>

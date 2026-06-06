@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
+import PageNav from "../components/PageNav";
 import { useLang } from "../context/lang";
 import { TOP_BAR_HEIGHT } from "../components/TopBar";
 
@@ -76,7 +77,7 @@ function WechatModal({ onClose }: { onClose: () => void }) {
           cursor: "default",
         }}
       >
-        <img src="/wechat-qr.png" alt="WeChat QR" width={220} height={220} style={{ display: "block" }} />
+        <img src="/Images/wechat.JPG" alt="WeChat QR" width={220} height={220} style={{ display: "block" }} />
         <div style={{
           fontFamily: "var(--font-geist),sans-serif", fontSize: 10,
           letterSpacing: "0.2em", color: "var(--faint)",
@@ -283,11 +284,19 @@ export default function About() {
           initial={{ opacity: 0, clipPath: "inset(8% 0 8% 0)" }}
           animate={{ opacity: 1, clipPath: "inset(0% 0 0% 0)" }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          style={{ position: "sticky", top: TOP_BAR_HEIGHT, height: `calc(100vh - ${TOP_BAR_HEIGHT}px)`, background: "var(--placeholder)" }}
-        />
+          style={{ position: "sticky", top: TOP_BAR_HEIGHT, height: `calc(100vh - ${TOP_BAR_HEIGHT}px)`, overflow: "hidden" }}
+        >
+          <img src="/Images/About-Profile.JPG" alt="Zhuojing Li"
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }} />
+        </motion.div>
 
         {/* Right: content */}
         <div style={{ padding: "80px 60px 100px 64px" }}>
+
+          {/* Page navigation */}
+          <div style={{ marginBottom: 48 }}>
+            <PageNav />
+          </div>
 
           {/* Name */}
           <div style={{ overflow: "hidden", marginBottom: 20 }}>

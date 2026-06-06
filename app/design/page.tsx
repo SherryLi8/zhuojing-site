@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
+import PageNav from "../components/PageNav";
 import { TOP_BAR_HEIGHT } from "../components/TopBar";
 import { useLang } from "../context/lang";
 
@@ -384,18 +386,27 @@ export default function Design() {
                 return (
                   <button key={f.key}
                     onClick={() => setActiveFilter(isActive && f.key !== "all" ? "all" : f.key)}
-                    style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
+                    style={{ position: "relative", background: "none", border: "none", cursor: "pointer", padding: "0 0 4px 0" }}
                   >
                     <span style={{
                       fontFamily: "var(--font-geist),sans-serif",
                       fontSize: 9, letterSpacing: "0.2em",
                       color: isActive ? "var(--dark)" : "var(--faint)",
-                      borderBottom: isActive ? "1px solid var(--dark)" : "1px solid transparent",
-                      paddingBottom: 2, transition: "color 0.15s",
+                      transition: "color 0.2s",
                       display: "inline-block",
                     }}>
                       {"en" in f ? (lang === "en" ? f.en : f.zh) : (lang === "en" ? "ALL" : "全部")}
                     </span>
+                    <motion.div
+                      initial={false}
+                      animate={{ scaleX: isActive ? 1 : 0 }}
+                      transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                      style={{
+                        position: "absolute", bottom: 0, left: 0, right: 0,
+                        height: 1, background: "var(--dark)",
+                        transformOrigin: "left center",
+                      }}
+                    />
                   </button>
                 );
               })}
@@ -462,14 +473,28 @@ export default function Design() {
           </div>
         </div>
 
-        {/* ── Right: detail panel ── */}
+        {/* ── Right: detail panel — fade transition on change ── */}
         <div style={{
           position: "sticky", top: TOP_BAR_HEIGHT,
           height: `calc(100vh - ${TOP_BAR_HEIGHT}px)`, overflowY: "auto",
           padding: "48px 40px 48px 40px",
           display: "flex", flexDirection: "column",
         }}>
-          <DetailPanel work={activeWork} />
+          {/* Page navigation */}
+          <PageNav />
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeWork?.num ?? "empty"}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.32, ease: [0.25, 0, 0, 1] }}
+              style={{ flex: 1 }}
+            >
+              <DetailPanel work={activeWork} />
+            </motion.div>
+          </AnimatePresence>
         </div>
 
       </div>
