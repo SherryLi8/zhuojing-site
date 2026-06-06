@@ -126,7 +126,7 @@ const CURSOR_IMAGES = [
   "/Images/龙鳞装/2.JPG",
   "/Images/八月花神/主图.png",
   "/Images/Photos/1. New York/Featured.jpg",
-  "/Images/Photos/2.Guiyang/未命名-2.jpg",
+  "/Images/Photos/2.Guiyang/未命名-6.jpg",
   "/Images/Photos/Los Angeles/LP主图.jpg",
   "/Images/Photos/Yosemite/000236660001_副本.jpg",
   "/Images/Photos/USC/LP主图.JPG",
