@@ -136,23 +136,40 @@ export default function Photos() {
             </div>
           </div>
 
-          {/* Photo grid — masonry-style two-column */}
-          <div style={{ columns: 2, columnGap: 10 }}>
-            {photos.map((p, i) => (
-              <motion.div
-                key={activeId + p.id}
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
-                style={{ breakInside: "avoid", marginBottom: 10, overflow: "hidden", background: "var(--placeholder)" }}
-              >
-                {p.src ? (
-                  <img src={p.src} alt={`${activeSeries.title} ${i + 1}`}
-                    style={{ width: "100%", display: "block", aspectRatio: p.aspect, objectFit: "cover" }} />
-                ) : (
-                  <div style={{ aspectRatio: p.aspect, background: "var(--placeholder)" }} />
-                )}
-              </motion.div>
-            ))}
+          {/* Photo grid — two columns, natural proportions, editorial spacing */}
+          <div style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
+            {/* Left column: odd-indexed */}
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 24 }}>
+              {photos.filter((_, i) => i % 2 === 0).map((p, i) => (
+                <motion.div key={activeId + p.id + "L"}
+                  initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.08 }}
+                >
+                  {p.src ? (
+                    <img src={p.src} alt={`${activeSeries.title} ${i * 2 + 1}`}
+                      style={{ width: "100%", height: "auto", display: "block" }} />
+                  ) : (
+                    <div style={{ aspectRatio: p.aspect, background: "var(--placeholder)" }} />
+                  )}
+                </motion.div>
+              ))}
+            </div>
+            {/* Right column: even-indexed — offset down for rhythm */}
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 24, marginTop: 80 }}>
+              {photos.filter((_, i) => i % 2 === 1).map((p, i) => (
+                <motion.div key={activeId + p.id + "R"}
+                  initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.05 + i * 0.08 }}
+                >
+                  {p.src ? (
+                    <img src={p.src} alt={`${activeSeries.title} ${i * 2 + 2}`}
+                      style={{ width: "100%", height: "auto", display: "block" }} />
+                  ) : (
+                    <div style={{ aspectRatio: p.aspect, background: "var(--placeholder)" }} />
+                  )}
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
 

@@ -238,91 +238,75 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                 transition={{ duration: 0.65, ease: [0.25, 0, 0, 1] }}
               >
-                {/* Image grid — fills full viewport */}
-                {(() => {
-                  const imgs = (works[workIdx] as typeof works[0] & { lpImages?: string[] }).lpImages ?? [works[workIdx].img];
-                  const n = imgs.length;
-                  const cols = n === 1 ? 1 : n === 2 ? 2 : n <= 4 ? 2 : 3;
-                  const rows = n === 1 ? 1 : Math.ceil(n / cols);
-                  return (
-                    <div style={{
-                      display: "grid",
-                      gridTemplateColumns: `repeat(${cols}, 1fr)`,
-                      gridTemplateRows: `repeat(${rows}, 1fr)`,
-                      gap: 3, width: "100%", height: "100%",
-                    }}>
-                      {imgs.map((src, i) => (
-                        <motion.div key={i}
-                          initial={{ opacity: 0, scale: 1.04 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.9, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                          style={{ overflow: "hidden" }}
-                        >
-                          <img src={src} alt={works[workIdx].title}
-                            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                        </motion.div>
-                      ))}
-                    </div>
-                  );
-                })()}
+                {/* Hero image — right side, full viewport height */}
+                {works[workIdx].img && (
+                  <motion.div
+                    key={`wimg-${workIdx}`}
+                    initial={{ opacity: 0, clipPath: "inset(6% 0 6% 0)" }}
+                    animate={{ opacity: 1, clipPath: "inset(0% 0 0% 0)" }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ position: "absolute", top: 0, right: 0, height: "100vh", width: "58vw", overflow: "hidden" }}
+                  >
+                    <img src={works[workIdx].img} alt={works[workIdx].title}
+                      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  </motion.div>
+                )}
 
-                {/* Text overlay — fades in after 4s */}
-                <AnimatePresence>
-                  {workTextVis && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
+                {/* Text — plain on left until overlay kicks in */}
+                <AnimatePresence mode="wait">
+                  {!workTextVis ? (
+                    <motion.div key="pre-text"
+                      style={{ ...contentStyle, justifyContent: "flex-start" }}
+                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      <div>
+                        <div style={{ fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}>
+                          {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {works[workIdx].category} · {works[workIdx].year}
+                        </div>
+                        <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(48px,6.5vw,88px)", color: "var(--dark)", lineHeight: 1.0 }}>
+                          {works[workIdx].title}
+                        </div>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    /* Gradient overlay + animated text after 4s */
+                    <motion.div key="overlay"
+                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                       transition={{ duration: 0.9, ease: [0.25, 0, 0, 1] }}
                       style={{
                         position: "absolute", inset: 0,
-                        background: "linear-gradient(105deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.28) 55%, transparent 100%)",
+                        background: "linear-gradient(100deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.18) 48%, transparent 100%)",
                         display: "flex", alignItems: "center",
                         padding: "0 8vw 0 18vw",
                       }}
                     >
                       <div>
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 0.4, delay: 0.1 }}
-                          style={{ fontSize: 8, letterSpacing: "0.28em", color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}
-                        >
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4, delay: 0.1 }}
+                          style={{ fontSize: 8, letterSpacing: "0.28em", color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}>
                           {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {works[workIdx].category} · {works[workIdx].year}
                         </motion.div>
-                        <div style={{
-                          fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-                          fontSize: "clamp(48px,6.5vw,88px)", color: "#fff",
-                          lineHeight: 1.0, marginBottom: 22,
-                          display: "flex", flexWrap: "wrap", gap: "0 0.22em",
-                        }}>
+                        <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(48px,6.5vw,88px)", color: "#fff", lineHeight: 1.0, marginBottom: 22, display: "flex", flexWrap: "wrap", gap: "0 0.22em" }}>
                           {works[workIdx].title.split(" ").map((w, i) => (
                             <div key={i} style={{ overflow: "hidden" }}>
                               <motion.span style={{ display: "inline-block" }}
                                 initial={{ y: "110%" }} animate={{ y: "0%" }}
-                                transition={{ duration: 0.7, delay: 0.2 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                                transition={{ duration: 0.7, delay: 0.15 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
                               >{w}</motion.span>
                             </div>
                           ))}
                         </div>
-                        <div style={{
-                          fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-                          fontSize: "clamp(13px,1.1vw,16px)", color: "rgba(255,255,255,0.75)", lineHeight: 1.6, marginBottom: 32,
-                          maxWidth: 380, display: "flex", flexWrap: "wrap", gap: "0 0.28em",
-                        }}>
+                        <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(13px,1.1vw,16px)", color: "rgba(255,255,255,0.75)", lineHeight: 1.6, marginBottom: 32, maxWidth: 380, display: "flex", flexWrap: "wrap", gap: "0 0.28em" }}>
                           {works[workIdx].note.split(" ").map((w, i) => (
                             <div key={i} style={{ overflow: "hidden" }}>
                               <motion.span style={{ display: "inline-block" }}
                                 initial={{ y: "110%" }} animate={{ y: "0%" }}
-                                transition={{ duration: 0.6, delay: 0.35 + i * 0.025, ease: [0.16, 1, 0.3, 1] }}
+                                transition={{ duration: 0.6, delay: 0.3 + i * 0.025, ease: [0.16, 1, 0.3, 1] }}
                               >{w}</motion.span>
                             </div>
                           ))}
                         </div>
-                        <motion.div
-                          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                          transition={{ duration: 0.5, delay: 0.9 }}
-                        >
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.85 }}>
                           <Link href="/design" style={{ fontSize: 10, letterSpacing: "0.2em", color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-geist),sans-serif" }}>
                             VIEW PROJECT →
                           </Link>
@@ -364,26 +348,22 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                       fontFamily: "var(--font-geist),sans-serif",
                     }}>VIEW ALL →</Link>
                   </div>
-                  {/* Right: image — clipPath reveal per photo */}
+                  {/* Right: image — natural proportions, no crop */}
                   <motion.div
                     key={`img-${photoIdx}`}
                     initial={{ clipPath: "inset(6% 0 6% 0)" }}
                     animate={{ clipPath: "inset(0% 0 0% 0)" }}
                     transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                    style={{
-                      height: "68vh",
-                      aspectRatio: "2/3",
-                      background: "var(--placeholder)",
-                      flexShrink: 0,
-                      overflow: "hidden",
-                    }}
+                    style={{ flexShrink: 0, maxHeight: "72vh", display: "flex", alignItems: "center" }}
                   >
-                    {photos[photoIdx].img && (
+                    {photos[photoIdx].img ? (
                       <img
                         src={photos[photoIdx].img}
                         alt={photos[photoIdx].title}
-                        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                        style={{ maxHeight: "72vh", maxWidth: "46vw", width: "auto", height: "auto", display: "block" }}
                       />
+                    ) : (
+                      <div style={{ height: "60vh", width: "32vw", background: "var(--placeholder)" }} />
                     )}
                   </motion.div>
                 </motion.div>
