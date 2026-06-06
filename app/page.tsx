@@ -1,65 +1,540 @@
-import Image from "next/image";
+"use client";
+import { useEffect, useRef, useState, useCallback } from "react";
+import Link from "next/link";
+import {
+  motion, AnimatePresence,
+  useSpring, useMotionValue, useScroll,
+} from "framer-motion";
+import { useLang } from "./context/lang";
+import { TOP_BAR_HEIGHT } from "./components/TopBar";
 
-export default function Home() {
+// ─── Cursor ───────────────────────────────────────────────────────────────────
+function Cursor() {
+  const x = useMotionValue(-200), y = useMotionValue(-200);
+  const sx = useSpring(x, { damping: 20, stiffness: 600, mass: 0.2 });
+  const sy = useSpring(y, { damping: 20, stiffness: 600, mass: 0.2 });
+  useEffect(() => {
+    const fn = (e: MouseEvent) => { x.set(e.clientX); y.set(e.clientY); };
+    window.addEventListener("mousemove", fn);
+    return () => window.removeEventListener("mousemove", fn);
+  }, [x, y]);
+  return <motion.div style={{
+    position: "fixed", top: 0, left: 0, pointerEvents: "none", zIndex: 9999,
+    width: 14, height: 14, borderRadius: "50%", background: "var(--dim)",
+    translateX: sx, translateY: sy, x: "-50%", y: "-50%",
+  }}/>;
+}
+
+// ─── Left progress (exact fromanother style) ──────────────────────────────────
+// fromanother: left side vertical, each item = "01 — Label"
+// Active: full opacity + dash extended; others: dimmed
+const NAV_ITEMS = [
+  { num: "01", label: "" },
+  { num: "02", label: "About" },
+  { num: "03", label: "Work" },
+  { num: "04", label: "Photos" },
+  { num: "05", label: "Writing" },
+  { num: "06", label: "Index" },
+];
+
+function SideNav({ active }: { active: number }) {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div style={{
+      position: "fixed", left: 24, top: "50%", transform: "translateY(-50%)",
+      zIndex: 100, pointerEvents: "none",
+      display: "flex", flexDirection: "column",
+    }}>
+      {NAV_ITEMS.map((item, i) => {
+        const isAct = i === active;
+        return (
+          <motion.div
+            key={i}
+            style={{
+              display: "flex", alignItems: "center",
+              padding: "4px 0",
+              fontFamily: "var(--font-geist),sans-serif",
+              fontSize: 8, letterSpacing: "0.18em", color: "var(--dim)",
+              whiteSpace: "nowrap",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            <motion.div
+              animate={{ width: isAct ? 10 : 4, opacity: isAct ? 1 : 0.15 }}
+              transition={{ duration: 0.35 }}
+              style={{ height: 1, background: "var(--dim)", marginRight: 6, flexShrink: 0 }}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <motion.span
+              animate={{ opacity: isAct ? 1 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {item.num}{item.label ? ` ${item.label}` : ""}
+            </motion.span>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ─── Masked line ──────────────────────────────────────────────────────────────
+function ML({ text, delay = 0, s }: { text: string; delay?: number; s?: React.CSSProperties }) {
+  return (
+    <div style={{ overflow: "hidden" }}>
+      <motion.div style={s} initial={{ y: "105%" }} animate={{ y: "0%" }}
+        transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
+      >{text}</motion.div>
+    </div>
+  );
+}
+
+// ─── useInView ────────────────────────────────────────────────────────────────
+function useInView(thr = 0.25) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [vis, setVis] = useState(false);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true); }, { threshold: thr });
+    obs.observe(el); return () => obs.disconnect();
+  }, [thr]);
+  return { ref, vis };
+}
+
+// ─── Spinning wheel ───────────────────────────────────────────────────────────
+function Wheel({ size = 108, text = "DESIGN · WORDS · PHOTOS · ABOUT · " }: { size?: number; text?: string }) {
+  const r = size / 2 - 10;
+  const d = `M ${size/2},${size/2} m -${r},0 a ${r},${r} 0 1,1 ${r*2},0 a ${r},${r} 0 1,1 -${r*2},0`;
+  return (
+    <motion.div animate={{ rotate: 360 }} transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+      style={{ width: size, height: size }}>
+      <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size}>
+        <defs><path id="wp" d={d}/></defs>
+        <text style={{ fontSize: 7.5, fill: "var(--faint)", letterSpacing: "0.14em", fontFamily: "var(--font-geist),sans-serif" }}>
+          <textPath href="#wp">{text}</textPath>
+        </text>
+      </svg>
+    </motion.div>
+  );
+}
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+const works = [
+  { title: "Zentea",             category: "Brand Identity", year: "2023", note: "Tea as ritual. A brand language built from silence and ceremony." },
+  { title: "Seasons",            category: "Brand Identity", year: "2022", note: "A flower store that changes with the light. Identity rooted in impermanence." },
+  { title: "The Period",         category: "Type Design",    year: "2023", note: "A typeface that holds the weight of what comes before the full stop." },
+];
+
+const photos = [
+  { title: "Tokyo",     series: "Urban Quiet",  year: "2024" },
+  { title: "Yunnan",    series: "Fieldwork",    year: "2023" },
+  { title: "New York",  series: "In Between",   year: "2024" },
+];
+
+const writings = [
+  { title: "Reinscription of Cultural Meaning Through Design", tag: "Thesis",  date: "2024", href: "https://digitallibrary.usc.edu/asset-management/2A3BF1M2SUNBE", pub: true },
+  { title: "以观看为方法",                                       tag: "随笔",    date: "2025", href: "#", pub: false },
+  { title: "On Designing for Silence",                         tag: "Essay",   date: "2025", href: "#", pub: false },
+  { title: "Branding as Translation",                          tag: "Essay",   date: "2024", href: "#", pub: false },
+];
+
+const awards = [
+  { award: "Gold",                 org: "Graphis New Talent Annual", year: "2023", project: "Seasons" },
+  { award: "Silver",               org: "Graphis New Talent Annual", year: "2023", project: "Salvation of Seven Deadly Sins" },
+  { award: "Honorable Mention ×2", org: "Graphis New Talent Annual", year: "2023", project: "One Second · Orient" },
+  { award: "Shortlist",            org: "TDC Young Ones",            year: "2023", project: "UToypia" },
+];
+
+// Sub-sections: Work + Photos each get 3 slots, Writing gets 1
+// Total scroll height = (3 + 3 + 1) × 100vh = 7 × 100vh
+const SUBS_CONFIG = [
+  { key: "Work",    slots: 3 },
+  { key: "Photos",  slots: 3 },
+  { key: "Writing", slots: 1 },
+];
+const TOTAL_SLOTS = SUBS_CONFIG.reduce((a, c) => a + c.slots, 0); // 7
+
+// ─── Big sticky content block ─────────────────────────────────────────────────
+// fromanother: one huge sticky container, left = sub-nav, right = content
+// background barely moves, ONLY text/content cross-fades
+function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => void }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [sub, setSub] = useState(0);
+  const [workIdx, setWorkIdx] = useState(0);
+  const [photoIdx, setPhotoIdx] = useState(0);
+  const [hovWrite, setHovWrite] = useState<number|null>(null);
+
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+
+  const handleScroll = useCallback((v: number) => {
+    const slot = Math.min(v * TOTAL_SLOTS, TOTAL_SLOTS - 0.001);
+    // Work = slots 0-2, Photos = 3-5, Writing = 6
+    if (slot < 3) {
+      setSub(0);
+      setWorkIdx(Math.min(Math.floor(slot), works.length - 1));
+      onSectionChange(2);
+    } else if (slot < 6) {
+      setSub(1);
+      setPhotoIdx(Math.min(Math.floor(slot - 3), photos.length - 1));
+      onSectionChange(3);
+    } else {
+      setSub(2);
+      onSectionChange(4);
+    }
+  }, [onSectionChange]);
+
+  useEffect(() => scrollYProgress.on("change", handleScroll), [scrollYProgress, handleScroll]);
+
+  const contentStyle: React.CSSProperties = {
+    position: "absolute", inset: 0,
+    display: "flex", alignItems: "center",
+    padding: "0 8vw 0 18vw",
+  };
+
+  return (
+    <div ref={ref} style={{ height: `${TOTAL_SLOTS * 100}vh`, position: "relative" }}>
+      <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden", background: "var(--bg)" }}>
+
+        {/* Content — cross-fades between sub-sections */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 1 }}>
+
+          {/* ── Work ── */}
+          <AnimatePresence mode="wait">
+            {sub === 0 && (
+              <motion.div key={`work-${workIdx}`} style={contentStyle}
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.65, ease: [0.25, 0, 0, 1] }}
+              >
+                <div>
+                  <div style={{ fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}>
+                    {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {works[workIdx].category} · {works[workIdx].year}
+                  </div>
+                  <div style={{
+                    fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                    fontSize: "clamp(48px,6.5vw,88px)", color: "var(--dark)",
+                    lineHeight: 1.0, marginBottom: 22,
+                  }}>{works[workIdx].title}</div>
+                  <div style={{
+                    fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                    fontSize: "clamp(13px,1.1vw,16px)", color: "var(--dim)", lineHeight: 1.6, marginBottom: 32,
+                    maxWidth: 380,
+                  }}>{works[workIdx].note}</div>
+                  <Link href="/design" style={{ fontSize: 10, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
+                    VIEW PROJECT →
+                  </Link>
+                </div>
+              </motion.div>
+            )}
+
+            {/* ── Photos ── */}
+            {sub === 1 && (
+              <AnimatePresence mode="wait">
+                <motion.div key={`photo-${photoIdx}`}
+                  style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", padding: "0 8vw 0 18vw" }}
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5, ease: [0.25, 0, 0, 1] }}
+                >
+                  {/* Left: metadata */}
+                  <div style={{ flexShrink: 0, width: 148, marginRight: "5vw" }}>
+                    <div style={{
+                      fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)",
+                      fontFamily: "var(--font-geist),sans-serif", marginBottom: 28,
+                    }}>
+                      {String(photoIdx + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}
+                    </div>
+                    <div style={{
+                      fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                      fontSize: "clamp(20px,2vw,28px)", color: "var(--dark)",
+                      lineHeight: 1.1, marginBottom: 12,
+                    }}>{photos[photoIdx].title}</div>
+                    <div style={{
+                      fontSize: 8, letterSpacing: "0.24em", color: "var(--faint)",
+                      fontFamily: "var(--font-geist),sans-serif", marginBottom: 36,
+                    }}>{photos[photoIdx].series.toUpperCase()}<br/>{photos[photoIdx].year}</div>
+                    <Link href="/photos" style={{
+                      fontSize: 9, letterSpacing: "0.2em", color: "var(--dim)",
+                      fontFamily: "var(--font-geist),sans-serif",
+                    }}>VIEW ALL →</Link>
+                  </div>
+                  {/* Right: image — clipPath reveal per photo */}
+                  <motion.div
+                    key={`img-${photoIdx}`}
+                    initial={{ clipPath: "inset(6% 0 6% 0)" }}
+                    animate={{ clipPath: "inset(0% 0 0% 0)" }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                    style={{
+                      height: "68vh",
+                      aspectRatio: "2/3",
+                      background: "var(--placeholder)",
+                      flexShrink: 0,
+                    }}
+                  />
+                </motion.div>
+              </AnimatePresence>
+            )}
+
+            {/* ── Writing ── */}
+            {sub === 2 && (
+              <motion.div key="writing" style={contentStyle}
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.65, ease: [0.25, 0, 0, 1] }}
+              >
+                <div style={{ width: "100%" }}>
+                  {writings.map((w, i) => (
+                    <motion.a key={i}
+                      href={w.pub ? w.href : undefined}
+                      target={w.pub && w.href.startsWith("http") ? "_blank" : undefined}
+                      rel={w.pub && w.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      onMouseEnter={() => setHovWrite(i)}
+                      onMouseLeave={() => setHovWrite(null)}
+                      animate={{ opacity: hovWrite !== null && hovWrite !== i ? 0.1 : w.pub ? 1 : 0.3 }}
+                      transition={{ duration: 0.2 }}
+                      style={{
+                        display: "grid", gridTemplateColumns: "1fr 88px 52px",
+                        alignItems: "baseline", padding: "26px 0",
+                        borderTop: "1px solid var(--line)",
+                        cursor: w.pub ? "pointer" : "default",
+                        textDecoration: "none",
+                      }}
+                    >
+                      <span style={{
+                        fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                        fontSize: "clamp(18px,1.7vw,24px)", color: "var(--dark)", lineHeight: 1.3,
+                      }}>
+                        {w.title}
+                        {w.pub && <span style={{ fontSize: 11, marginLeft: 8, color: "var(--faint)", fontStyle: "normal" }}>↗</span>}
+                      </span>
+                      <span style={{ fontSize: 8, letterSpacing: "0.18em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", textTransform: "uppercase" }}>{w.tag}</span>
+                      <span style={{ fontSize: 9, color: "var(--faint)", textAlign: "right", fontFamily: "var(--font-geist),sans-serif" }}>{w.date}</span>
+                    </motion.a>
+                  ))}
+                  <div style={{ borderTop: "1px solid var(--line)" }}/>
+                </div>
+              </motion.div>
+            )}
+
+
+          </AnimatePresence>
         </div>
-      </main>
+
+      </div>
+    </div>
+  );
+}
+
+// ─── Index / Final screen ─────────────────────────────────────────────────────
+const indexLinks = [
+  { label: "Design",  desc: "Identity · Type · Image",  href: "/design" },
+  { label: "Writing", desc: "Essays · Research · 随笔",  href: "/words"  },
+  { label: "Photos",  desc: "Quiet observations",        href: "/photos" },
+  { label: "About",   desc: "Who I am, how I work",      href: "/about"  },
+];
+
+function FinalNav() {
+  const [hov, setHov] = useState<string|null>(null);
+  return (
+    <div style={{ width: "100%", padding: "0 8vw 0 18vw" }}>
+      <div>
+        {indexLinks.map(({ label, desc, href }) => {
+          const isAct = hov === label;
+          const isDim = hov !== null && !isAct;
+          return (
+            <Link key={label} href={href}
+              onMouseEnter={() => setHov(label)} onMouseLeave={() => setHov(null)}
+              style={{ display: "block", textDecoration: "none" }}
+            >
+              <motion.div
+                animate={{ opacity: isDim ? 0.1 : 1 }}
+                transition={{ duration: 0.2 }}
+                style={{
+                  display: "flex", alignItems: "baseline", justifyContent: "space-between",
+                  padding: "20px 0", borderBottom: "1px solid var(--line)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "baseline", gap: "2.5vw" }}>
+                  <span style={{
+                    fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                    fontSize: "clamp(26px,2.8vw,40px)", color: "var(--dark)",
+                  }}>{label}</span>
+                  <span style={{
+                    fontFamily: "var(--font-geist),sans-serif", fontSize: 9,
+                    letterSpacing: "0.18em", color: "var(--faint)",
+                  }}>{desc}</span>
+                </div>
+                <motion.span
+                  animate={{ opacity: isAct ? 1 : 0, x: isAct ? 0 : -8 }}
+                  transition={{ duration: 0.2 }}
+                  style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, color: "var(--dim)" }}
+                >→</motion.span>
+              </motion.div>
+            </Link>
+          );
+        })}
+      </div>
+
+    </div>
+  );
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
+export default function Home() {
+  const { lang } = useLang();
+  const [phase, setPhase]   = useState<"zh"|"both">("zh");
+  const [topVis, setTopVis] = useState(false);
+  const [scrolled, setScrolled] = useState(false); // for arrow fade
+  const [activeNav, setActiveNav] = useState(0);   // 0=poem,1=about,2-6=content,7=navigate
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setPhase("both"), 1700);
+    const t2 = setTimeout(() => setTopVis(true),  3000);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);
+
+  // Arrow disappears on first scroll
+  useEffect(() => {
+    const fn = () => { if (window.scrollY > 40) setScrolled(true); };
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
+
+  // Track active section for sidenav
+  useEffect(() => {
+    const sections = document.querySelectorAll("[data-sec]");
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) setActiveNav(Number((e.target as HTMLElement).dataset.sec));
+      });
+    }, { threshold: 0.4 });
+    sections.forEach(s => obs.observe(s));
+    return () => obs.disconnect();
+  }, []);
+
+  const ps: React.CSSProperties = {
+    fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
+    fontSize: "clamp(22px,2.8vw,42px)", color: "var(--dim)", display: "block",
+  };
+
+  return (
+    <>
+      <Cursor/>
+      <SideNav active={activeNav}/>
+      <div style={{ cursor: "none" }}>
+
+        {/* 01 — POEM */}
+        <section data-sec="0" style={{
+          height: "100vh", position: "relative",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          background: "var(--bg)", overflow: "hidden",
+          paddingTop: TOP_BAR_HEIGHT,
+        }}>
+
+          {/* Poem */}
+          <div style={{ textAlign: "center", marginBottom: "6vh" }}>
+            <AnimatePresence mode="wait">
+              {lang === "zh" ? (
+                <motion.div key="zh" initial={{ opacity: 0, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, filter: "blur(8px)" }}
+                  transition={{ duration: 0.5, ease: [0.25, 0, 0, 1] }}
+                  style={{ lineHeight: 1.55 }}
+                >
+                  <ML text="以我观物，"        delay={0.1}  s={ps}/>
+                  <ML text="故物皆著我之色彩。" delay={0.45} s={ps}/>
+                </motion.div>
+              ) : (
+                <motion.div key="en" initial={{ opacity: 0, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, filter: "blur(8px)" }}
+                  transition={{ duration: 0.5, ease: [0.25, 0, 0, 1] }}
+                  style={{ lineHeight: 1.55 }}
+                >
+                  <ML text="A world,"                        delay={0.1}  s={ps}/>
+                  <ML text="built through my way of seeing." delay={0.45} s={ps}/>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Arrow — fades out on scroll */}
+          <motion.div
+            animate={{ opacity: scrolled ? 0 : topVis ? 1 : 0 }}
+            transition={{ duration: 0.5 }}
+            style={{ position: "absolute", bottom: 44, left: 0, right: 0, display: "flex", justifyContent: "center", pointerEvents: "none" }}
+          >
+            <motion.span animate={{ y: [0, 7, 0] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}>
+              <svg width="32" height="18" viewBox="0 0 32 18" fill="none">
+                <path d="M1 1L16 16L31 1" stroke="var(--faint)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </motion.span>
+          </motion.div>
+        </section>
+
+        {/* 02 — ABOUT */}
+        <section data-sec="1" style={{
+          height: "100vh", display: "flex", alignItems: "center",
+          padding: "0 10vw 0 18vw", background: "var(--bg)",
+        }}>
+          <AboutBlock/>
+        </section>
+
+        {/* 03–07 — BIG STICKY CONTENT BLOCK */}
+        <ContentBlock onSectionChange={setActiveNav}/>
+
+        {/* 06 — INDEX */}
+        <section data-sec="5" style={{
+          minHeight: "100vh", background: "var(--bg)", position: "relative",
+          display: "flex", flexDirection: "column", justifyContent: "center",
+          cursor: "none", borderTop: "1px solid var(--line)",
+        }}>
+          <FinalNav/>
+          {/* Copyright pinned to bottom */}
+          <div style={{
+            position: "absolute", bottom: 28, left: 0, right: 0,
+            padding: "0 8vw 0 18vw",
+            fontFamily: "var(--font-geist),sans-serif", fontSize: 9,
+            letterSpacing: "0.15em", color: "var(--faint)",
+          }}>
+            © 2026 · ZHUOJING LI
+          </div>
+        </section>
+
+      </div>
+    </>
+  );
+}
+
+// ─── About block ──────────────────────────────────────────────────────────────
+function AboutBlock() {
+  const { ref, vis } = useInView(0.3);
+  const words = "I work at the edge of image and language — designing identities, typefaces, and experiences that hold something unsaid.".split(" ");
+  return (
+    <div ref={ref} style={{ maxWidth: 680 }}>
+      <div style={{ overflow: "hidden", marginBottom: 24 }}>
+        <motion.div
+          style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(40px,5vw,72px)", color: "var(--dark)", lineHeight: 1.05 }}
+          initial={{ y: "105%" }} animate={vis ? { y: "0%" } : {}}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        >Zhuojing Li</motion.div>
+      </div>
+      <div style={{
+        fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+        fontSize: "clamp(16px,1.8vw,24px)", lineHeight: 1.65, color: "var(--dim)",
+        display: "flex", flexWrap: "wrap", gap: "0 0.28em", marginBottom: 40,
+      }}>
+        {words.map((w, i) => (
+          <div key={i} style={{ overflow: "hidden" }}>
+            <motion.span style={{ display: "inline-block" }}
+              initial={{ y: "110%" }} animate={vis ? { y: "0%" } : {}}
+              transition={{ duration: 0.7, delay: 0.25 + i * 0.03, ease: [0.16, 1, 0.3, 1] }}
+            >{w}</motion.span>
+          </div>
+        ))}
+      </div>
+      <motion.div initial={{ opacity: 0 }} animate={vis ? { opacity: 1 } : {}}
+        transition={{ duration: 0.5, delay: 1.0 }}
+        style={{ display: "flex", gap: 28, fontSize: 10, letterSpacing: "0.18em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif" }}
+      >
+        <span>MFA Design · USC</span>
+        <span>BFA Web & Multimedia · SVA</span>
+        <Link href="/about" style={{ color: "var(--dim)" }}>FULL BIO →</Link>
+      </motion.div>
     </div>
   );
 }
