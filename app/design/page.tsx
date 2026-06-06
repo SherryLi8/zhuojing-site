@@ -362,26 +362,25 @@ export default function Design() {
         }}>
           {/* Section header */}
           <div style={{
-            display: "flex", alignItems: "baseline", justifyContent: "space-between",
             marginBottom: 40, paddingBottom: 20,
             borderBottom: "1px solid var(--line)",
           }}>
-            <h1 style={{
-              fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-              fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
-            }}>{lang === "en" ? "Design" : "设计"}</h1>
-            {/* Filter tabs */}
-            <div style={{ display: "flex", gap: 20, alignItems: "baseline" }}>
-              {/* ALL */}
+            <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 16 }}>
+              <h1 style={{
+                fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
+              }}>{lang === "en" ? "Design" : "设计"}</h1>
+            </div>
+            {/* Filter tabs — 2 rows of 4 */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, max-content)", gap: "8px 20px" }}>
               <button
                 onClick={() => setActiveFilter("all")}
                 style={{
-                  fontFamily: "var(--font-geist),sans-serif",
-                  fontSize: 9, letterSpacing: "0.2em",
+                  fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em",
                   color: activeFilter === "all" ? "var(--dark)" : "var(--faint)",
                   background: "none", border: "none", cursor: "pointer",
                   borderBottom: activeFilter === "all" ? "1px solid var(--dark)" : "1px solid transparent",
-                  paddingBottom: 2, transition: "color 0.15s",
+                  paddingBottom: 2, transition: "color 0.15s", textAlign: "left",
                 }}
               >{lang === "en" ? "ALL" : "全部"}</button>
               {FILTERS.map(f => {
@@ -390,12 +389,11 @@ export default function Design() {
                   <button key={f.key}
                     onClick={() => setActiveFilter(isActive ? "all" : f.key)}
                     style={{
-                      fontFamily: "var(--font-geist),sans-serif",
-                      fontSize: 9, letterSpacing: "0.2em",
+                      fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em",
                       color: isActive ? "var(--dark)" : "var(--faint)",
                       background: "none", border: "none", cursor: "pointer",
                       borderBottom: isActive ? "1px solid var(--dark)" : "1px solid transparent",
-                      paddingBottom: 2, transition: "color 0.15s",
+                      paddingBottom: 2, transition: "color 0.15s", textAlign: "left",
                     }}
                   >{lang === "en" ? f.en : f.zh}</button>
                 );

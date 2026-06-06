@@ -263,20 +263,26 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                   </Link>
                 </div>
 
-                {/* Right: hero image — larger than before */}
+                {/* Right: hero image — natural proportions, no crop */}
                 <motion.div
                   key={`wimg-${workIdx}`}
                   initial={{ opacity: 0, clipPath: "inset(6% 0 6% 0)" }}
                   animate={{ opacity: 1, clipPath: "inset(0% 0 0% 0)" }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                  style={{ flexShrink: 0, height: "82vh", width: "44vw", overflow: "hidden" }}
+                  style={{ flexShrink: 0 }}
                 >
                   {works[workIdx].img ? (
                     <img src={works[workIdx].img} alt={works[workIdx].title}
-                      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                      style={{
+                        maxHeight: "calc(100vh - 100px)",
+                        maxWidth: "52vw",
+                        width: "auto",
+                        height: "auto",
+                        display: "block",
+                      }} />
                   ) : (
-                    <div style={{ width: "100%", height: "100%", background: "var(--placeholder)" }} />
+                    <div style={{ width: "40vw", height: "60vh", background: "var(--placeholder)" }} />
                   )}
                 </motion.div>
               </motion.div>
@@ -469,7 +475,7 @@ export default function Home() {
       if (activeNav !== 0) return;
       const dx = e.clientX - lastSpawnRef.current.x;
       const dy = e.clientY - lastSpawnRef.current.y;
-      if (dx*dx + dy*dy < 10000) return; // ~100px threshold
+      if (dx*dx + dy*dy < 57600) return; // ~240px threshold — sparser
       lastSpawnRef.current = { x: e.clientX, y: e.clientY };
       const src = CURSOR_IMAGES[Math.floor(Math.random() * CURSOR_IMAGES.length)];
       const rot = (Math.random() - 0.5) * 14;
@@ -516,10 +522,9 @@ export default function Home() {
             style={{
               position: "fixed",
               left: img.x - 90,
-              top: img.y - 65,
+              top: img.y - 70,
               width: 180,
-              height: 130,
-              objectFit: "cover",
+              height: "auto",
               pointerEvents: "none",
               zIndex: 9000,
               transform: `rotate(${img.rot}deg)`,
