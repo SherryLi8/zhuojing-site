@@ -19,7 +19,7 @@ const photoGrids: Record<string, { id: string; aspect: string; src: string }[]> 
     { id: "ny7", aspect: "3/2", src: `${P}/1. New York/Cropped_副本.jpg` },
   ],
   "guiyang": [
-    { id: "gy0",  aspect: "3/2", src: `${P}/2.Guiyang/LP图.jpg` },
+    { id: "gy0",  aspect: "3/2", src: `${P}/2.Guiyang/LP%E5%9B%BE.jpg` },
     { id: "gy1",  aspect: "3/2", src: `${P}/2.Guiyang/未命名-13.jpg` },
     { id: "gy2",  aspect: "3/2", src: `${P}/2.Guiyang/未命名-14.jpg` },
     { id: "gy3",  aspect: "3/2", src: `${P}/2.Guiyang/未命名-15.jpg` },
