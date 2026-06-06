@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
-import PageNav from "../components/PageNav";
 import { useLang } from "../context/lang";
 import { TOP_BAR_HEIGHT } from "../lib/constants";
 
@@ -20,6 +19,7 @@ const photoGrids: Record<string, { id: string; aspect: string; src: string }[]> 
     { id: "ny7", aspect: "3/2", src: `${P}/1. New York/Cropped_副本.jpg` },
   ],
   "guiyang": [
+    { id: "gy0", aspect: "3/2", src: `${P}/2.Guiyang/LP图-2.jpg` },
     { id: "gy1", aspect: "3/2", src: `${P}/2.Guiyang/未命名-13_副本.jpg` },
     { id: "gy2", aspect: "3/2", src: `${P}/2.Guiyang/未命名-16_副本.jpg` },
     { id: "gy3", aspect: "3/2", src: `${P}/2.Guiyang/未命名-19_副本.jpg` },
@@ -78,7 +78,7 @@ const photoGrids: Record<string, { id: string; aspect: string; src: string }[]> 
 const seriesData = {
   en: [
     { id: "new-york",    title: "In Between",  location: "New York",     year: "2022", count: 7,  note: "Everything happens in the margins. The threshold, the pause, the transit." },
-    { id: "guiyang",     title: "Home Ground", location: "Guiyang",      year: "2022", count: 5,  note: "The familiar made strange. A hometown seen through borrowed distance." },
+    { id: "guiyang",     title: "Home Ground", location: "Guiyang",      year: "2022", count: 6,  note: "The familiar made strange. A hometown seen through borrowed distance." },
     { id: "los-angeles", title: "Silver",      location: "Los Angeles",  year: "2023", count: 8,  note: "Light that arrives sideways. Film grain as atmosphere." },
     { id: "usc",         title: "Residency",   location: "USC",          year: "2024", count: 10, note: "The institution as landscape. Weeks at a time, observed in passing." },
     { id: "yosemite",    title: "Exposure",    location: "Yosemite",     year: "2023", count: 10, note: "Scale that unmakes you. The valley holds everything it needs to." },
@@ -86,7 +86,7 @@ const seriesData = {
   ],
   zh: [
     { id: "new-york",    title: "过渡",   location: "纽约",      year: "2022", count: 7,  note: "一切都发生在边缘。阈值、停顿、过渡。" },
-    { id: "guiyang",     title: "故土",   location: "贵阳",      year: "2022", count: 5,  note: "熟悉的陌生感。用借来的距离重新看一座家乡。" },
+    { id: "guiyang",     title: "故土",   location: "贵阳",      year: "2022", count: 6,  note: "熟悉的陌生感。用借来的距离重新看一座家乡。" },
     { id: "los-angeles", title: "银盐",   location: "洛杉矶",   year: "2023", count: 8,  note: "侧面抵达的光。胶片颗粒作为氛围。" },
     { id: "usc",         title: "驻留",   location: "南加大",   year: "2024", count: 10, note: "校园作为风景。几周时光，在路过中被观察。" },
     { id: "yosemite",    title: "曝光",   location: "约塞米蒂", year: "2023", count: 10, note: "令人失去尺度感的规模。山谷容纳了所需的一切。" },
@@ -136,26 +136,27 @@ export default function Photos() {
                 return (
                   <button key={s.id}
                     onClick={() => setActiveId(s.id)}
-                    style={{
-                      position: "relative",
+                    style={{ background: "none", border: "none", cursor: "pointer", padding: 0, outline: "none" }}
+                  >
+                    <span style={{
+                      display: "inline-block", position: "relative", paddingBottom: 4,
                       fontFamily: "var(--font-geist),sans-serif",
                       fontSize: 9, letterSpacing: "0.2em",
                       color: isActive ? "var(--dark)" : "var(--faint)",
-                      background: "none", border: "none", cursor: "pointer",
-                      paddingBottom: 4, transition: "color 0.2s",
-                    }}
-                  >
-                    {s.title.toUpperCase()}
-                    <motion.div
-                      initial={false}
-                      animate={{ scaleX: isActive ? 1 : 0 }}
-                      transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                      style={{
-                        position: "absolute", bottom: 0, left: 0, right: 0,
-                        height: 1, background: "var(--dark)",
-                        transformOrigin: "left center",
-                      }}
-                    />
+                      transition: "color 0.2s",
+                    }}>
+                      {s.title.toUpperCase()}
+                      <motion.div
+                        initial={false}
+                        animate={{ scaleX: isActive ? 1 : 0 }}
+                        transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                        style={{
+                          position: "absolute", bottom: 0, left: 0, right: 0,
+                          height: 1, background: "var(--dark)",
+                          transformOrigin: "left center",
+                        }}
+                      />
+                    </span>
                   </button>
                 );
               })}
@@ -214,9 +215,6 @@ export default function Photos() {
           height: `calc(100vh - ${TOP_BAR_HEIGHT}px)`,
           padding: "48px 32px", overflowY: "auto",
         }}>
-          {/* Page navigation */}
-          <PageNav />
-
           {/* Series detail — animated on switch */}
           <AnimatePresence mode="wait">
             <motion.div

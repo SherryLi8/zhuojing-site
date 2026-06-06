@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
-import PageNav from "../components/PageNav";
 import { TOP_BAR_HEIGHT } from "../components/TopBar";
 import { useLang } from "../context/lang";
 
@@ -386,27 +385,27 @@ export default function Design() {
                 return (
                   <button key={f.key}
                     onClick={() => setActiveFilter(isActive && f.key !== "all" ? "all" : f.key)}
-                    style={{ position: "relative", background: "none", border: "none", cursor: "pointer", padding: "0 0 4px 0" }}
+                    style={{ background: "none", border: "none", cursor: "pointer", padding: 0, outline: "none" }}
                   >
                     <span style={{
+                      display: "inline-block", position: "relative", paddingBottom: 4,
                       fontFamily: "var(--font-geist),sans-serif",
                       fontSize: 9, letterSpacing: "0.2em",
                       color: isActive ? "var(--dark)" : "var(--faint)",
                       transition: "color 0.2s",
-                      display: "inline-block",
                     }}>
                       {"en" in f ? (lang === "en" ? f.en : f.zh) : (lang === "en" ? "ALL" : "全部")}
+                      <motion.div
+                        initial={false}
+                        animate={{ scaleX: isActive ? 1 : 0 }}
+                        transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                        style={{
+                          position: "absolute", bottom: 0, left: 0, right: 0,
+                          height: 1, background: "var(--dark)",
+                          transformOrigin: "left center",
+                        }}
+                      />
                     </span>
-                    <motion.div
-                      initial={false}
-                      animate={{ scaleX: isActive ? 1 : 0 }}
-                      transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                      style={{
-                        position: "absolute", bottom: 0, left: 0, right: 0,
-                        height: 1, background: "var(--dark)",
-                        transformOrigin: "left center",
-                      }}
-                    />
                   </button>
                 );
               })}
@@ -480,9 +479,6 @@ export default function Design() {
           padding: "48px 40px 48px 40px",
           display: "flex", flexDirection: "column",
         }}>
-          {/* Page navigation */}
-          <PageNav />
-
           <AnimatePresence mode="wait">
             <motion.div
               key={activeWork?.num ?? "empty"}

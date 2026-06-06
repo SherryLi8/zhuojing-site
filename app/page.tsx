@@ -126,7 +126,7 @@ const CURSOR_IMAGES = [
   "/Images/龙鳞装/2.JPG",
   "/Images/八月花神/主图.png",
   "/Images/Photos/1. New York/Featured.jpg",
-  "/Images/Photos/2.Guiyang/LP图.jpg",
+  "/Images/Photos/2.Guiyang/LP图-2.jpg",
   "/Images/Photos/Los Angeles/LP主图.jpg",
   "/Images/Photos/Yosemite/000236660001_副本.jpg",
   "/Images/Photos/USC/LP主图.JPG",
@@ -135,7 +135,7 @@ const CURSOR_IMAGES = [
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const works = [
   {
-    title: "Zentea", category: "Brand Identity", year: "2024",
+    title: "Zentea", category: "Branding", year: "2024",
     note: "Tea as ritual. A brand language built from silence and ceremony.",
     img: "/Images/ZENTEA/主图.png",
     lpImages: [
@@ -146,7 +146,7 @@ const works = [
     ],
   },
   {
-    title: "Seasons", category: "Brand Identity", year: "2022",
+    title: "Seasons", category: "Branding", year: "2022",
     note: "A flower store that changes with the light. Identity rooted in impermanence.",
     img: "/Images/Seasons/主图.jpeg",
     lpImages: [
@@ -157,7 +157,7 @@ const works = [
     ],
   },
   {
-    title: "The Period", category: "Type Design", year: "2025",
+    title: "The Period", category: "Typography", year: "2025",
     note: "Typography as body politics. A typeface that refuses to apologize.",
     img: "/Images/月经体/月经体%20主图.jpg",
     lpImages: ["/Images/月经体/月经体%20主图.jpg"],

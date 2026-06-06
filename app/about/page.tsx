@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
-import PageNav from "../components/PageNav";
 import { useLang } from "../context/lang";
 import { TOP_BAR_HEIGHT } from "../components/TopBar";
 
@@ -292,11 +291,6 @@ export default function About() {
 
         {/* Right: content */}
         <div style={{ padding: "80px 60px 100px 64px" }}>
-
-          {/* Page navigation */}
-          <div style={{ marginBottom: 48 }}>
-            <PageNav />
-          </div>
 
           {/* Name */}
           <div style={{ overflow: "hidden", marginBottom: 20 }}>

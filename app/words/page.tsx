@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
-import PageNav from "../components/PageNav";
 import { useLang } from "../context/lang";
 import { TOP_BAR_HEIGHT } from "../components/TopBar";
 
@@ -183,9 +182,6 @@ export default function Words() {
 
         {/* ── Right: detail panel ── */}
         <div style={{ position: "sticky", top: TOP_BAR_HEIGHT, height: `calc(100vh - ${TOP_BAR_HEIGHT}px)`, padding: "48px 32px", overflowY: "auto" }}>
-          {/* Page navigation */}
-          <PageNav />
-
           {/* Detail content — animated on hover change */}
           <AnimatePresence mode="wait">
             {hovered ? (
