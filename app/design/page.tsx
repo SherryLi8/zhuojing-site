@@ -168,8 +168,7 @@ export const works = [
       "/Images/龙鳞装/7.JPG",
     ] as ImageEntry[],
     credits: [
-      { role: "PHOTO", name: "Rebecca (@un_coz_)", href: "https://www.instagram.com/un_coz_/" },
-      { role: "", name: "小红书 @Nixuy", href: "https://xhslink.com/m/1ciUK7MvEDa" },
+      { role: "PHOTO", name: "Rebecca", href: "https://www.instagram.com/un_coz_/", name2: "小红书 @Nixuy", href2: "https://xhslink.com/m/1ciUK7MvEDa" },
     ],
     writingLink: "/words",
   },
@@ -248,7 +247,7 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
         <video
           src={(work as typeof work & { video: string }).video}
           controls
-          style={{ width: "100%", display: "block", marginBottom: 6 }}
+          style={{ width: "100%", display: "block", marginBottom: 28 }}
         />
       )}
 
@@ -278,16 +277,23 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
           <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>{labels.designer}</span>
         </div>
         {/* Credits */}
-        {"credits" in work && (work as typeof work & { credits?: { role: string; name: string; href?: string }[] }).credits?.map((c, i) => (
+        {"credits" in work && (work as typeof work & { credits?: { role: string; name: string; href?: string; name2?: string; href2?: string }[] }).credits?.map((c, i) => (
           <div key={i} style={{ display: "flex", gap: 24 }}>
             <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52, flexShrink: 0 }}>{c.role}</span>
-            {c.href ? (
-              <a href={c.href} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)", textDecoration: "none" }}>
-                {c.name} ↗
-              </a>
-            ) : (
-              <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>{c.name}</span>
-            )}
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+              {c.href ? (
+                <a href={c.href} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)", textDecoration: "none" }}>
+                  {c.name} ↗
+                </a>
+              ) : (
+                <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>{c.name}</span>
+              )}
+              {c.href2 && (
+                <a href={c.href2} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--faint)", textDecoration: "none" }}>
+                  {c.name2} ↗
+                </a>
+              )}
+            </div>
           </div>
         ))}
       </div>
@@ -362,40 +368,34 @@ export default function Design() {
         }}>
           {/* Section header */}
           <div style={{
+            display: "flex", alignItems: "baseline", justifyContent: "space-between",
             marginBottom: 40, paddingBottom: 20,
             borderBottom: "1px solid var(--line)",
           }}>
-            <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 16 }}>
-              <h1 style={{
-                fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-                fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
-              }}>{lang === "en" ? "Design" : "设计"}</h1>
-            </div>
-            {/* Filter tabs — 2 rows of 4 */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, max-content)", gap: "8px 20px" }}>
-              <button
-                onClick={() => setActiveFilter("all")}
-                style={{
-                  fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em",
-                  color: activeFilter === "all" ? "var(--dark)" : "var(--faint)",
-                  background: "none", border: "none", cursor: "pointer",
-                  borderBottom: activeFilter === "all" ? "1px solid var(--dark)" : "1px solid transparent",
-                  paddingBottom: 2, transition: "color 0.15s", textAlign: "left",
-                }}
-              >{lang === "en" ? "ALL" : "全部"}</button>
-              {FILTERS.map(f => {
+            <h1 style={{
+              fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+              fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
+            }}>{lang === "en" ? "Design" : "设计"}</h1>
+            {/* Filter tabs — single row, underline on inner span = text-width centered */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 14px", alignItems: "baseline", justifyContent: "flex-end", maxWidth: "58%" }}>
+              {[{ key: "all", en: "ALL", zh: "全部" } as const, ...FILTERS].map((f) => {
                 const isActive = activeFilter === f.key;
                 return (
                   <button key={f.key}
-                    onClick={() => setActiveFilter(isActive ? "all" : f.key)}
-                    style={{
-                      fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em",
+                    onClick={() => setActiveFilter(isActive && f.key !== "all" ? "all" : f.key)}
+                    style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
+                  >
+                    <span style={{
+                      fontFamily: "var(--font-geist),sans-serif",
+                      fontSize: 9, letterSpacing: "0.2em",
                       color: isActive ? "var(--dark)" : "var(--faint)",
-                      background: "none", border: "none", cursor: "pointer",
                       borderBottom: isActive ? "1px solid var(--dark)" : "1px solid transparent",
-                      paddingBottom: 2, transition: "color 0.15s", textAlign: "left",
-                    }}
-                  >{lang === "en" ? f.en : f.zh}</button>
+                      paddingBottom: 2, transition: "color 0.15s",
+                      display: "inline-block",
+                    }}>
+                      {"en" in f ? (lang === "en" ? f.en : f.zh) : (lang === "en" ? "ALL" : "全部")}
+                    </span>
+                  </button>
                 );
               })}
             </div>
