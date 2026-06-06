@@ -5,85 +5,85 @@ import Nav, { NAV_WIDTH } from "../components/Nav";
 import { useLang } from "../context/lang";
 import { TOP_BAR_HEIGHT } from "../lib/constants";
 
-const NY = "/Images/Photos/1. New York";
+const P = "/Images/Photos";
 
-// ─── Photo grids (shared, language-independent) ───────────────────────────────
-const photoGrids = {
-  "urban-quiet": [
-    { id: "uq1", aspect: "3/2", src: "" }, { id: "uq2", aspect: "2/3", src: "" },
-    { id: "uq3", aspect: "3/2", src: "" }, { id: "uq4", aspect: "1/1", src: "" },
-    { id: "uq5", aspect: "2/3", src: "" },
+// ─── Photo grids ──────────────────────────────────────────────────────────────
+const photoGrids: Record<string, { id: string; aspect: string; src: string }[]> = {
+  "new-york": [
+    { id: "ny1", aspect: "3/2", src: `${P}/1. New York/20220212-IMG_0614_副本.jpg` },
+    { id: "ny2", aspect: "2/3", src: `${P}/1. New York/IMG_0577_副本.jpg` },
+    { id: "ny3", aspect: "3/2", src: `${P}/1. New York/20220212-IMG_0612_副本.jpg` },
+    { id: "ny4", aspect: "2/3", src: `${P}/1. New York/20220208-IMG_0605_副本.jpg` },
+    { id: "ny5", aspect: "3/2", src: `${P}/1. New York/20220130-IMG_0287_副本.jpg` },
+    { id: "ny6", aspect: "2/3", src: `${P}/1. New York/20220213-IMG_0628_副本.jpg` },
+    { id: "ny7", aspect: "3/2", src: `${P}/1. New York/Cropped_副本.jpg` },
+    { id: "ny8", aspect: "2/3", src: `${P}/1. New York/20220212-20220212-IMG_6925_副本.jpg` },
   ],
-  "fieldwork": [
-    { id: "fw1", aspect: "2/3", src: "" }, { id: "fw2", aspect: "3/2", src: "" },
-    { id: "fw3", aspect: "2/3", src: "" }, { id: "fw4", aspect: "3/2", src: "" },
+  "guiyang": [
+    { id: "gy1", aspect: "3/2", src: `${P}/2.Guiyang/未命名-13_副本.jpg` },
+    { id: "gy2", aspect: "3/2", src: `${P}/2.Guiyang/未命名-16_副本.jpg` },
+    { id: "gy3", aspect: "3/2", src: `${P}/2.Guiyang/未命名-19_副本.jpg` },
+    { id: "gy4", aspect: "3/2", src: `${P}/2.Guiyang/未命名-28_副本.jpg` },
+    { id: "gy5", aspect: "3/2", src: `${P}/2.Guiyang/未命名-36_副本.jpg` },
   ],
-  "in-between": [
-    { id: "ib1", aspect: "3/2", src: `${NY}/20220212-IMG_0614_副本.jpg` },
-    { id: "ib2", aspect: "2/3", src: `${NY}/IMG_0577_副本.jpg` },
-    { id: "ib3", aspect: "3/2", src: `${NY}/20220212-IMG_0612_副本.jpg` },
-    { id: "ib4", aspect: "2/3", src: `${NY}/20220208-IMG_0605_副本.jpg` },
-    { id: "ib5", aspect: "3/2", src: `${NY}/20220130-IMG_0287_副本.jpg` },
-    { id: "ib6", aspect: "2/3", src: `${NY}/20220213-IMG_0628_副本.jpg` },
-    { id: "ib7", aspect: "3/2", src: `${NY}/Cropped_副本.jpg` },
-    { id: "ib8", aspect: "2/3", src: `${NY}/20220212-20220212-IMG_6925_副本.jpg` },
+  "los-angeles": [
+    { id: "la1", aspect: "3/2", src: `${P}/Los Angeles/LP主图.jpg` },
+    { id: "la2", aspect: "3/2", src: `${P}/Los Angeles/IMG0616-R01-002A.jpg` },
+    { id: "la3", aspect: "3/2", src: `${P}/Los Angeles/IMG0617-R01-008.jpg` },
+    { id: "la4", aspect: "3/2", src: `${P}/Los Angeles/IMG0617-R01-017.jpg` },
+    { id: "la5", aspect: "3/2", src: `${P}/Los Angeles/IMG0617-R01-020.jpg` },
+    { id: "la6", aspect: "3/2", src: `${P}/Los Angeles/IMG0617-R01-024.jpg` },
+    { id: "la7", aspect: "3/2", src: `${P}/Los Angeles/IMG0617-R01-033.jpg` },
+    { id: "la8", aspect: "3/2", src: `${P}/Los Angeles/IMG5461-R01-006_副本.jpg` },
+  ],
+  "usc": [
+    { id: "usc1", aspect: "3/2", src: `${P}/USC/LP主图.JPG` },
+    { id: "usc2", aspect: "3/2", src: `${P}/USC/IMG4754-R01-002A.JPG` },
+    { id: "usc3", aspect: "3/2", src: `${P}/USC/IMG4754-R01-005A.JPG` },
+    { id: "usc4", aspect: "3/2", src: `${P}/USC/IMG4754-R01-010A.JPG` },
+    { id: "usc5", aspect: "3/2", src: `${P}/USC/IMG4754-R01-028A-2.JPG` },
+    { id: "usc6", aspect: "3/2", src: `${P}/USC/IMG4754-R01-036A.JPG` },
+    { id: "usc7", aspect: "3/2", src: `${P}/USC/IMG4755-R01-030.JPG` },
+    { id: "usc8", aspect: "3/2", src: `${P}/USC/IMG4755-R01-034.JPG` },
+    { id: "usc9", aspect: "3/2", src: `${P}/USC/IMG4755-R01-035.JPG` },
+    { id: "usc10", aspect: "3/2", src: `${P}/USC/IMG4755-R01-036.JPG` },
+  ],
+  "yosemite": [
+    { id: "yo1", aspect: "3/2", src: `${P}/Yosemite/000236660001_副本.jpg` },
+    { id: "yo2", aspect: "3/2", src: `${P}/Yosemite/000236660005_副本.jpg` },
+    { id: "yo3", aspect: "3/2", src: `${P}/Yosemite/000236660007_副本.jpg` },
+    { id: "yo4", aspect: "3/2", src: `${P}/Yosemite/000236660009_副本.jpg` },
+    { id: "yo5", aspect: "3/2", src: `${P}/Yosemite/000236660015-2_副本.jpg` },
+    { id: "yo6", aspect: "3/2", src: `${P}/Yosemite/000236660015_副本.jpg` },
+    { id: "yo7", aspect: "3/2", src: `${P}/Yosemite/000236660018-2_副本.jpg` },
+    { id: "yo8", aspect: "3/2", src: `${P}/Yosemite/000236660019_副本.jpg` },
+    { id: "yo9", aspect: "3/2", src: `${P}/Yosemite/000236660022_副本.jpg` },
+    { id: "yo10", aspect: "3/2", src: `${P}/Yosemite/000236660027_副本.jpg` },
   ],
 };
 
 // ─── Series data ──────────────────────────────────────────────────────────────
 const seriesData = {
   en: [
-    {
-      id: "urban-quiet",
-      title: "Urban Quiet",
-      location: "Tokyo", year: "2024",
-      count: 5,
-      note: "The city between moments. Searching for stillness in density.",
-    },
-    {
-      id: "fieldwork",
-      title: "Fieldwork",
-      location: "Yunnan", year: "2023",
-      count: 4,
-      note: "Distance changes what you see. Landscapes observed, not performed.",
-    },
-    {
-      id: "in-between",
-      title: "In Between",
-      location: "New York", year: "2022",
-      count: 8,
-      note: "Everything happens in the margins. The threshold, the pause, the transit.",
-    },
+    { id: "new-york",     title: "In Between",   location: "New York",     year: "2022", count: 8,  note: "Everything happens in the margins. The threshold, the pause, the transit." },
+    { id: "guiyang",      title: "Home Ground",  location: "Guiyang",      year: "2022", count: 5,  note: "The familiar made strange. A hometown seen through borrowed distance." },
+    { id: "los-angeles",  title: "Silver",       location: "Los Angeles",  year: "2023", count: 8,  note: "Light that arrives sideways. Film grain as atmosphere." },
+    { id: "usc",          title: "Residency",    location: "USC",          year: "2024", count: 10, note: "The institution as landscape. Weeks at a time, observed in passing." },
+    { id: "yosemite",     title: "Exposure",     location: "Yosemite",     year: "2023", count: 10, note: "Scale that unmakes you. The valley holds everything it needs to." },
   ],
   zh: [
-    {
-      id: "urban-quiet",
-      title: "都市之静",
-      location: "东京", year: "2024",
-      count: 5,
-      note: "城市的隙间。在密度中寻找宁静。",
-    },
-    {
-      id: "fieldwork",
-      title: "野外考察",
-      location: "云南", year: "2023",
-      count: 4,
-      note: "距离改变你所见。被观察而非被演绎的风景。",
-    },
-    {
-      id: "in-between",
-      title: "过渡",
-      location: "纽约", year: "2022",
-      count: 8,
-      note: "一切都发生在边缘。阈值、停顿、过渡。",
-    },
+    { id: "new-york",     title: "过渡",   location: "纽约",   year: "2022", count: 8,  note: "一切都发生在边缘。阈值、停顿、过渡。" },
+    { id: "guiyang",      title: "故土",   location: "贵阳",   year: "2022", count: 5,  note: "熟悉的陌生感。用借来的距离重新看一座家乡。" },
+    { id: "los-angeles",  title: "银盐",   location: "洛杉矶", year: "2023", count: 8,  note: "侧面抵达的光。胶片颗粒作为氛围。" },
+    { id: "usc",          title: "驻留",   location: "南加大", year: "2024", count: 10, note: "校园作为风景。几周时光，在路过中被观察。" },
+    { id: "yosemite",     title: "曝光",   location: "约塞米蒂", year: "2023", count: 10, note: "令人失去尺度感的规模。山谷容纳了所需的一切。" },
   ],
 };
 
 export default function Photos() {
   const { lang } = useLang();
   const series = seriesData[lang];
-  const [activeId, setActiveId] = useState("urban-quiet");
+  const [activeId, setActiveId] = useState("new-york");
   const activeSeries = series.find(s => s.id === activeId) ?? series[0];
   const photos = photoGrids[activeId as keyof typeof photoGrids] ?? [];
 

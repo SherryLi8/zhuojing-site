@@ -117,15 +117,43 @@ function Wheel({ size = 108, text = "DESIGN · WORDS · PHOTOS · ABOUT · " }: 
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const works = [
-  { title: "Zentea",   category: "Brand Identity", year: "2024", note: "Tea as ritual. A brand language built from silence and ceremony.",              img: "/Images/ZENTEA/主图.png" },
-  { title: "Seasons",  category: "Brand Identity", year: "2022", note: "A flower store that changes with the light. Identity rooted in impermanence.", img: "" },
-  { title: "The Period", category: "Type Design",  year: "2023", note: "A typeface that holds the weight of what comes before the full stop.",         img: "" },
+  {
+    title: "Zentea", category: "Brand Identity", year: "2024",
+    note: "Tea as ritual. A brand language built from silence and ceremony.",
+    img: "/Images/ZENTEA/主图.png",
+    lpImages: [
+      "/Images/ZENTEA/主图.png",
+      "/Images/ZENTEA/stationery.png",
+      "/Images/ZENTEA/盒装.jpg",
+      "/Images/ZENTEA/社媒.png",
+    ],
+  },
+  {
+    title: "Seasons", category: "Brand Identity", year: "2022",
+    note: "A flower store that changes with the light. Identity rooted in impermanence.",
+    img: "/Images/Seasons/主图.jpeg",
+    lpImages: [
+      "/Images/Seasons/主图.jpeg",
+      "/Images/Seasons/帆布包.jpg",
+      "/Images/Seasons/地广1.jpg",
+      "/Images/Seasons/menu.jpg",
+    ],
+  },
+  {
+    title: "The Period", category: "Type Design", year: "2025",
+    note: "Typography as body politics. A typeface that refuses to apologize.",
+    img: "/Images/月经体/月经体%20主图.jpg",
+    lpImages: ["/Images/月经体/月经体%20主图.jpg"],
+  },
 ];
 
+const P = "/Images/Photos";
 const photos = [
-  { title: "Tokyo",     series: "Urban Quiet",  year: "2024", img: "" },
-  { title: "Yunnan",    series: "Fieldwork",    year: "2023", img: "" },
-  { title: "New York",  series: "In Between",   year: "2024", img: "/Images/Photos/1. New York/Featured.jpg" },
+  { title: "New York",    series: "In Between",  year: "2022", img: `${P}/1. New York/Featured.jpg` },
+  { title: "Guiyang",     series: "Home Ground", year: "2022", img: `${P}/2.Guiyang/LP图.jpg` },
+  { title: "Los Angeles", series: "Silver",      year: "2023", img: `${P}/Los Angeles/LP主图.jpg` },
+  { title: "USC",         series: "Residency",   year: "2024", img: `${P}/USC/LP主图.JPG` },
+  { title: "Yosemite",    series: "Exposure",    year: "2023", img: `${P}/Yosemite/000236660001_副本.jpg` },
 ];
 
 const writings = [
@@ -142,14 +170,13 @@ const awards = [
   { award: "Shortlist",            org: "TDC Young Ones",            year: "2023", project: "UToypia" },
 ];
 
-// Sub-sections: Work + Photos each get 3 slots, Writing gets 1
-// Total scroll height = (3 + 3 + 1) × 100vh = 7 × 100vh
+// Sub-sections: Work=3, Photos=5, Writing=1 → total 9 × 100vh
 const SUBS_CONFIG = [
   { key: "Work",    slots: 3 },
-  { key: "Photos",  slots: 3 },
+  { key: "Photos",  slots: 5 },
   { key: "Writing", slots: 1 },
 ];
-const TOTAL_SLOTS = SUBS_CONFIG.reduce((a, c) => a + c.slots, 0); // 7
+const TOTAL_SLOTS = SUBS_CONFIG.reduce((a, c) => a + c.slots, 0); // 9
 
 // ─── Big sticky content block ─────────────────────────────────────────────────
 // fromanother: one huge sticky container, left = sub-nav, right = content
@@ -160,17 +187,25 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
   const [workIdx, setWorkIdx] = useState(0);
   const [photoIdx, setPhotoIdx] = useState(0);
   const [hovWrite, setHovWrite] = useState<number|null>(null);
+  const [workTextVis, setWorkTextVis] = useState(false);
+
+  // Text overlay appears 4s after each new work
+  useEffect(() => {
+    setWorkTextVis(false);
+    const t = setTimeout(() => setWorkTextVis(true), 4000);
+    return () => clearTimeout(t);
+  }, [workIdx]);
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
   const handleScroll = useCallback((v: number) => {
     const slot = Math.min(v * TOTAL_SLOTS, TOTAL_SLOTS - 0.001);
-    // Work = slots 0-2, Photos = 3-5, Writing = 6
+    // Work = 0-2, Photos = 3-7, Writing = 8
     if (slot < 3) {
       setSub(0);
       setWorkIdx(Math.min(Math.floor(slot), works.length - 1));
       onSectionChange(2);
-    } else if (slot < 6) {
+    } else if (slot < 8) {
       setSub(1);
       setPhotoIdx(Math.min(Math.floor(slot - 3), photos.length - 1));
       onSectionChange(3);
@@ -195,50 +230,107 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
         {/* Content — cross-fades between sub-sections */}
         <div style={{ position: "absolute", inset: 0, zIndex: 1 }}>
 
-          {/* ── Work ── */}
+          {/* ── Work ── full-screen image grid + delayed text overlay ── */}
           <AnimatePresence mode="wait">
             {sub === 0 && (
               <motion.div key={`work-${workIdx}`}
-                style={{ ...contentStyle, justifyContent: "space-between", alignItems: "center", gap: "4vw" }}
+                style={{ position: "absolute", inset: 0 }}
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                 transition={{ duration: 0.65, ease: [0.25, 0, 0, 1] }}
               >
-                {/* Text */}
-                <div style={{ flexShrink: 0 }}>
-                  <div style={{ fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}>
-                    {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {works[workIdx].category} · {works[workIdx].year}
-                  </div>
-                  <div style={{
-                    fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-                    fontSize: "clamp(48px,6.5vw,88px)", color: "var(--dark)",
-                    lineHeight: 1.0, marginBottom: 22,
-                  }}>{works[workIdx].title}</div>
-                  <div style={{
-                    fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-                    fontSize: "clamp(13px,1.1vw,16px)", color: "var(--dim)", lineHeight: 1.6, marginBottom: 32,
-                    maxWidth: 380,
-                  }}>{works[workIdx].note}</div>
-                  <Link href="/design" style={{ fontSize: 10, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
-                    VIEW PROJECT →
-                  </Link>
-                </div>
+                {/* Image grid — fills full viewport */}
+                {(() => {
+                  const imgs = (works[workIdx] as typeof works[0] & { lpImages?: string[] }).lpImages ?? [works[workIdx].img];
+                  const n = imgs.length;
+                  const cols = n === 1 ? 1 : n === 2 ? 2 : n <= 4 ? 2 : 3;
+                  const rows = n === 1 ? 1 : Math.ceil(n / cols);
+                  return (
+                    <div style={{
+                      display: "grid",
+                      gridTemplateColumns: `repeat(${cols}, 1fr)`,
+                      gridTemplateRows: `repeat(${rows}, 1fr)`,
+                      gap: 3, width: "100%", height: "100%",
+                    }}>
+                      {imgs.map((src, i) => (
+                        <motion.div key={i}
+                          initial={{ opacity: 0, scale: 1.04 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.9, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                          style={{ overflow: "hidden" }}
+                        >
+                          <img src={src} alt={works[workIdx].title}
+                            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                        </motion.div>
+                      ))}
+                    </div>
+                  );
+                })()}
 
-                {/* Image */}
-                {works[workIdx].img ? (
-                  <motion.div
-                    key={`work-img-${workIdx}`}
-                    initial={{ opacity: 0, clipPath: "inset(6% 0 6% 0)" }}
-                    animate={{ opacity: 1, clipPath: "inset(0% 0 0% 0)" }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ flexShrink: 0, height: "72vh", width: "32vw", overflow: "hidden" }}
-                  >
-                    <img src={works[workIdx].img} alt={works[workIdx].title}
-                      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                  </motion.div>
-                ) : (
-                  <div style={{ flexShrink: 0, height: "72vh", width: "32vw", background: "var(--placeholder)" }} />
-                )}
+                {/* Text overlay — fades in after 4s */}
+                <AnimatePresence>
+                  {workTextVis && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.9, ease: [0.25, 0, 0, 1] }}
+                      style={{
+                        position: "absolute", inset: 0,
+                        background: "linear-gradient(105deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.28) 55%, transparent 100%)",
+                        display: "flex", alignItems: "center",
+                        padding: "0 8vw 0 18vw",
+                      }}
+                    >
+                      <div>
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.4, delay: 0.1 }}
+                          style={{ fontSize: 8, letterSpacing: "0.28em", color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}
+                        >
+                          {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {works[workIdx].category} · {works[workIdx].year}
+                        </motion.div>
+                        <div style={{
+                          fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                          fontSize: "clamp(48px,6.5vw,88px)", color: "#fff",
+                          lineHeight: 1.0, marginBottom: 22,
+                          display: "flex", flexWrap: "wrap", gap: "0 0.22em",
+                        }}>
+                          {works[workIdx].title.split(" ").map((w, i) => (
+                            <div key={i} style={{ overflow: "hidden" }}>
+                              <motion.span style={{ display: "inline-block" }}
+                                initial={{ y: "110%" }} animate={{ y: "0%" }}
+                                transition={{ duration: 0.7, delay: 0.2 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                              >{w}</motion.span>
+                            </div>
+                          ))}
+                        </div>
+                        <div style={{
+                          fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                          fontSize: "clamp(13px,1.1vw,16px)", color: "rgba(255,255,255,0.75)", lineHeight: 1.6, marginBottom: 32,
+                          maxWidth: 380, display: "flex", flexWrap: "wrap", gap: "0 0.28em",
+                        }}>
+                          {works[workIdx].note.split(" ").map((w, i) => (
+                            <div key={i} style={{ overflow: "hidden" }}>
+                              <motion.span style={{ display: "inline-block" }}
+                                initial={{ y: "110%" }} animate={{ y: "0%" }}
+                                transition={{ duration: 0.6, delay: 0.35 + i * 0.025, ease: [0.16, 1, 0.3, 1] }}
+                              >{w}</motion.span>
+                            </div>
+                          ))}
+                        </div>
+                        <motion.div
+                          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                          transition={{ duration: 0.5, delay: 0.9 }}
+                        >
+                          <Link href="/design" style={{ fontSize: 10, letterSpacing: "0.2em", color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-geist),sans-serif" }}>
+                            VIEW PROJECT →
+                          </Link>
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             )}
 

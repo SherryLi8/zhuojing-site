@@ -6,8 +6,8 @@ import { useLang } from "../context/lang";
 
 // ─── i18n ─────────────────────────────────────────────────────────────────────
 const TAG_LABELS: Record<string, Record<string, string>> = {
-  en: { "brand-identity": "Brand Identity", "editorial": "Editorial", "uxui": "UX/UI", "motion": "Motion" },
-  zh: { "brand-identity": "品牌设计", "editorial": "编辑设计", "uxui": "UX/UI", "motion": "动态" },
+  en: { "brand-identity": "Brand Identity", "editorial": "Editorial", "uxui": "UX/UI", "product": "Product Design", "motion": "Motion" },
+  zh: { "brand-identity": "品牌设计", "editorial": "编辑设计", "uxui": "UX/UI", "product": "产品设计", "motion": "动态" },
 };
 
 // ─── Image entry types ────────────────────────────────────────────────────────
@@ -174,8 +174,8 @@ export const works = [
     writingLink: "/words",
   },
   {
-    num: "13", title: "八月花神",
-    tag: "brand-identity", tagLabel: "Brand Identity", year: "2025",
+    num: "13", title: "八月花神", titleEn: "August Offering",
+    tag: "product", tagLabel: "Product Design", year: "2025",
     note: "A seasonal identity grounded in offering and bloom.",
     img: "/Images/八月花神/主图.png",
     images: [
@@ -324,6 +324,7 @@ const FILTERS = [
   { key: "brand-identity", en: "Brand Identity", zh: "品牌设计" },
   { key: "editorial",      en: "Editorial",      zh: "编辑设计" },
   { key: "uxui",           en: "UX/UI",           zh: "UX/UI"   },
+  { key: "product",        en: "Product",         zh: "产品设计" },
 ] as const;
 
 export default function Design() {
@@ -368,6 +369,18 @@ export default function Design() {
             }}>{lang === "en" ? "Design" : "设计"}</h1>
             {/* Filter tabs */}
             <div style={{ display: "flex", gap: 20, alignItems: "baseline" }}>
+              {/* ALL */}
+              <button
+                onClick={() => setActiveFilter("all")}
+                style={{
+                  fontFamily: "var(--font-geist),sans-serif",
+                  fontSize: 9, letterSpacing: "0.2em",
+                  color: activeFilter === "all" ? "var(--dark)" : "var(--faint)",
+                  background: "none", border: "none", cursor: "pointer",
+                  borderBottom: activeFilter === "all" ? "1px solid var(--dark)" : "1px solid transparent",
+                  paddingBottom: 2, transition: "color 0.15s",
+                }}
+              >{lang === "en" ? "ALL" : "全部"}</button>
               {FILTERS.map(f => {
                 const isActive = activeFilter === f.key;
                 return (
