@@ -6,8 +6,8 @@ import { useLang } from "../context/lang";
 
 // ─── i18n ─────────────────────────────────────────────────────────────────────
 const TAG_LABELS: Record<string, Record<string, string>> = {
-  en: { "brand-identity": "Brand Identity", "editorial": "Editorial", "uxui": "UX/UI", "product": "Product Design", "motion": "Motion" },
-  zh: { "brand-identity": "品牌设计", "editorial": "编辑设计", "uxui": "UX/UI", "product": "产品设计", "motion": "动态" },
+  en: { "brand-identity": "Brand Identity", "editorial": "Editorial", "typography": "Typography", "packaging": "Packaging", "uxui": "UX/UI", "product": "Product Design", "creative": "Creative", "motion": "Motion" },
+  zh: { "brand-identity": "品牌设计", "editorial": "编辑设计", "typography": "字体设计", "packaging": "包装设计", "uxui": "UX/UI", "product": "产品设计", "creative": "创意", "motion": "动态" },
 };
 
 // ─── Image entry types ────────────────────────────────────────────────────────
@@ -59,7 +59,7 @@ export const works = [
   },
   {
     num: "03", title: "The Period",
-    tag: "editorial", tagLabel: "Editorial", year: "2025",
+    tag: "typography", tagLabel: "Typography", year: "2025",
     note: "Typography as body politics. A typeface that refuses to apologize.",
     img: "/Images/月经体/月经体%20主图.jpg",
     images: [
@@ -69,7 +69,7 @@ export const works = [
   },
   {
     num: "04", title: "Salvation of Seven Deadly Sins",
-    tag: "editorial", tagLabel: "Editorial", year: "2022",
+    tag: "packaging", tagLabel: "Packaging", year: "2022",
     note: "Chocolate as salvation. Each sin given a flavour, a texture, a second chance.",
     img: "/Images/Chocolate/主图.jpg",
     images: [
@@ -80,7 +80,7 @@ export const works = [
   },
   {
     num: "05", title: "One Second",
-    tag: "editorial", tagLabel: "Editorial", year: "2022",
+    tag: "packaging", tagLabel: "Packaging", year: "2022",
     note: "Named for the first second of sparkling water hitting the tongue.",
     img: "/Images/One%20Second/主图.jpg",
     images: [
@@ -103,13 +103,13 @@ export const works = [
   },
   {
     num: "07", title: "Fractal Font",
-    tag: "editorial", tagLabel: "Editorial", year: "2022",
+    tag: "typography", tagLabel: "Typography", year: "2022",
     note: "Self-similarity scaled from glyph to composition.",
     img: "",
   },
   {
     num: "08", title: "Program Error",
-    tag: "editorial", tagLabel: "Editorial", year: "2022",
+    tag: "creative", tagLabel: "Creative", year: "2022",
     note: "Digital glitch as aesthetic language.",
     img: "",
   },
@@ -143,7 +143,7 @@ export const works = [
   },
   {
     num: "11", title: "Anxiety Relief",
-    tag: "brand-identity", tagLabel: "Brand Identity", year: "2023",
+    tag: "typography", tagLabel: "Typography", year: "2023",
     note: "Design as care. A visual system built around stillness and recovery.",
     img: "/Images/Anxiety%20Relief/主图.jpg",
     images: [
@@ -323,8 +323,11 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
 const FILTERS = [
   { key: "brand-identity", en: "Brand Identity", zh: "品牌设计" },
   { key: "editorial",      en: "Editorial",      zh: "编辑设计" },
-  { key: "uxui",           en: "UX/UI",           zh: "UX/UI"   },
-  { key: "product",        en: "Product",         zh: "产品设计" },
+  { key: "typography",     en: "Typography",     zh: "字体设计" },
+  { key: "packaging",      en: "Packaging",      zh: "包装设计" },
+  { key: "uxui",           en: "UX/UI",          zh: "UX/UI"   },
+  { key: "product",        en: "Product",        zh: "产品设计" },
+  { key: "creative",       en: "Creative",       zh: "创意"     },
 ] as const;
 
 export default function Design() {

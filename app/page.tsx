@@ -115,6 +115,23 @@ function Wheel({ size = 108, text = "DESIGN · WORDS · PHOTOS · ABOUT · " }: 
   );
 }
 
+// ─── Cursor scatter image pool ────────────────────────────────────────────────
+const CURSOR_IMAGES = [
+  "/Images/ZENTEA/主图.png",
+  "/Images/ZENTEA/盒装.jpg",
+  "/Images/Seasons/主图.jpeg",
+  "/Images/Seasons/帆布包.jpg",
+  "/Images/Chocolate/主图.jpg",
+  "/Images/Orient/主图.jpeg",
+  "/Images/龙鳞装/2.JPG",
+  "/Images/八月花神/主图.png",
+  "/Images/Photos/1. New York/Featured.jpg",
+  "/Images/Photos/2.Guiyang/LP图.jpg",
+  "/Images/Photos/Los Angeles/LP主图.jpg",
+  "/Images/Photos/Yosemite/000236660001_副本.jpg",
+  "/Images/Photos/USC/LP主图.JPG",
+];
+
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const works = [
   {
@@ -187,14 +204,6 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
   const [workIdx, setWorkIdx] = useState(0);
   const [photoIdx, setPhotoIdx] = useState(0);
   const [hovWrite, setHovWrite] = useState<number|null>(null);
-  const [workTextVis, setWorkTextVis] = useState(false);
-
-  // Text overlay appears 4s after each new work
-  useEffect(() => {
-    setWorkTextVis(false);
-    const t = setTimeout(() => setWorkTextVis(true), 4000);
-    return () => clearTimeout(t);
-  }, [workIdx]);
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
@@ -230,91 +239,46 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
         {/* Content — cross-fades between sub-sections */}
         <div style={{ position: "absolute", inset: 0, zIndex: 1 }}>
 
-          {/* ── Work ── full-screen image grid + delayed text overlay ── */}
+          {/* ── Work ── photos-style: text left, large image right ── */}
           <AnimatePresence mode="wait">
             {sub === 0 && (
               <motion.div key={`work-${workIdx}`}
-                style={{ position: "absolute", inset: 0 }}
+                style={{ ...contentStyle, justifyContent: "space-between", alignItems: "center", gap: "4vw" }}
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                 transition={{ duration: 0.65, ease: [0.25, 0, 0, 1] }}
               >
-                {/* Hero image — right side, full viewport height */}
-                {works[workIdx].img && (
-                  <motion.div
-                    key={`wimg-${workIdx}`}
-                    initial={{ opacity: 0, clipPath: "inset(6% 0 6% 0)" }}
-                    animate={{ opacity: 1, clipPath: "inset(0% 0 0% 0)" }}
-                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ position: "absolute", top: 0, right: 0, height: "100vh", width: "58vw", overflow: "hidden" }}
-                  >
+                {/* Left: metadata */}
+                <div style={{ flexShrink: 0, maxWidth: 280 }}>
+                  <div style={{ fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}>
+                    {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {works[workIdx].category} · {works[workIdx].year}
+                  </div>
+                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(32px,3.8vw,56px)", color: "var(--dark)", lineHeight: 1.05, marginBottom: 18 }}>
+                    {works[workIdx].title}
+                  </div>
+                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)", lineHeight: 1.7, marginBottom: 28 }}>
+                    {works[workIdx].note}
+                  </div>
+                  <Link href="/design" style={{ fontSize: 10, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
+                    VIEW PROJECT →
+                  </Link>
+                </div>
+
+                {/* Right: hero image — larger than before */}
+                <motion.div
+                  key={`wimg-${workIdx}`}
+                  initial={{ opacity: 0, clipPath: "inset(6% 0 6% 0)" }}
+                  animate={{ opacity: 1, clipPath: "inset(0% 0 0% 0)" }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ flexShrink: 0, height: "82vh", width: "44vw", overflow: "hidden" }}
+                >
+                  {works[workIdx].img ? (
                     <img src={works[workIdx].img} alt={works[workIdx].title}
                       style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                  </motion.div>
-                )}
-
-                {/* Text — plain on left until overlay kicks in */}
-                <AnimatePresence mode="wait">
-                  {!workTextVis ? (
-                    <motion.div key="pre-text"
-                      style={{ ...contentStyle, justifyContent: "flex-start" }}
-                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                      transition={{ duration: 0.4 }}
-                    >
-                      <div>
-                        <div style={{ fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}>
-                          {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {works[workIdx].category} · {works[workIdx].year}
-                        </div>
-                        <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(48px,6.5vw,88px)", color: "var(--dark)", lineHeight: 1.0 }}>
-                          {works[workIdx].title}
-                        </div>
-                      </div>
-                    </motion.div>
                   ) : (
-                    /* Gradient overlay + animated text after 4s */
-                    <motion.div key="overlay"
-                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                      transition={{ duration: 0.9, ease: [0.25, 0, 0, 1] }}
-                      style={{
-                        position: "absolute", inset: 0,
-                        background: "linear-gradient(100deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.18) 48%, transparent 100%)",
-                        display: "flex", alignItems: "center",
-                        padding: "0 8vw 0 18vw",
-                      }}
-                    >
-                      <div>
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4, delay: 0.1 }}
-                          style={{ fontSize: 8, letterSpacing: "0.28em", color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}>
-                          {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {works[workIdx].category} · {works[workIdx].year}
-                        </motion.div>
-                        <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(48px,6.5vw,88px)", color: "#fff", lineHeight: 1.0, marginBottom: 22, display: "flex", flexWrap: "wrap", gap: "0 0.22em" }}>
-                          {works[workIdx].title.split(" ").map((w, i) => (
-                            <div key={i} style={{ overflow: "hidden" }}>
-                              <motion.span style={{ display: "inline-block" }}
-                                initial={{ y: "110%" }} animate={{ y: "0%" }}
-                                transition={{ duration: 0.7, delay: 0.15 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                              >{w}</motion.span>
-                            </div>
-                          ))}
-                        </div>
-                        <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(13px,1.1vw,16px)", color: "rgba(255,255,255,0.75)", lineHeight: 1.6, marginBottom: 32, maxWidth: 380, display: "flex", flexWrap: "wrap", gap: "0 0.28em" }}>
-                          {works[workIdx].note.split(" ").map((w, i) => (
-                            <div key={i} style={{ overflow: "hidden" }}>
-                              <motion.span style={{ display: "inline-block" }}
-                                initial={{ y: "110%" }} animate={{ y: "0%" }}
-                                transition={{ duration: 0.6, delay: 0.3 + i * 0.025, ease: [0.16, 1, 0.3, 1] }}
-                              >{w}</motion.span>
-                            </div>
-                          ))}
-                        </div>
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.85 }}>
-                          <Link href="/design" style={{ fontSize: 10, letterSpacing: "0.2em", color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-geist),sans-serif" }}>
-                            VIEW PROJECT →
-                          </Link>
-                        </motion.div>
-                      </div>
-                    </motion.div>
+                    <div style={{ width: "100%", height: "100%", background: "var(--placeholder)" }} />
                   )}
-                </AnimatePresence>
+                </motion.div>
               </motion.div>
             )}
 
@@ -477,8 +441,13 @@ export default function Home() {
   const { lang } = useLang();
   const [phase, setPhase]   = useState<"zh"|"both">("zh");
   const [topVis, setTopVis] = useState(false);
-  const [scrolled, setScrolled] = useState(false); // for arrow fade
-  const [activeNav, setActiveNav] = useState(0);   // 0=poem,1=about,2-6=content,7=navigate
+  const [scrolled, setScrolled] = useState(false);
+  const [activeNav, setActiveNav] = useState(0);
+
+  // ── Cursor scatter images ──
+  const [cursorImgs, setCursorImgs] = useState<{id:number;x:number;y:number;src:string;rot:number}[]>([]);
+  const cursorIdRef = useRef(0);
+  const lastSpawnRef = useRef({x:-999,y:-999});
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase("both"), 1700);
@@ -492,6 +461,25 @@ export default function Home() {
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
+
+  // Cursor scatter: spawn images on mouse move when on intro section
+  useEffect(() => {
+    if (!topVis) return;
+    const fn = (e: MouseEvent) => {
+      if (activeNav !== 0) return;
+      const dx = e.clientX - lastSpawnRef.current.x;
+      const dy = e.clientY - lastSpawnRef.current.y;
+      if (dx*dx + dy*dy < 10000) return; // ~100px threshold
+      lastSpawnRef.current = { x: e.clientX, y: e.clientY };
+      const src = CURSOR_IMAGES[Math.floor(Math.random() * CURSOR_IMAGES.length)];
+      const rot = (Math.random() - 0.5) * 14;
+      const id = ++cursorIdRef.current;
+      setCursorImgs(prev => [...prev.slice(-5), { id, x: e.clientX, y: e.clientY, src, rot }]);
+      setTimeout(() => setCursorImgs(prev => prev.filter(img => img.id !== id)), 1600);
+    };
+    window.addEventListener("mousemove", fn);
+    return () => window.removeEventListener("mousemove", fn);
+  }, [topVis, activeNav]);
 
   // Track active section for sidenav
   useEffect(() => {
@@ -514,6 +502,31 @@ export default function Home() {
     <>
       <Cursor/>
       <SideNav active={activeNav}/>
+
+      {/* Cursor scatter images — fixed, above everything */}
+      <AnimatePresence>
+        {cursorImgs.map(img => (
+          <motion.img
+            key={img.id}
+            src={img.src}
+            initial={{ opacity: 0, scale: 0.88 }}
+            animate={{ opacity: 0.88, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.94 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              position: "fixed",
+              left: img.x - 90,
+              top: img.y - 65,
+              width: 180,
+              height: 130,
+              objectFit: "cover",
+              pointerEvents: "none",
+              zIndex: 9000,
+              transform: `rotate(${img.rot}deg)`,
+            }}
+          />
+        ))}
+      </AnimatePresence>
       <div style={{ cursor: "none" }}>
 
         {/* 01 — POEM */}
