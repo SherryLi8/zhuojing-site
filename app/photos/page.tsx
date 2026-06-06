@@ -19,12 +19,18 @@ const photoGrids: Record<string, { id: string; aspect: string; src: string }[]> 
     { id: "ny7", aspect: "3/2", src: `${P}/1. New York/Cropped_副本.jpg` },
   ],
   "guiyang": [
-    { id: "gy0", aspect: "3/2", src: `${P}/2.Guiyang/LP图-2.jpg` },
-    { id: "gy1", aspect: "3/2", src: `${P}/2.Guiyang/未命名-13_副本.jpg` },
-    { id: "gy2", aspect: "3/2", src: `${P}/2.Guiyang/未命名-16_副本.jpg` },
-    { id: "gy3", aspect: "3/2", src: `${P}/2.Guiyang/未命名-19_副本.jpg` },
-    { id: "gy4", aspect: "3/2", src: `${P}/2.Guiyang/未命名-28_副本.jpg` },
-    { id: "gy5", aspect: "3/2", src: `${P}/2.Guiyang/未命名-36_副本.jpg` },
+    { id: "gy1",  aspect: "3/2", src: `${P}/2.Guiyang/未命名-2.jpg` },
+    { id: "gy2",  aspect: "3/2", src: `${P}/2.Guiyang/未命名-6.jpg` },
+    { id: "gy3",  aspect: "3/2", src: `${P}/2.Guiyang/未命名-13.jpg` },
+    { id: "gy4",  aspect: "3/2", src: `${P}/2.Guiyang/未命名-14.jpg` },
+    { id: "gy5",  aspect: "3/2", src: `${P}/2.Guiyang/未命名-15.jpg` },
+    { id: "gy6",  aspect: "3/2", src: `${P}/2.Guiyang/未命名-16.jpg` },
+    { id: "gy7",  aspect: "3/2", src: `${P}/2.Guiyang/未命名-19.jpg` },
+    { id: "gy8",  aspect: "3/2", src: `${P}/2.Guiyang/未命名-25.jpg` },
+    { id: "gy9",  aspect: "3/2", src: `${P}/2.Guiyang/未命名-26.jpg` },
+    { id: "gy10", aspect: "3/2", src: `${P}/2.Guiyang/未命名-27.jpg` },
+    { id: "gy11", aspect: "3/2", src: `${P}/2.Guiyang/未命名-28.jpg` },
+    { id: "gy12", aspect: "3/2", src: `${P}/2.Guiyang/未命名-36.jpg` },
   ],
   "los-angeles": [
     { id: "la1", aspect: "3/2", src: `${P}/Los Angeles/LP主图.jpg` },
@@ -78,7 +84,7 @@ const photoGrids: Record<string, { id: string; aspect: string; src: string }[]> 
 const seriesData = {
   en: [
     { id: "new-york",    title: "In Between",  location: "New York",     year: "2022", count: 7,  note: "Everything happens in the margins. The threshold, the pause, the transit." },
-    { id: "guiyang",     title: "Home Ground", location: "Guiyang",      year: "2022", count: 6,  note: "The familiar made strange. A hometown seen through borrowed distance." },
+    { id: "guiyang",     title: "Home Ground", location: "Guiyang",      year: "2022", count: 12, note: "The familiar made strange. A hometown seen through borrowed distance." },
     { id: "los-angeles", title: "Silver",      location: "Los Angeles",  year: "2023", count: 8,  note: "Light that arrives sideways. Film grain as atmosphere." },
     { id: "usc",         title: "Residency",   location: "USC",          year: "2024", count: 10, note: "The institution as landscape. Weeks at a time, observed in passing." },
     { id: "yosemite",    title: "Exposure",    location: "Yosemite",     year: "2023", count: 10, note: "Scale that unmakes you. The valley holds everything it needs to." },
@@ -86,7 +92,7 @@ const seriesData = {
   ],
   zh: [
     { id: "new-york",    title: "过渡",   location: "纽约",      year: "2022", count: 7,  note: "一切都发生在边缘。阈值、停顿、过渡。" },
-    { id: "guiyang",     title: "故土",   location: "贵阳",      year: "2022", count: 6,  note: "熟悉的陌生感。用借来的距离重新看一座家乡。" },
+    { id: "guiyang",     title: "故土",   location: "贵阳",      year: "2022", count: 12, note: "熟悉的陌生感。用借来的距离重新看一座家乡。" },
     { id: "los-angeles", title: "银盐",   location: "洛杉矶",   year: "2023", count: 8,  note: "侧面抵达的光。胶片颗粒作为氛围。" },
     { id: "usc",         title: "驻留",   location: "南加大",   year: "2024", count: 10, note: "校园作为风景。几周时光，在路过中被观察。" },
     { id: "yosemite",    title: "曝光",   location: "约塞米蒂", year: "2023", count: 10, note: "令人失去尺度感的规模。山谷容纳了所需的一切。" },

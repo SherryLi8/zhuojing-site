@@ -126,7 +126,7 @@ const CURSOR_IMAGES = [
   "/Images/龙鳞装/2.JPG",
   "/Images/八月花神/主图.png",
   "/Images/Photos/1. New York/Featured.jpg",
-  "/Images/Photos/2.Guiyang/LP图-2.jpg",
+  "/Images/Photos/2.Guiyang/未命名-2.jpg",
   "/Images/Photos/Los Angeles/LP主图.jpg",
   "/Images/Photos/Yosemite/000236660001_副本.jpg",
   "/Images/Photos/USC/LP主图.JPG",
@@ -167,7 +167,7 @@ const works = [
 const P = "/Images/Photos";
 const photos = [
   { title: "New York",    series: "In Between",  year: "2022", img: `${P}/1. New York/Featured.jpg` },
-  { title: "Guiyang",     series: "Home Ground", year: "2022", img: `${P}/2.Guiyang/LP图-2.jpg` },
+  { title: "Guiyang",     series: "Home Ground", year: "2022", img: `${P}/2.Guiyang/未命名-2.jpg` },
   { title: "Los Angeles", series: "Silver",      year: "2023", img: `${P}/Los Angeles/LP主图.jpg` },
   { title: "USC",         series: "Residency",   year: "2024", img: `${P}/USC/LP主图.JPG` },
   { title: "Yosemite",    series: "Exposure",    year: "2023", img: `${P}/Yosemite/000236660001_副本.jpg` },
