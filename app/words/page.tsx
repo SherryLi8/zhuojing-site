@@ -11,7 +11,7 @@ const entries = {
   en: [
     {
       id: "thesis",
-      title: "Reinscription of Cultural Meaning Through Design",
+      title: "Reinscription of Cultural Meaning Through Design: How Visual and Material Transformations Reshape Meaning",
       date: "2024", tag: "Thesis",
       href: "https://digitallibrary.usc.edu/asset-management/2A3BF1M2SUNBE",
       external: true, published: true,
@@ -49,7 +49,7 @@ const entries = {
   zh: [
     {
       id: "thesis",
-      title: "以设计重写文化意义",
+      title: "以设计重写文化意义：视觉与物质转化如何重塑意义",
       date: "2024", tag: "论文",
       href: "https://digitallibrary.usc.edu/asset-management/2A3BF1M2SUNBE",
       external: true, published: true,

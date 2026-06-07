@@ -393,7 +393,13 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                         fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
                         fontSize: "clamp(18px,1.7vw,24px)", color: "var(--dark)", lineHeight: 1.3,
                       }}>
-                        {lang === "zh" ? w.titleZh : w.title}
+                        {(() => {
+                          const t = lang === "zh" ? w.titleZh : w.title;
+                          const parts = t.split(": ");
+                          return parts.length > 1
+                            ? <>{parts[0]}:<br/>{parts.slice(1).join(": ")}</>
+                            : <>{t}</>;
+                        })()}
                         {w.pub && <span style={{ fontSize: 11, marginLeft: 8, color: "var(--faint)", fontStyle: "normal" }}>↗</span>}
                       </span>
                       <span style={{ fontSize: 8, letterSpacing: "0.18em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", textTransform: "uppercase" }}>{lang === "zh" ? w.tagZh : w.tag}</span>
@@ -415,8 +421,8 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
 // ─── Index / Final screen ─────────────────────────────────────────────────────
 const indexLinks = [
   { label: "Design",  labelZh: "设计",  desc: "Branding · Editorial · Packaging · Typography · UX/UI · Product · Creative · Motion", descZh: "品牌 · 交互 · 出版物 · 包装 · 字体 · 产品 · 创意 · 动态", href: "/design" },
-  { label: "Photos",  labelZh: "摄影",  desc: "Observation & Travel",                      descZh: "观察 · 旅行",                               href: "/photos" },
-  { label: "Writing", labelZh: "文字",  desc: "Essays · Research · Writing",               descZh: "随笔 · 研究 · 论文",                        href: "/words"  },
+  { label: "Photos",  labelZh: "摄影",  desc: "observation · travel",                      descZh: "观察 · 旅行",                               href: "/photos" },
+  { label: "Writing", labelZh: "文字",  desc: "essays · research",                         descZh: "随笔 · 研究",                               href: "/words"  },
   { label: "About",   labelZh: "关于",  desc: "Everything about me",                       descZh: "关于我的一切",                               href: "/about"  },
 ];
 

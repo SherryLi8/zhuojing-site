@@ -274,7 +274,7 @@ export default function About() {
       <main style={{
         marginLeft: NAV_WIDTH,
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
+        gridTemplateColumns: "0.8fr 1.2fr",
         minHeight: "100dvh",
       }}>
 
@@ -305,13 +305,6 @@ export default function About() {
           </div>
 
           <FadeUp delay={0.1}>
-            <p style={{
-              fontFamily: "var(--font-geist),sans-serif", fontSize: 11,
-              letterSpacing: "0.2em", color: "var(--faint)", marginBottom: 28,
-            }}>{c.tagline}</p>
-          </FadeUp>
-
-          <FadeUp delay={0.16}>
             <p style={{
               fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
               fontSize: "clamp(16px,1.45vw,20px)", lineHeight: 1.8, color: "var(--dim)",
