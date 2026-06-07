@@ -274,7 +274,7 @@ export default function About() {
       <main style={{
         marginLeft: NAV_WIDTH,
         display: "grid",
-        gridTemplateColumns: "0.8fr 1.2fr",
+        gridTemplateColumns: "1fr 1fr",
         minHeight: "100dvh",
       }}>
 
@@ -283,10 +283,15 @@ export default function About() {
           initial={{ opacity: 0, clipPath: "inset(8% 0 8% 0)" }}
           animate={{ opacity: 1, clipPath: "inset(0% 0 0% 0)" }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          style={{ position: "sticky", top: TOP_BAR_HEIGHT, height: `calc(100vh - ${TOP_BAR_HEIGHT}px)`, overflow: "hidden" }}
+          style={{
+            position: "sticky", top: TOP_BAR_HEIGHT,
+            height: `calc(100vh - ${TOP_BAR_HEIGHT}px)`,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            padding: "48px 40px",
+          }}
         >
           <img src="/Images/About-Profile.JPG" alt="Zhuojing Li"
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }} />
+            style={{ maxHeight: "100%", maxWidth: "100%", width: "auto", height: "auto", display: "block", objectFit: "contain" }} />
         </motion.div>
 
         {/* Right: content */}
