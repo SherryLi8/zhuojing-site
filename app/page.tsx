@@ -277,7 +277,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                   <div style={{ fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}>
                     {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {works[workIdx].category} · {works[workIdx].year}
                   </div>
-                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(32px,3.8vw,56px)", color: "var(--dark)", lineHeight: 1.05, marginBottom: 9 }}>
+                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(32px,3.8vw,56px)", color: "var(--dark)", lineHeight: 1.05, marginBottom: 6 }}>
                     {works[workIdx].title}
                   </div>
                   <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)", lineHeight: 1.7, marginBottom: 28 }}>
