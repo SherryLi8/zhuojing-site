@@ -370,7 +370,7 @@ export default function Design() {
         }}>
           {/* Section header */}
           <div style={{
-            display: "flex", alignItems: "flex-start", justifyContent: "space-between",
+            display: "flex", alignItems: "center", justifyContent: "space-between",
             marginBottom: 40, paddingBottom: 20,
             borderBottom: "1px solid var(--line)",
           }}>
@@ -379,7 +379,7 @@ export default function Design() {
               fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
             }}>{lang === "en" ? "Design" : "设计"}</h1>
             {/* Filter tabs — 4-col grid → exactly 2 rows of 4 */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, max-content)", gap: "8px 14px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, max-content)", gap: "4px 14px" }}>
               {[{ key: "all", en: "ALL", zh: "全部" } as const, ...FILTERS].map((f) => {
                 const isActive = activeFilter === f.key;
                 return (
