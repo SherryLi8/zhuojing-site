@@ -136,7 +136,8 @@ const CURSOR_IMAGES = [
 const works = [
   {
     title: "Zentea", category: "Branding", year: "2024",
-    note: "Tea as ritual. A brand language built from silence and ceremony.",
+    note: "Tea and stillness, one taste.",
+    noteZh: "禅茶一味",
     img: "/Images/ZENTEA/主图.png",
     lpImages: [
       "/Images/ZENTEA/主图.png",
@@ -147,7 +148,8 @@ const works = [
   },
   {
     title: "Seasons", category: "Branding", year: "2022",
-    note: "A flower store that changes with the light. Identity rooted in impermanence.",
+    note: "Flowers for yourself, season after season.",
+    noteZh: "一季一花，都送给自己。",
     img: "/Images/Seasons/主图.jpeg",
     lpImages: [
       "/Images/Seasons/主图.jpeg",
@@ -158,7 +160,8 @@ const works = [
   },
   {
     title: "The Period", category: "Typography", year: "2025",
-    note: "Typography as body politics. A typeface that refuses to apologize.",
+    note: "Some letters bleed.",
+    noteZh: "有些字，会洇血。",
     img: "/Images/月经体/月经体%20主图.jpg",
     lpImages: ["/Images/月经体/月经体%20主图.jpg"],
   },
@@ -200,6 +203,7 @@ const TOTAL_SLOTS = SUBS_CONFIG.reduce((a, c) => a + c.slots, 0); // 9
 // background barely moves, ONLY text/content cross-fades
 function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => void }) {
   const ref = useRef<HTMLDivElement>(null);
+  const { lang } = useLang();
   const [sub, setSub] = useState(0);
   const [workIdx, setWorkIdx] = useState(0);
   const [photoIdx, setPhotoIdx] = useState(0);
@@ -256,7 +260,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                     {works[workIdx].title}
                   </div>
                   <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)", lineHeight: 1.7, marginBottom: 28 }}>
-                    {works[workIdx].note}
+                    {lang === "zh" ? works[workIdx].noteZh : works[workIdx].note}
                   </div>
                   <Link href="/design" style={{ fontSize: 10, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
                     VIEW PROJECT →
