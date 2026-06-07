@@ -141,12 +141,6 @@ const data = {
         desc: "Logo system and motion identity for an interactive narrative game studio. Built around the numeral 26 — static and animated versions, bilingual application standards.",
       },
       {
-        org: "Guizhou Qian Cultural",
-        role: "Visual Identity",
-        period: "2025",
-        desc: "Brand system, colour architecture, gift packaging, and social media visuals.",
-      },
-      {
         org: "HugoEast China",
         role: "Brand & Merchandise Design",
         period: "2024 – 2025",
@@ -216,12 +210,6 @@ const data = {
         role: "品牌视觉",
         period: "2025",
         desc: "为互动叙事游戏工作室设计标志系统与动态标志。围绕数字「26」构建，含静态与动态版本及中英双语应用规范。",
-      },
-      {
-        org: "贵州黔元素文化",
-        role: "视觉识别",
-        period: "2025",
-        desc: "品牌视觉系统、色彩体系、礼盒包装及社交媒体视觉。",
       },
       {
         org: "北京和观映像文化传媒",
