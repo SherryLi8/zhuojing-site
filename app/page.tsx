@@ -618,9 +618,30 @@ export default function Home() {
 }
 
 // ─── About block ──────────────────────────────────────────────────────────────
+const aboutContent = {
+  en: {
+    name: "Zhuojing Li",
+    lines: [
+      "A designer who never quite settled into a single medium.",
+      "The idea leads; the medium follows.",
+      "Design is my honest way of looking at the world.",
+    ],
+  },
+  zh: {
+    name: "李卓璟",
+    lines: [
+      "一个始终没在单一媒介里安顿下来的设计师。",
+      "想法先行，媒介是手段。",
+      "归根结底，做设计是我诚实地注视世界的方式。",
+    ],
+  },
+};
+
 function AboutBlock() {
   const { ref, vis } = useInView(0.3);
-  const words = "I work at the edge of image and language — designing identities, typefaces, and experiences that hold something unsaid.".split(" ");
+  const { lang } = useLang();
+  const c = aboutContent[lang];
+
   return (
     <div ref={ref} style={{ maxWidth: 680 }}>
       <div style={{ overflow: "hidden", marginBottom: 24 }}>
@@ -628,24 +649,27 @@ function AboutBlock() {
           style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(40px,5vw,72px)", color: "var(--dark)", lineHeight: 1.05 }}
           initial={{ y: "105%" }} animate={vis ? { y: "0%" } : {}}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        >Zhuojing Li</motion.div>
+        >{c.name}</motion.div>
       </div>
-      <div style={{
-        fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-        fontSize: "clamp(16px,1.8vw,24px)", lineHeight: 1.65, color: "var(--dim)",
-        display: "flex", flexWrap: "wrap", gap: "0 0.28em", marginBottom: 40,
-      }}>
-        {words.map((w, i) => (
+
+      <div style={{ marginBottom: 40 }}>
+        {c.lines.map((line, i) => (
           <div key={i} style={{ overflow: "hidden" }}>
-            <motion.span style={{ display: "inline-block" }}
+            <motion.p
+              style={{
+                fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                fontSize: "clamp(16px,1.8vw,24px)", lineHeight: 1.65, color: "var(--dim)",
+                margin: 0,
+              }}
               initial={{ y: "110%" }} animate={vis ? { y: "0%" } : {}}
-              transition={{ duration: 0.7, delay: 0.25 + i * 0.03, ease: [0.16, 1, 0.3, 1] }}
-            >{w}</motion.span>
+              transition={{ duration: 0.75, delay: 0.2 + i * 0.14, ease: [0.16, 1, 0.3, 1] }}
+            >{line}</motion.p>
           </div>
         ))}
       </div>
+
       <motion.div initial={{ opacity: 0 }} animate={vis ? { opacity: 1 } : {}}
-        transition={{ duration: 0.5, delay: 1.0 }}
+        transition={{ duration: 0.5, delay: 0.8 }}
       >
         <Link href="/about" style={{
           fontFamily: "var(--font-geist),sans-serif",
