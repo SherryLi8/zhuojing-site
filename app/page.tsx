@@ -190,18 +190,18 @@ const works = [
 
 const P = "/Images/Photos";
 const photos = [
-  { id: "new-york",    title: "New York",    series: "In Between",  year: "2022", img: `${P}/1. New York/Featured.jpg` },
-  { id: "guiyang",     title: "Guiyang",     series: "Home Ground", year: "2022", img: `${P}/2.Guiyang/LP.jpg` },
-  { id: "los-angeles", title: "Los Angeles", series: "Silver",      year: "2023", img: `${P}/Los Angeles/LP主图.jpg` },
-  { id: "usc",         title: "USC",         series: "Residency",   year: "2024", img: `${P}/USC/LP主图.JPG` },
-  { id: "yosemite",    title: "Yosemite",    series: "Exposure",    year: "2023", img: `${P}/Yosemite/000236660001_副本.jpg` },
+  { id: "new-york",    title: "New York",    titleZh: "纽约",      series: "In Between",  seriesZh: "过渡",   year: "2022", img: `${P}/1. New York/Featured.jpg` },
+  { id: "guiyang",     title: "Guiyang",     titleZh: "贵阳",      series: "Home Ground", seriesZh: "故土",   year: "2022", img: `${P}/2.Guiyang/LP.jpg` },
+  { id: "los-angeles", title: "Los Angeles", titleZh: "洛杉矶",    series: "Silver",      seriesZh: "银盐",   year: "2023", img: `${P}/Los Angeles/LP主图.jpg` },
+  { id: "usc",         title: "USC",         titleZh: "南加大",    series: "Residency",   seriesZh: "驻留",   year: "2024", img: `${P}/USC/LP主图.JPG` },
+  { id: "yosemite",    title: "Yosemite",    titleZh: "约塞米蒂",  series: "Exposure",    seriesZh: "曝光",   year: "2023", img: `${P}/Yosemite/000236660001_副本.jpg` },
 ];
 
 const writings = [
-  { title: "Reinscription of Cultural Meaning Through Design", tag: "Thesis",  date: "2024", href: "https://digitallibrary.usc.edu/asset-management/2A3BF1M2SUNBE", pub: true },
-  { title: "以观看为方法",                                       tag: "随笔",    date: "2025", href: "#", pub: false },
-  { title: "On Designing for Silence",                         tag: "Essay",   date: "2025", href: "#", pub: false },
-  { title: "Branding as Translation",                          tag: "Essay",   date: "2024", href: "#", pub: false },
+  { title: "Reinscription of Cultural Meaning Through Design", titleZh: "以设计重写文化意义", tag: "Thesis",  tagZh: "论文", date: "2024", href: "https://digitallibrary.usc.edu/asset-management/2A3BF1M2SUNBE", pub: true },
+  { title: "以观看为方法",                                       titleZh: "以观看为方法",       tag: "随笔",   tagZh: "随笔", date: "2025", href: "#", pub: false },
+  { title: "On Designing for Silence",                         titleZh: "为沉默而设计",       tag: "Essay",  tagZh: "随笔", date: "2025", href: "#", pub: false },
+  { title: "Branding as Translation",                          titleZh: "品牌即翻译",         tag: "Essay",  tagZh: "随笔", date: "2024", href: "#", pub: false },
 ];
 
 const awards = [
@@ -333,11 +333,11 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                       fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
                       fontSize: "clamp(20px,2vw,28px)", color: "var(--dark)",
                       lineHeight: 1.1, marginBottom: 12,
-                    }}>{photos[photoIdx].title}</div>
+                    }}>{lang === "zh" ? photos[photoIdx].titleZh : photos[photoIdx].title}</div>
                     <div style={{
                       fontSize: 8, letterSpacing: "0.24em", color: "var(--faint)",
                       fontFamily: "var(--font-geist),sans-serif", marginBottom: 36,
-                    }}>{photos[photoIdx].series.toUpperCase()}</div>
+                    }}>{lang === "zh" ? photos[photoIdx].seriesZh : photos[photoIdx].series.toUpperCase()}</div>
                     <Link href={`/photos?series=${photos[photoIdx].id}`} style={{
                       fontSize: 9, letterSpacing: "0.2em", color: "var(--dim)",
                       fontFamily: "var(--font-geist),sans-serif",
@@ -393,10 +393,10 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                         fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
                         fontSize: "clamp(18px,1.7vw,24px)", color: "var(--dark)", lineHeight: 1.3,
                       }}>
-                        {w.title}
+                        {lang === "zh" ? w.titleZh : w.title}
                         {w.pub && <span style={{ fontSize: 11, marginLeft: 8, color: "var(--faint)", fontStyle: "normal" }}>↗</span>}
                       </span>
-                      <span style={{ fontSize: 8, letterSpacing: "0.18em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", textTransform: "uppercase" }}>{w.tag}</span>
+                      <span style={{ fontSize: 8, letterSpacing: "0.18em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", textTransform: "uppercase" }}>{lang === "zh" ? w.tagZh : w.tag}</span>
                     </motion.a>
                   ))}
                 </div>

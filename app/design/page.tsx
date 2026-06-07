@@ -8,7 +8,7 @@ import { useLang } from "../context/lang";
 // ─── i18n ─────────────────────────────────────────────────────────────────────
 const TAG_LABELS: Record<string, Record<string, string>> = {
   en: { "brand-identity": "Branding", "editorial": "Editorial", "typography": "Typography", "packaging": "Packaging", "uxui": "UX/UI", "product": "Product", "creative": "Creative", "motion": "Motion" },
-  zh: { "brand-identity": "品牌", "editorial": "编辑设计", "typography": "字体设计", "packaging": "包装设计", "uxui": "UX/UI", "product": "产品设计", "creative": "创意", "motion": "动态" },
+  zh: { "brand-identity": "品牌设计", "editorial": "编辑设计", "typography": "字体设计", "packaging": "包装设计", "uxui": "交互设计", "product": "产品设计", "creative": "创意", "motion": "动态" },
 };
 
 // ─── Image entry types ────────────────────────────────────────────────────────
@@ -325,11 +325,11 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 // Row 1: ALL, Branding, Editorial, Packaging — Row 2: Typography, UX/UI, Product, Creative
 const FILTERS = [
-  { key: "brand-identity", en: "Branding",   zh: "品牌"     },
+  { key: "brand-identity", en: "Branding",   zh: "品牌设计" },
   { key: "editorial",      en: "Editorial",  zh: "编辑设计" },
   { key: "packaging",      en: "Packaging",  zh: "包装设计" },
   { key: "typography",     en: "Typography", zh: "字体设计" },
-  { key: "uxui",           en: "UX/UI",      zh: "UX/UI"   },
+  { key: "uxui",           en: "UX/UI",      zh: "交互设计" },
   { key: "product",        en: "Product",    zh: "产品设计" },
   { key: "creative",       en: "Creative",   zh: "创意"     },
 ] as const;
