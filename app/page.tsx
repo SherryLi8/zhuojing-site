@@ -115,7 +115,8 @@ function Wheel({ size = 108, text = "DESIGN · WORDS · PHOTOS · ABOUT · " }: 
   );
 }
 
-// ─── Cursor scatter image pool ────────────────────────────────────────────────
+// ─── Cursor scatter image pools ───────────────────────────────────────────────
+// Section 01 — design / work images
 const CURSOR_IMAGES = [
   "/Images/ZENTEA/主图.png",
   "/Images/ZENTEA/盒装.jpg",
@@ -130,6 +131,26 @@ const CURSOR_IMAGES = [
   "/Images/Photos/Los Angeles/LP主图.jpg",
   "/Images/Photos/Yosemite/000236660001_副本.jpg",
   "/Images/Photos/USC/LP主图.JPG",
+];
+
+// Section 02 — personal / life photos
+const PROFILE_CURSOR_IMAGES = [
+  "/Images/About-Profile.JPG",
+  "/Images/Profile/IMG_2962.JPG",
+  "/Images/Profile/IMG_3792.jpg",
+  "/Images/Profile/IMG_3793.jpg",
+  "/Images/Profile/IMG_3794.jpg",
+  "/Images/Profile/IMG_3796.jpg",
+  "/Images/Profile/IMG_3812.jpg",
+  "/Images/Profile/IMG_4042.JPG",
+  "/Images/Profile/IMG_4043.JPG",
+  "/Images/Profile/IMG_4046.JPG",
+  "/Images/Profile/beauty_1750087225962.JPG",
+  "/Images/Profile/classicu%202025-09-23%20011810.147.JPG",
+  "/Images/Profile/dfuns%202026-05-09%201856434AD1BDEC6164.JPG",
+  "/Images/Profile/dfuns%202026-05-28%202341187B7F3AC34DEC.JPG",
+  "/Images/Profile/dqs%202025-05-15%20180936.798.JPG",
+  "/Images/Profile/dqs%202026-05-14%2023030190C30BFD1532.JPG",
 ];
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -472,16 +493,17 @@ export default function Home() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  // Cursor scatter: spawn images on mouse move when on intro section
+  // Cursor scatter: section 0 = design images, section 1 = profile images
   useEffect(() => {
     if (!topVis) return;
     const fn = (e: MouseEvent) => {
-      if (activeNav !== 0) return;
+      if (activeNav !== 0 && activeNav !== 1) return;
+      const pool = activeNav === 0 ? CURSOR_IMAGES : PROFILE_CURSOR_IMAGES;
       const dx = e.clientX - lastSpawnRef.current.x;
       const dy = e.clientY - lastSpawnRef.current.y;
-      if (dx*dx + dy*dy < 57600) return; // ~240px threshold — sparser
+      if (dx*dx + dy*dy < 57600) return; // ~240px threshold
       lastSpawnRef.current = { x: e.clientX, y: e.clientY };
-      const src = CURSOR_IMAGES[Math.floor(Math.random() * CURSOR_IMAGES.length)];
+      const src = pool[Math.floor(Math.random() * pool.length)];
       const rot = (Math.random() - 0.5) * 14;
       const id = ++cursorIdRef.current;
       setCursorImgs(prev => [...prev.slice(-5), { id, x: e.clientX, y: e.clientY, src, rot }]);
