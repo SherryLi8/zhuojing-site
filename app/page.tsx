@@ -275,7 +275,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                 {/* Left: metadata */}
                 <div style={{ flexShrink: 0, maxWidth: 280 }}>
                   <div style={{ fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}>
-                    {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {works[workIdx].category} · {works[workIdx].year}
+                    {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {works[workIdx].category}
                   </div>
                   <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(32px,3.8vw,56px)", color: "var(--dark)", lineHeight: 1.05, marginBottom: 6 }}>
                     {works[workIdx].title}
@@ -337,7 +337,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                     <div style={{
                       fontSize: 8, letterSpacing: "0.24em", color: "var(--faint)",
                       fontFamily: "var(--font-geist),sans-serif", marginBottom: 36,
-                    }}>{photos[photoIdx].series.toUpperCase()}<br/>{photos[photoIdx].year}</div>
+                    }}>{photos[photoIdx].series.toUpperCase()}</div>
                     <Link href={`/photos?series=${photos[photoIdx].id}`} style={{
                       fontSize: 9, letterSpacing: "0.2em", color: "var(--dim)",
                       fontFamily: "var(--font-geist),sans-serif",
@@ -382,7 +382,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                       animate={{ opacity: hovWrite !== null && hovWrite !== i ? 0.1 : w.pub ? 1 : 0.3 }}
                       transition={{ duration: 0.2 }}
                       style={{
-                        display: "grid", gridTemplateColumns: "1fr 88px 52px",
+                        display: "grid", gridTemplateColumns: "1fr 88px",
                         alignItems: "baseline", padding: "26px 0",
                         borderTop: i === 0 ? "none" : "1px solid var(--line)",
                         cursor: w.pub ? "pointer" : "default",
@@ -397,7 +397,6 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                         {w.pub && <span style={{ fontSize: 11, marginLeft: 8, color: "var(--faint)", fontStyle: "normal" }}>↗</span>}
                       </span>
                       <span style={{ fontSize: 8, letterSpacing: "0.18em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", textTransform: "uppercase" }}>{w.tag}</span>
-                      <span style={{ fontSize: 9, color: "var(--faint)", textAlign: "right", fontFamily: "var(--font-geist),sans-serif" }}>{w.date}</span>
                     </motion.a>
                   ))}
                 </div>

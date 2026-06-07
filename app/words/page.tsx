@@ -119,14 +119,13 @@ export default function Words() {
 
           {/* Column header */}
           <div style={{
-            display: "grid", gridTemplateColumns: "1fr 80px 72px",
+            display: "grid", gridTemplateColumns: "1fr 80px",
             padding: "10px 0", borderBottom: "1px solid var(--line)",
             fontFamily: "var(--font-geist),sans-serif",
             fontSize: 9, letterSpacing: "0.22em", color: "var(--faint)",
           }}>
             <span>{lang === "en" ? "TITLE" : "标题"}</span>
             <span>{lang === "en" ? "TYPE" : "分类"}</span>
-            <span style={{ textAlign: "right" }}>{lang === "en" ? "DATE" : "日期"}</span>
           </div>
 
           {list.map((entry) => {
@@ -148,7 +147,7 @@ export default function Words() {
                     rel: entry.external ? "noopener noreferrer" : undefined,
                   } : {})}
                   style={{
-                    display: "grid", gridTemplateColumns: "1fr 80px 72px",
+                    display: "grid", gridTemplateColumns: "1fr 80px",
                     alignItems: "baseline", gap: "0 12px",
                     padding: "22px 0", borderBottom: "1px solid var(--line)",
                     cursor: entry.published ? "pointer" : "default",
@@ -166,9 +165,6 @@ export default function Words() {
                   </span>
                   <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.16em", color: "var(--faint)" }}>
                     {entry.published ? entry.tag : (lang === "en" ? "COMING SOON" : "敬请期待")}
-                  </span>
-                  <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, color: "var(--faint)", textAlign: "right" }}>
-                    {entry.date}
                   </span>
                 </Tag>
               </motion.div>

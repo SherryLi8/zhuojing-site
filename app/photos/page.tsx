@@ -235,7 +235,7 @@ export default function Photos() {
               transition={{ duration: 0.35, ease: [0.25, 0, 0, 1] }}
             >
               <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.22em", color: "var(--faint)", marginBottom: 20 }}>
-                {activeSeries.location.toUpperCase()} · {activeSeries.year}
+                {activeSeries.location.toUpperCase()}
               </div>
               <div style={{
                 fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,

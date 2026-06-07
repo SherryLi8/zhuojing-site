@@ -270,10 +270,6 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
           <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>{TAG_LABELS[lang][work.tag]}</span>
         </div>
         <div style={{ display: "flex", gap: 24 }}>
-          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52 }}>{labels.year}</span>
-          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>{work.year}</span>
-        </div>
-        <div style={{ display: "flex", gap: 24 }}>
           <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52 }}>{labels.role}</span>
           <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>{labels.designer}</span>
         </div>
@@ -437,7 +433,7 @@ export default function Design() {
                   onClick={() => setSelected(isSelected ? null : work)}
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "36px 1fr max-content max-content",
+                    gridTemplateColumns: "36px 1fr max-content",
                     alignItems: "baseline",
                     gap: "0 32px",
                     padding: "18px 0",
@@ -471,11 +467,6 @@ export default function Design() {
                     fontSize: 9, letterSpacing: "0.16em", color: "var(--faint)",
                   }}>{TAG_LABELS[lang][work.tag]}</span>
 
-                  {/* Year */}
-                  <span style={{
-                    fontFamily: "var(--font-geist),sans-serif",
-                    fontSize: 9, color: "var(--faint)",
-                  }}>{work.year}</span>
                 </div>
               );
             })}
