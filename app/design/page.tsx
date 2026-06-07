@@ -1,4 +1,5 @@
 "use client";
+// v2
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
