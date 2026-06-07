@@ -414,18 +414,19 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
 
 // ─── Index / Final screen ─────────────────────────────────────────────────────
 const indexLinks = [
-  { label: "Design",  desc: "Identity · Type · Image",  href: "/design" },
-  { label: "Writing", desc: "Essays · Research · 随笔",  href: "/words"  },
-  { label: "Photos",  desc: "Quiet observations",        href: "/photos" },
-  { label: "About",   desc: "Who I am, how I work",      href: "/about"  },
+  { label: "Design",  labelZh: "设计",  desc: "Branding · UX/UI · Typography · Packaging", descZh: "品牌设计 · 交互设计 · 字体设计 · 包装设计", href: "/design" },
+  { label: "Photos",  labelZh: "摄影",  desc: "Observation & Travel",                      descZh: "观察 · 旅行",                               href: "/photos" },
+  { label: "Writing", labelZh: "文字",  desc: "Essays · Research · Writing",               descZh: "随笔 · 研究 · 论文",                        href: "/words"  },
+  { label: "About",   labelZh: "关于",  desc: "Who I am, how I work",                      descZh: "关于我，关于工作方式",                         href: "/about"  },
 ];
 
 function FinalNav() {
+  const { lang } = useLang();
   const [hov, setHov] = useState<string|null>(null);
   return (
     <div style={{ width: "100%", padding: "0 8vw 0 18vw" }}>
       <div>
-        {indexLinks.map(({ label, desc, href }) => {
+        {indexLinks.map(({ label, labelZh, desc, descZh, href }) => {
           const isAct = hov === label;
           const isDim = hov !== null && !isAct;
           return (
@@ -445,11 +446,11 @@ function FinalNav() {
                   <span style={{
                     fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
                     fontSize: "clamp(26px,2.8vw,40px)", color: "var(--dark)",
-                  }}>{label}</span>
+                  }}>{lang === "zh" ? labelZh : label}</span>
                   <span style={{
                     fontFamily: "var(--font-geist),sans-serif", fontSize: 9,
                     letterSpacing: "0.18em", color: "var(--faint)",
-                  }}>{desc}</span>
+                  }}>{lang === "zh" ? descZh : desc}</span>
                 </div>
                 <motion.span
                   animate={{ opacity: isAct ? 1 : 0, x: isAct ? 0 : -8 }}
@@ -498,6 +499,13 @@ export default function Home() {
     const fn = (e: MouseEvent) => {
       if (activeNav !== 0 && activeNav !== 1) return;
       const pool = activeNav === 0 ? CURSOR_IMAGES : PROFILE_CURSOR_IMAGES;
+      // Section 01: dead zone around center text
+      if (activeNav === 0) {
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        const dcx = e.clientX - cx, dcy = e.clientY - cy;
+        if (dcx*dcx + dcy*dcy < 280*280) return;
+      }
       const dx = e.clientX - lastSpawnRef.current.x;
       const dy = e.clientY - lastSpawnRef.current.y;
       if (dx*dx + dy*dy < 57600) return; // ~240px threshold
