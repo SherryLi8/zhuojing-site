@@ -125,7 +125,7 @@ export const works = [
     img: "",
   },
   {
-    num: "09", title: "ICH Museum",
+    num: "09", title: "UToypia",
     tag: "uxui", tagLabel: "UX/UI", year: "2022",
     note: "Digital experience bridging living tradition and contemporary archiving.",
     img: "/Images/UToypia/主图.jpg",
@@ -281,6 +281,10 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
           <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52 }}>{labels.type}</span>
           <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>{TAG_LABELS[lang][work.tag]}</span>
         </div>
+        <div style={{ display: "flex", gap: 24 }}>
+          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52 }}>{labels.year}</span>
+          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>{work.year}</span>
+        </div>
         {/* Award */}
         {"award" in work && (
           <div style={{ display: "flex", gap: 24 }}>
@@ -296,7 +300,7 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
         {"credits" in work && (work as typeof work & { credits?: { role: string; name: string; href?: string; name2?: string; href2?: string }[] }).credits?.map((c, i) => (
           <div key={i} style={{ display: "flex", gap: 24 }}>
             <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52, flexShrink: 0 }}>{c.role}</span>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 12, flexWrap: "nowrap", alignItems: "baseline" }}>
               {c.href ? (
                 <a href={c.href} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)", textDecoration: "none" }}>
                   {c.name} ↗
