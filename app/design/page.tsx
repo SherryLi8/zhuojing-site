@@ -72,6 +72,8 @@ export const works = [
   {
     num: "04", title: "Salvation of Seven Deadly Sins",
     tag: "packaging", tagLabel: "Packaging", year: "2022",
+    award: "Graphis New Talent — Silver, 2023",
+    awardZh: "Graphis New Talent 银奖 2023",
     note: "Sweet, silken chocolate is salvation for the small sin everyone carries. Salvation of Seven Deadly Sins is a full packaging set built around the seven sins — pride, greed, lust, envy, gluttony, wrath, sloth — one chocolate for each. Chocolate has always stood for temptation and excess, yet it's also the most everyday of comforts. The packaging rests on that paradox: sin and absolution, temptation and solace, each the lining of the other. To eat one is both to confess and to be forgiven.",
     noteZh: "甜而丝滑的巧克力，是每个人心底那点「罪」的救赎。Salvation of Seven Deadly Sins 以七宗罪为线索，设计了一整套巧克力包装——傲慢、贪婪、色欲、嫉妒、暴食、暴怒、懒惰，每一宗罪，对应一颗巧克力。巧克力本就是诱惑与放纵的代名词，却也是最日常的慰藉。包装因此立在这层悖论之上：罪与赦免、诱惑与安慰，互为表里。吃下它，既是认罪，也是被原谅。",
     img: "/Images/Chocolate/主图.jpg",
@@ -84,6 +86,8 @@ export const works = [
   {
     num: "05", title: "One Second",
     tag: "packaging", tagLabel: "Packaging", year: "2023",
+    award: "Graphis New Talent — Honorable Mention, 2023",
+    awardZh: "Graphis New Talent 荣誉提名 2023",
     note: "The name One Second comes from the first second the sparkling water meets your mouth — the instant the bubbles burst on the tongue. It's about an unhurried way of living: don't rush to swallow; stay in the moment you're in.",
     noteZh: "One Second 的名字，来自气泡水入口的第一秒，气泡在舌尖炸开的那一瞬。品牌想传递一种松弛的生活态度：别急着咽下，沉浸在当下这一刻。",
     img: "/Images/One%20Second/主图.jpg",
@@ -96,7 +100,9 @@ export const works = [
   {
     num: "06", title: "Orient",
     tag: "editorial", tagLabel: "Editorial", year: "2023",
-    note: "Orient is a digital magazine devoted to a new generation of contemporary Chinese architecture. Readers can subscribe and read it on the iPad. Orient wants to give the word “the Orient” a different set of images — not only upturned eaves, gardens, and a China reduced to symbols, but the architecture happening now: concrete, geometry, scale, and negative space. To read it is to come to know “the Orient” anew.",
+    award: "Graphis New Talent — Honorable Mention, 2023",
+    awardZh: "Graphis New Talent 荣誉提名 2023",
+    note: "Orient is a digital magazine devoted to a new generation of contemporary Chinese architecture. Readers can subscribe and read it on the iPad. Orient wants to give the word \"the Orient\" a different set of images — not only upturned eaves, gardens, and a China reduced to symbols, but the architecture happening now: concrete, geometry, scale, and negative space. To read it is to come to know \"the Orient\" anew.",
     noteZh: "Orient 是一本电子杂志，专注于介绍新一代的当代中国建筑。读者可订阅，并在 iPad 上阅读。Orient 想替「东方」这个词换一批图像——不只是飞檐、园林与符号化的中国，也是正在发生的当代建筑：混凝土、几何、尺度与留白。阅读它，是一次重新认识「东方」的过程。",
     img: "/Images/Orient/主图.jpeg",
     images: [
@@ -205,6 +211,7 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
     type:  lang === "en" ? "TYPE"  : "类型",
     year:  lang === "en" ? "YEAR"  : "年份",
     role:  lang === "en" ? "ROLE"  : "角色",
+    award: lang === "en" ? "AWARD" : "奖项",
     designer: lang === "en" ? "DESIGNER" : "设计师",
   };
 
@@ -274,6 +281,17 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
           <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52 }}>{labels.type}</span>
           <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>{TAG_LABELS[lang][work.tag]}</span>
         </div>
+        {/* Award */}
+        {"award" in work && (
+          <div style={{ display: "flex", gap: 24 }}>
+            <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52, flexShrink: 0 }}>{labels.award}</span>
+            <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>
+              {lang === "zh" && "awardZh" in work
+                ? (work as typeof work & { awardZh: string }).awardZh
+                : (work as typeof work & { award: string }).award}
+            </span>
+          </div>
+        )}
         {/* Credits */}
         {"credits" in work && (work as typeof work & { credits?: { role: string; name: string; href?: string; name2?: string; href2?: string }[] }).credits?.map((c, i) => (
           <div key={i} style={{ display: "flex", gap: 24 }}>
