@@ -93,7 +93,7 @@ const seriesData = {
     { id: "guiyang",     title: "故土",   location: "贵阳",      year: "2022", count: 10, note: "熟悉的陌生感。用借来的距离重新看一座家乡。" },
     { id: "los-angeles", title: "银盐",   location: "洛杉矶",   year: "2023", count: 8,  note: "侧面抵达的光。胶片颗粒作为氛围。" },
     { id: "usc",         title: "驻留",   location: "南加大",   year: "2024", count: 10, note: "校园作为风景。几周时光，在路过中被观察。" },
-    { id: "yosemite",    title: "曝光",   location: "约塞米蒂", year: "2023", count: 10, note: "令人失去尺度感的规模。山谷容纳了所需的一切。" },
+    { id: "yosemite",    title: "曝光",   location: "优胜美地", year: "2023", count: 10, note: "令人失去尺度感的规模。山谷容纳了所需的一切。" },
     { id: "florida",     title: "岸边",   location: "佛罗里达", year: "2022", count: 10, note: "热、水、静。最不慌不忙的南方。" },
   ],
 };

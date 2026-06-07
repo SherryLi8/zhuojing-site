@@ -194,11 +194,11 @@ const photos = [
   { id: "guiyang",     title: "Guiyang",     titleZh: "贵阳",      series: "Home Ground", seriesZh: "故土",   year: "2022", img: `${P}/2.Guiyang/LP.jpg` },
   { id: "los-angeles", title: "Los Angeles", titleZh: "洛杉矶",    series: "Silver",      seriesZh: "银盐",   year: "2023", img: `${P}/Los Angeles/LP主图.jpg` },
   { id: "usc",         title: "USC",         titleZh: "南加大",    series: "Residency",   seriesZh: "驻留",   year: "2024", img: `${P}/USC/LP主图.JPG` },
-  { id: "yosemite",    title: "Yosemite",    titleZh: "约塞米蒂",  series: "Exposure",    seriesZh: "曝光",   year: "2023", img: `${P}/Yosemite/000236660001_副本.jpg` },
+  { id: "yosemite",    title: "Yosemite",    titleZh: "优胜美地",  series: "Exposure",    seriesZh: "曝光",   year: "2023", img: `${P}/Yosemite/000236660001_副本.jpg` },
 ];
 
 const writings = [
-  { title: "Reinscription of Cultural Meaning Through Design", titleZh: "以设计重写文化意义", tag: "Thesis",  tagZh: "论文", date: "2024", href: "https://digitallibrary.usc.edu/asset-management/2A3BF1M2SUNBE", pub: true },
+  { title: "Reinscription of Cultural Meaning Through Design: How Visual and Material Transformations Reshape Meaning", titleZh: "以设计重写文化意义：视觉与物质转化如何重塑意义", tag: "Thesis", tagZh: "论文", date: "2024", href: "https://digitallibrary.usc.edu/asset-management/2A3BF1M2SUNBE", pub: true },
   { title: "以观看为方法",                                       titleZh: "以观看为方法",       tag: "随笔",   tagZh: "随笔", date: "2025", href: "#", pub: false },
   { title: "On Designing for Silence",                         titleZh: "为沉默而设计",       tag: "Essay",  tagZh: "随笔", date: "2025", href: "#", pub: false },
   { title: "Branding as Translation",                          titleZh: "品牌即翻译",         tag: "Essay",  tagZh: "随笔", date: "2024", href: "#", pub: false },
@@ -417,7 +417,7 @@ const indexLinks = [
   { label: "Design",  labelZh: "设计",  desc: "Branding · UX/UI · Typography · Packaging", descZh: "品牌设计 · 交互设计 · 字体设计 · 包装设计", href: "/design" },
   { label: "Photos",  labelZh: "摄影",  desc: "Observation & Travel",                      descZh: "观察 · 旅行",                               href: "/photos" },
   { label: "Writing", labelZh: "文字",  desc: "Essays · Research · Writing",               descZh: "随笔 · 研究 · 论文",                        href: "/words"  },
-  { label: "About",   labelZh: "关于",  desc: "Who I am, how I work",                      descZh: "关于我，关于工作方式",                         href: "/about"  },
+  { label: "About",   labelZh: "关于",  desc: "Everything about me",                       descZh: "关于我的一切",                               href: "/about"  },
 ];
 
 function FinalNav() {
