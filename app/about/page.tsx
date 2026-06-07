@@ -107,7 +107,7 @@ const data = {
   en: {
     name: "Zhuojing Li",
     tagline: "BRAND IDENTITY · PACKAGING · UI/UX",
-    bio: "Designer working in brand identity, packaging, and digital experience. Raised in Guiyang, trained in New York and Los Angeles — interested in what happens when design moves between cultures and languages.",
+    bio: "A multidisciplinary designer. Born in Guiyang, China, trained in New York and Los Angeles, now based in Beijing. The idea comes first; the medium follows. At heart, design is my honest way of looking at the world.",
     workTitle: "WORK EXPERIENCE",
     projectsTitle: "PROJECTS",
     educationTitle: "EDUCATION",
@@ -176,7 +176,7 @@ const data = {
   zh: {
     name: "李卓璟",
     tagline: "品牌设计 · 包装设计 · UI/UX",
-    bio: "设计师，贵阳人。在纽约读完本科，在洛杉矶读硕士。主要做品牌设计、包装和UI/UX。对视觉如何在不同文化之间流动与转译这件事一直有兴趣。",
+    bio: "跨媒介设计师。生于贵阳，中国，求学于纽约与洛杉矶，现居北京。想法先行，媒介随后。说到底，做设计是我诚实地注视世界的方式。",
     workTitle: "工作经历",
     projectsTitle: "项目经历",
     educationTitle: "教育背景",
