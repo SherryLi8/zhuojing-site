@@ -306,7 +306,7 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
       {"pdf" in work && (work as typeof work & { pdf?: string }).pdf && (
         <a href={(work as typeof work & { pdf: string }).pdf} target="_blank" rel="noopener noreferrer"
           style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.18em", color: "var(--dim)", textDecoration: "none", display: "inline-block", marginBottom: 8 }}>
-          VIEW MAGAZINE PDF →
+          {lang === "zh" ? "查看杂志 PDF →" : "VIEW MAGAZINE PDF →"}
         </a>
       )}
 
@@ -314,7 +314,7 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
       {"writingLink" in work && (work as typeof work & { writingLink?: string }).writingLink && (
         <a href={(work as typeof work & { writingLink: string }).writingLink}
           style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.18em", color: "var(--dim)", textDecoration: "none", display: "block" }}>
-          READ ESSAY →
+          {lang === "zh" ? "阅读文章 →" : "READ ESSAY →"}
         </a>
       )}
 

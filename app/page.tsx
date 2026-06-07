@@ -156,7 +156,7 @@ const PROFILE_CURSOR_IMAGES = [
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const works = [
   {
-    title: "Zentea", category: "Branding", year: "2024",
+    title: "Zentea", category: "Branding", categoryZh: "品牌设计", year: "2024",
     note: "Tea and stillness, one taste.",
     noteZh: "禅茶一味",
     img: "/Images/ZENTEA/主图.png",
@@ -168,7 +168,7 @@ const works = [
     ],
   },
   {
-    title: "Seasons", category: "Branding", year: "2022",
+    title: "Seasons", category: "Branding", categoryZh: "品牌设计", year: "2022",
     note: "Flowers for yourself, season after season.",
     noteZh: "一季一花，都送给自己。",
     img: "/Images/Seasons/主图.jpeg",
@@ -180,7 +180,7 @@ const works = [
     ],
   },
   {
-    title: "The Period", category: "Typography", year: "2025",
+    title: "The Period", category: "Typography", categoryZh: "字体设计", year: "2025",
     note: "Some letters bleed.",
     noteZh: "有些字，会洇血。",
     img: "/Images/月经体/月经体%20主图.jpg",
@@ -275,7 +275,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                 {/* Left: metadata */}
                 <div style={{ flexShrink: 0, maxWidth: 280 }}>
                   <div style={{ fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}>
-                    {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {works[workIdx].category}
+                    {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {lang === "zh" ? works[workIdx].categoryZh : works[workIdx].category}
                   </div>
                   <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(32px,3.8vw,56px)", color: "var(--dark)", lineHeight: 1.05, marginBottom: 6 }}>
                     {works[workIdx].title}
@@ -284,7 +284,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                     {lang === "zh" ? works[workIdx].noteZh : works[workIdx].note}
                   </div>
                   <Link href={`/design?project=${works[workIdx].title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`} style={{ fontSize: 10, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
-                    VIEW PROJECT →
+                    {lang === "zh" ? "查看项目 →" : "VIEW PROJECT →"}
                   </Link>
                 </div>
 
@@ -341,7 +341,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                     <Link href={`/photos?series=${photos[photoIdx].id}`} style={{
                       fontSize: 9, letterSpacing: "0.2em", color: "var(--dim)",
                       fontFamily: "var(--font-geist),sans-serif",
-                    }}>VIEW ALL →</Link>
+                    }}>{lang === "zh" ? "查看全部 →" : "VIEW ALL →"}</Link>
                   </div>
                   {/* Right: image — natural proportions, no crop */}
                   <motion.div
@@ -699,7 +699,7 @@ function AboutBlock() {
         <Link href="/about" style={{
           fontFamily: "var(--font-geist),sans-serif",
           fontSize: 10, letterSpacing: "0.18em", color: "var(--dim)",
-        }}>FULL BIO →</Link>
+        }}>{lang === "zh" ? "完整简介 →" : "FULL BIO →"}</Link>
       </motion.div>
     </div>
   );

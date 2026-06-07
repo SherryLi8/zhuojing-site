@@ -204,7 +204,7 @@ export default function Words() {
                   <a href={hovered.href} target={hovered.external ? "_blank" : undefined}
                     rel={hovered.external ? "noopener noreferrer" : undefined}
                     style={{ display: "block", marginTop: 24, fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.22em", color: "var(--faint)", textDecoration: "none", borderBottom: "1px solid var(--line)", paddingBottom: 2, width: "fit-content" }}>
-                    READ →
+                    {lang === "zh" ? "阅读 →" : "READ →"}
                   </a>
                 )}
               </motion.div>
@@ -217,7 +217,7 @@ export default function Words() {
                 transition={{ duration: 0.2 }}
                 style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.18em", color: "var(--faint)" }}
               >
-                HOVER AN ENTRY
+                {lang === "zh" ? "悬停查看" : "HOVER AN ENTRY"}
               </motion.div>
             )}
           </AnimatePresence>
