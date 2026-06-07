@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
 import { useLang } from "../context/lang";
@@ -104,6 +104,12 @@ export default function Photos() {
   const [activeId, setActiveId] = useState("new-york");
   const activeSeries = series.find(s => s.id === activeId) ?? series[0];
   const photos = photoGrids[activeId as keyof typeof photoGrids] ?? [];
+
+  // Pre-select series from URL param ?series=new-york
+  useEffect(() => {
+    const slug = new URLSearchParams(window.location.search).get("series");
+    if (slug && photoGrids[slug as keyof typeof photoGrids]) setActiveId(slug);
+  }, []);
 
   const ui = {
     title:  lang === "en" ? "Photos" : "摄影",

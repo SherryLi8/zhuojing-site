@@ -169,11 +169,11 @@ const works = [
 
 const P = "/Images/Photos";
 const photos = [
-  { title: "New York",    series: "In Between",  year: "2022", img: `${P}/1. New York/Featured.jpg` },
-  { title: "Guiyang",     series: "Home Ground", year: "2022", img: `${P}/2.Guiyang/LP.jpg` },
-  { title: "Los Angeles", series: "Silver",      year: "2023", img: `${P}/Los Angeles/LP主图.jpg` },
-  { title: "USC",         series: "Residency",   year: "2024", img: `${P}/USC/LP主图.JPG` },
-  { title: "Yosemite",    series: "Exposure",    year: "2023", img: `${P}/Yosemite/000236660001_副本.jpg` },
+  { id: "new-york",    title: "New York",    series: "In Between",  year: "2022", img: `${P}/1. New York/Featured.jpg` },
+  { id: "guiyang",     title: "Guiyang",     series: "Home Ground", year: "2022", img: `${P}/2.Guiyang/LP.jpg` },
+  { id: "los-angeles", title: "Los Angeles", series: "Silver",      year: "2023", img: `${P}/Los Angeles/LP主图.jpg` },
+  { id: "usc",         title: "USC",         series: "Residency",   year: "2024", img: `${P}/USC/LP主图.JPG` },
+  { id: "yosemite",    title: "Yosemite",    series: "Exposure",    year: "2023", img: `${P}/Yosemite/000236660001_副本.jpg` },
 ];
 
 const writings = [
@@ -262,7 +262,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                   <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)", lineHeight: 1.7, marginBottom: 28 }}>
                     {lang === "zh" ? works[workIdx].noteZh : works[workIdx].note}
                   </div>
-                  <Link href="/design" style={{ fontSize: 10, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
+                  <Link href={`/design?project=${works[workIdx].title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`} style={{ fontSize: 10, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
                     VIEW PROJECT →
                   </Link>
                 </div>
@@ -317,7 +317,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                       fontSize: 8, letterSpacing: "0.24em", color: "var(--faint)",
                       fontFamily: "var(--font-geist),sans-serif", marginBottom: 36,
                     }}>{photos[photoIdx].series.toUpperCase()}<br/>{photos[photoIdx].year}</div>
-                    <Link href="/photos" style={{
+                    <Link href={`/photos?series=${photos[photoIdx].id}`} style={{
                       fontSize: 9, letterSpacing: "0.2em", color: "var(--dim)",
                       fontFamily: "var(--font-geist),sans-serif",
                     }}>VIEW ALL →</Link>

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
 import { TOP_BAR_HEIGHT } from "../components/TopBar";
@@ -343,6 +343,16 @@ export default function Design() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [hovered,  setHovered]  = useState<typeof works[0] | null>(null);
   const [selected, setSelected] = useState<typeof works[0] | null>(null);
+
+  // Pre-select project from URL param ?project=zentea
+  useEffect(() => {
+    const slug = new URLSearchParams(window.location.search).get("project");
+    if (!slug) return;
+    const match = works.find(w =>
+      w.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "") === slug
+    );
+    if (match) setSelected(match);
+  }, []);
 
   const activeWork = selected ?? hovered;
 
