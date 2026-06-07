@@ -274,7 +274,7 @@ export default function About() {
             padding: "48px 40px",
           }}
         >
-          <img src="/Images/About-Profile.JPG" alt="Zhuojing Li"
+          <img src="/Images/profile/IMG_2962.JPG" alt="Zhuojing Li"
             style={{ maxHeight: "100%", maxWidth: "100%", width: "auto", height: "auto", display: "block", objectFit: "contain" }} />
         </motion.div>
 
