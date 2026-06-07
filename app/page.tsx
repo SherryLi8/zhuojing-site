@@ -479,6 +479,8 @@ export default function Home() {
   const [cursorImgs, setCursorImgs] = useState<{id:number;x:number;y:number;src:string;rot:number}[]>([]);
   const cursorIdRef = useRef(0);
   const lastSpawnRef = useRef({x:-999,y:-999});
+  const isScrollingRef = useRef(false);
+  const scrollTimerRef = useRef<ReturnType<typeof setTimeout>|null>(null);
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase("both"), 1700);
@@ -486,9 +488,14 @@ export default function Home() {
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
-  // Arrow disappears on first scroll
+  // Arrow disappears on first scroll + pause scatter while scrolling
   useEffect(() => {
-    const fn = () => { if (window.scrollY > 40) setScrolled(true); };
+    const fn = () => {
+      if (window.scrollY > 40) setScrolled(true);
+      isScrollingRef.current = true;
+      if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
+      scrollTimerRef.current = setTimeout(() => { isScrollingRef.current = false; }, 250);
+    };
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
@@ -497,24 +504,25 @@ export default function Home() {
   useEffect(() => {
     if (!topVis) return;
     const fn = (e: MouseEvent) => {
+      if (isScrollingRef.current) return;          // pause during scroll
       if (activeNav !== 0 && activeNav !== 1) return;
       const pool = activeNav === 0 ? CURSOR_IMAGES : PROFILE_CURSOR_IMAGES;
-      // Section 01: dead zone around center text
+      // Dead zone: section 0 = 300px around center; section 1 = left text area
       if (activeNav === 0) {
-        const cx = window.innerWidth / 2;
-        const cy = window.innerHeight / 2;
+        const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
         const dcx = e.clientX - cx, dcy = e.clientY - cy;
-        if (dcx*dcx + dcy*dcy < 280*280) return;
+        if (dcx*dcx + dcy*dcy < 300*300) return;
       }
+      if (activeNav === 1 && e.clientX < window.innerWidth * 0.52) return;
       const dx = e.clientX - lastSpawnRef.current.x;
       const dy = e.clientY - lastSpawnRef.current.y;
-      if (dx*dx + dy*dy < 57600) return; // ~240px threshold
+      if (dx*dx + dy*dy < 72000) return; // ~268px threshold — less frequent
       lastSpawnRef.current = { x: e.clientX, y: e.clientY };
       const src = pool[Math.floor(Math.random() * pool.length)];
-      const rot = (Math.random() - 0.5) * 14;
+      const rot = (Math.random() - 0.5) * 12;
       const id = ++cursorIdRef.current;
-      setCursorImgs(prev => [...prev.slice(-5), { id, x: e.clientX, y: e.clientY, src, rot }]);
-      setTimeout(() => setCursorImgs(prev => prev.filter(img => img.id !== id)), 1600);
+      setCursorImgs(prev => [...prev.slice(-4), { id, x: e.clientX, y: e.clientY, src, rot }]);
+      setTimeout(() => setCursorImgs(prev => prev.filter(img => img.id !== id)), 2200);
     };
     window.addEventListener("mousemove", fn);
     return () => window.removeEventListener("mousemove", fn);
@@ -542,24 +550,24 @@ export default function Home() {
       <Cursor/>
       <SideNav active={activeNav}/>
 
-      {/* Cursor scatter images — fixed, above everything */}
+      {/* Cursor scatter images — behind content text */}
       <AnimatePresence>
         {cursorImgs.map(img => (
           <motion.img
             key={img.id}
             src={img.src}
-            initial={{ opacity: 0, scale: 0.88 }}
-            animate={{ opacity: 0.88, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.94 }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, scale: 0.84, y: 10 }}
+            animate={{ opacity: 0.82, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: -6 }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
             style={{
               position: "fixed",
               left: img.x - 90,
               top: img.y - 70,
-              width: 180,
+              width: 190,
               height: "auto",
               pointerEvents: "none",
-              zIndex: 9000,
+              zIndex: 40,
               transform: `rotate(${img.rot}deg)`,
             }}
           />
@@ -576,7 +584,7 @@ export default function Home() {
         }}>
 
           {/* Poem */}
-          <div style={{ textAlign: "center", marginBottom: "6vh" }}>
+          <div style={{ textAlign: "center", marginBottom: "6vh", position: "relative", zIndex: 60 }}>
             <AnimatePresence mode="wait">
               {lang === "zh" ? (
                 <motion.div key="zh" initial={{ opacity: 0, filter: "blur(8px)" }}
@@ -676,7 +684,7 @@ function AboutBlock() {
   const c = aboutContent[lang];
 
   return (
-    <div ref={ref} style={{ maxWidth: 680 }}>
+    <div ref={ref} style={{ maxWidth: 680, position: "relative", zIndex: 60 }}>
       <div style={{ overflow: "hidden", marginBottom: 24 }}>
         <motion.div
           style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(40px,5vw,72px)", color: "var(--dark)", lineHeight: 1.05 }}
