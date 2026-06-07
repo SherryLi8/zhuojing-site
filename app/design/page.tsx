@@ -8,7 +8,7 @@ import { useLang } from "../context/lang";
 // ─── i18n ─────────────────────────────────────────────────────────────────────
 const TAG_LABELS: Record<string, Record<string, string>> = {
   en: { "brand-identity": "Branding", "editorial": "Editorial", "typography": "Typography", "packaging": "Packaging", "uxui": "UX/UI", "product": "Product", "creative": "Creative", "motion": "Motion" },
-  zh: { "brand-identity": "品牌设计", "editorial": "编辑设计", "typography": "字体设计", "packaging": "包装设计", "uxui": "交互设计", "product": "产品设计", "creative": "创意", "motion": "动态" },
+  zh: { "brand-identity": "品牌设计", "editorial": "出版物设计", "typography": "字体设计", "packaging": "包装设计", "uxui": "交互设计", "product": "产品设计", "creative": "创意设计", "motion": "动态" },
 };
 
 // ─── Image entry types ────────────────────────────────────────────────────────
@@ -196,7 +196,7 @@ export const works = [
 function DetailPanel({ work }: { work: typeof works[0] | null }) {
   const { lang } = useLang();
   const labels = {
-    empty: lang === "en" ? "HOVER A PROJECT" : "悬停查看项目",
+    empty: lang === "en" ? "CLICK TO VIEW" : "点击查看设计",
     type:  lang === "en" ? "TYPE"  : "类型",
     year:  lang === "en" ? "YEAR"  : "年份",
     role:  lang === "en" ? "ROLE"  : "角色",
@@ -326,12 +326,12 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
 // Row 1: ALL, Branding, Editorial, Packaging — Row 2: Typography, UX/UI, Product, Creative
 const FILTERS = [
   { key: "brand-identity", en: "Branding",   zh: "品牌设计" },
-  { key: "editorial",      en: "Editorial",  zh: "编辑设计" },
+  { key: "editorial",      en: "Editorial",  zh: "出版物设计" },
   { key: "packaging",      en: "Packaging",  zh: "包装设计" },
   { key: "typography",     en: "Typography", zh: "字体设计" },
   { key: "uxui",           en: "UX/UI",      zh: "交互设计" },
   { key: "product",        en: "Product",    zh: "产品设计" },
-  { key: "creative",       en: "Creative",   zh: "创意"     },
+  { key: "creative",       en: "Creative",   zh: "创意设计" },
 ] as const;
 
 export default function Design() {
