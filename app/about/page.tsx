@@ -165,8 +165,6 @@ const data = {
     ],
     recognition: [
       "Graphis New Talent — Gold · Silver · Honorable Mention, 2023",
-      "TDC Young Ones — Shortlist, 2023",
-      "Communication Arts — Shortlist, 2023",
       "VAND Design Award — Nominee, 2025",
       "Guizhou Tourism & Entrepreneurship Competition — Silver, 2025",
     ],
@@ -236,8 +234,6 @@ const data = {
     ],
     recognition: [
       "Graphis 新锐人才奖 — 金奖 · 银奖 · 优秀奖，2023",
-      "TDC Young Ones — 入围，2023",
-      "Communication Arts — 入围，2023",
       "VAND Design Award — 提名，2025",
       "贵州省旅游创业大赛 — 银奖，2025",
     ],
