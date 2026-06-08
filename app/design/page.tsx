@@ -32,7 +32,8 @@ export const works = [
   {
     num: "01", title: "Zentea",
     tag: "brand-identity", tagLabel: "Brand Identity", year: "2024",
-    note: "Tea as ritual. A brand language built from silence and ceremony.",
+    note: "As life spins faster, people find themselves longing again for slowness, stability, and repose. Zentea comes from that. It believes Zen and tea are of one taste, placing the two side by side so that drinking tea becomes a daily practice again. The brand language grows out of negative space; its sense of ritual is carried by restraint rather than decoration. Every brew is a stretch of time, deliberately slowed.\n\nZENTEA takes the six tea categories as its through-line, reordering the flavors of fine teas from around the world. Ten representative teas cover the six categories, in two formats: pouches for everyday buying, boxes for collecting and gifting.\n\nThe color system unfolds along the fermentation gradient of the six categories, building a continuous scale — translating tea type and flavor level into a recognizable visual structure, and keeping the whole series consistent and extensible.",
+    noteZh: "当生活越转越快，人们重新渴望慢、稳定与安住。Zentea 由此而来。它信奉"禅茶一味"，把禅与茶并置，让"喝茶"重新成为一种日常的修行。品牌语言从"留白"生长，仪式感靠节制传达。每一次冲泡，都是一段被放慢的时间。\n\nZENTEA 以六大茶类为线索，重组全球精品茶的风味秩序。10 款代表性茶叶覆盖六大茶类，提供两种规格：袋装，面向日常；盒装，用于收藏与礼赠。\n\n色彩系统沿六大茶类的发酵梯度展开，构建出一组连续色阶——把茶类与风味层级翻译成可被识别的视觉结构，也让整个系列保持一致、可延展。",
     img: "/Images/ZENTEA/主图.png",
     images: [
       "/Images/ZENTEA/主图.png",
@@ -53,7 +54,8 @@ export const works = [
   {
     num: "02", title: "Seasons",
     tag: "brand-identity", tagLabel: "Brand Identity", year: "2022",
-    note: "A flower store that changes with the light. Identity rooted in impermanence.",
+    note: "Seasons is a flower shop. The concept begins with watching flowers bloom and fade — where blossoming and withering are themselves the shape of time.\n\nThe name comes from the turning of the seasons: in every one of them, something is in bloom. Buying flowers is usually treated as an accessory to holidays and relationships. Seasons redefines it as a form of everyday self-care. The inspiration is the opening line of Mrs Dalloway — \"Mrs. Dalloway said she would buy the flowers herself.\" The brand wants to say to every woman: flowers needn't wait for someone to give them; you can buy them for yourself, to please yourself.\n\nWhat it stands for is a free, independent life. The tone throughout is elegant, relaxed, and quiet — never loud. Visually it's positioned as a contemporary take on Art Deco: drawing on its geometry and proportion, then simplified and brought up to date.",
+    noteZh: "Seasons 是一间花店，概念始于"观花开花落，体会生命的循环"——盛放与凋零，本身就是时间的形状。\n\n品牌名源于四季流转：每一季，都有花在开。买花，常被当作节日与关系的附属。Seasons 把它重新定义为一种日常的自我照料。灵感来自《达洛维夫人》的开篇——\"Mrs. Dalloway said she would buy the flowers herself.\" 品牌想对每一个女性说：花不必等谁来送，你可以买给自己、取悦自己。\n\n它倡导的是一种自由而独立的生活。整体调性优雅、松弛，不喧哗。视觉定位为当代化的装饰艺术（Art Deco）：参考其几何结构与比例，再作简化与现代处理。",
     img: "/Images/Seasons/主图.jpeg",
     images: [
       "/Images/Seasons/主图.jpeg",
@@ -71,7 +73,8 @@ export const works = [
   {
     num: "03", title: "The Period",
     tag: "typography", tagLabel: "Typography", year: "2025",
-    note: "Typography as body politics. A typeface that refuses to apologize.",
+    note: "The Period is an experimental display typeface built from an unlikely pairing — human legs and sanitary pads. It extends an earlier project of mine on menstrual pain, The Moon Going Through My Body, moving from a tactile 2.5D format into a purely digital medium, and continuing to treat menstruation as an experience that is at once bodily and social.\n\nThe typeface asks whether structure — typographic or cultural — can be reimagined through bodily experience. Legs form the vertical strokes; pads become the horizontal connectors. What results is an alphabet that is at once playful and pointed.\n\nPublic conversation around menstruation keeps growing, yet the physical relationship between a pad and the body is still often passed over. A typeface is an everyday language; perhaps it can enter the subject in a lighter, friendlier way. The whole face is built as an expandable family: blood gradually accumulates and overflows across the variants — measurable, like weight — so the type system carries the progression of the body's own rhythm.",
+    noteZh: "The Period 是一套实验性展示字体，由一组意料之外的配对构成——人的双腿，与卫生巾。它延伸自我此前关于经痛的项目《The Moon Going Through My Body》，从可触摸的 2.5D 转向纯数字媒介，继续把月经当作一种既身体、也社会的经验来探讨。\n\n字体追问的是结构——无论排版的还是文化的——能否透过身体经验被重新想象。双腿构成竖向的笔画，卫生巾成为横向的连接，最终得到一套既顽皮又带锋芒的字母表。\n\n关于生理期的公共讨论越来越多，但"卫生巾与身体之间的物理关系"仍常被略过。字体是一种日常的语言，或许能以更轻松、友好的方式进入这个话题。整套字体被设计成一个可扩展的字族：血在不同变体间逐渐累积、溢出，像字重一样可以度量——让排版系统同时承载身体节奏的递进。",
     img: "/Images/月经体/月经体%20主图.jpg",
     images: [
       "/Images/月经体/月经体%20主图.jpg",
@@ -162,7 +165,8 @@ export const works = [
   {
     num: "11", title: "Anxiety Relief",
     tag: "typography", tagLabel: "Typography", year: "2023",
-    note: "Design as care. A visual system built around stillness and recovery.",
+    note: "Anxiety Relief is an experimental typeface that begins with contemporary health anxiety. Supplements and vitamins are now taken in great quantities, slowly becoming a daily \"ritual of health management.\" Often what they offer isn't only physical improvement but psychological relief — from illness, from fatigue, from the sense of living unhealthily. The project treats the pill as a visual language, using it to describe the state of being anxious about one's health.",
+    noteZh: "Anxiety Relief（焦虑缓释）是一套从当代健康焦虑出发的实验字体。如今，补剂与营养片被大量服用，渐渐变成一种日常化的"健康管理仪式"。很多时候，它们提供的并不只是身体层面的改善，更是一种心理上的缓解——对疾病、疲惫，与不够健康的生活方式的缓解。本项目把"药丸"当作一种视觉语言，用它来描述人处于健康焦虑中的状态。",
     img: "/Images/Anxiety%20Relief/主图.jpg",
     images: [
       "/Images/Anxiety%20Relief/主图.jpg",
@@ -193,7 +197,8 @@ export const works = [
   {
     num: "13", title: "八月花神", titleEn: "August Offering",
     tag: "product", tagLabel: "Product Design", year: "2025",
-    note: "A seasonal identity grounded in offering and bloom.",
+    note: "August Offering is a gift set of cultural products drawn from the Palace Museum collection. Its source is a Qing-dynasty opera robe: a green satin robe embroidered with osmanthus, jade rabbits, and gilt \"ball-flower\" roundels — the August Flower-Deity robe — a garment worn only once a year. Each Mid-Autumn, the Qing court staged chengying performances: ritual operas mounted by the palace troupe on imperial command, with a fixed repertoire, fixed roles, and fixed costumes. The August Flower-Deity robe is what the Flower Deity wears in the final act of that program, as she ascends the tower of the immortals — a ceremonial garment that belongs to the night of Mid-Autumn alone, to the final act alone, to the role of the Flower Deity alone.\n\nChengying (承应) is a Qing court term: to fulfill a command and meet the occasion, as custom requires. That logic — once a year, for this moment alone — sits exactly with the spirit of Mid-Autumn itself: the mooncake eaten once a year, the reunion longed for once a year, the chengying opera performed once a year. The gift set rewrites chengying (承应) as chengyue (承月) — receiving the moonlight, bearing reunion. It is itself a seasonal gift given once a year, just as the robe is worn once a year; but the plates inside it can be used again and again in daily life.\n\nAnd the plate is the moon. A round plate is already the form of the full moon: one, two, or four set out on the table, each one reads as fullness — a meaning the object's form carries on its own.\n\nIn pattern, three core elements are drawn from the robe — its overall palette, the osmanthus and jade rabbit, and the eight-lobed ruyi cartouche; the garment's original decorative language is kept, and rearranged into the composition of a round plate. In material, there is a quiet act of translation, turning silk thread into mother-of-pearl: the robe's three-tone blue silk becomes abalone-shell inlay; the white silk of the rabbit becomes white-lip pearl-shell inlay. The sheen once embroidered onto an opera costume, in a different material, settles back onto an object.\n\nA robe worn once a year — a fullness you can set on the table, year after year.",
+    noteZh: "August Offering（八月花神）是一组以故宫藏品为源的文创礼盒。源头是一件清代戏服：绿色缎绣桂花玉兔金皮球花纹"八月花神衣"，一件一年只穿一次的衣服。清宫每逢中秋设"承应戏"：宫廷戏班奉旨为中秋定制的仪式性演出，有固定的剧目、角色与服装。八月花神衣，正是这套承应戏最后一幕里、花神登仙楼时所穿——专属于中秋之夜、专属于最终一幕、专属于花神一角的仪式之衣。\n\n"承应"是清宫词汇，意为按惯例承命应节。这种"一年一次、专属此刻"的仪式逻辑，恰好与中秋的气质相合：月饼一年吃一次，团圆一年盼一次，承应戏一年演一次。礼盒由此把"承应"转写为"承月"——承接月光，承载团圆。它本身是一年一度的节令之礼，如同戏服一年只穿一次；但盒中的盘子，可以在日常里反复使用。\n\n而盘，即是月。圆盘本就是圆月的形态：一只、两只、四只摆在桌上，都是"圆满"——这是器物形态自带的文化语义。\n\n纹样上，从花神衣中提取三组核心元素——整体配色、桂花与玉兔、八合如意开光框；保留原衣的装饰语言，重新编排进圆盘构图。材质上做了一层巧妙的转译，把丝线翻译成螺钿：花神衣的三蓝丝线，对应鲍鱼壳螺钿；白兔身上的白丝线，对应白蝶贝螺钿。原本绣在戏服上的光泽，换一种材料，落回到了器物上。\n\n戏服一年穿一次，圆满可以年年端上桌。",
     img: "/Images/八月花神/主图.png",
     images: [
       "/Images/八月花神/主图.png",
@@ -336,7 +341,7 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
       <p style={{
         fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
         fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)",
-        lineHeight: 1.75, marginBottom: 24,
+        lineHeight: 1.75, marginBottom: 24, whiteSpace: "pre-line",
       }}>
         {lang === "zh" && "noteZh" in work
           ? (work as typeof work & { noteZh: string }).noteZh
