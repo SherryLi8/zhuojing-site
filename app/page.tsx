@@ -277,10 +277,10 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                   <div style={{ fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}>
                     {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {lang === "zh" ? works[workIdx].categoryZh : works[workIdx].category}
                   </div>
-                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(32px,3.8vw,56px)", color: "var(--dark)", lineHeight: 1.05, marginBottom: 6 }}>
+                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(32px,3.8vw,56px)", color: "var(--dark)", lineHeight: 1.05, marginBottom: 6 }}>
                     {works[workIdx].title}
                   </div>
-                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200, fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)", lineHeight: 1.7, marginBottom: 28 }}>
+                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)", lineHeight: 1.7, marginBottom: 28 }}>
                     {lang === "zh" ? works[workIdx].noteZh : works[workIdx].note}
                   </div>
                   <Link href={`/design?project=${works[workIdx].title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`} style={{ fontSize: 10, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
@@ -330,7 +330,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                       {String(photoIdx + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}
                     </div>
                     <div style={{
-                      fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                      fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
                       fontSize: "clamp(20px,2vw,28px)", color: "var(--dark)",
                       lineHeight: 1.1, marginBottom: 12,
                     }}>{lang === "zh" ? photos[photoIdx].titleZh : photos[photoIdx].title}</div>
@@ -390,7 +390,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                       }}
                     >
                       <span style={{
-                        fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                        fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
                         fontSize: "clamp(18px,1.7vw,24px)", color: "var(--dark)", lineHeight: 1.3,
                       }}>
                         {(() => {
@@ -450,7 +450,7 @@ function FinalNav() {
               >
                 <div style={{ display: "flex", alignItems: "baseline", gap: "2.5vw" }}>
                   <span style={{
-                    fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                    fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
                     fontSize: "clamp(26px,2.8vw,40px)", color: "var(--dark)",
                   }}>{lang === "zh" ? labelZh : label}</span>
                   <span style={{
@@ -704,7 +704,7 @@ function AboutBlock() {
           <div key={i} style={{ overflow: "hidden" }}>
             <motion.p
               style={{
-                fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
                 fontSize: "clamp(16px,1.8vw,24px)", lineHeight: 1.65, color: "var(--dim)",
                 margin: 0,
               }}

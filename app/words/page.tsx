@@ -155,12 +155,18 @@ export default function Words() {
                   }}
                 >
                   <span style={{
-                    fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                    fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
                     fontSize: "clamp(17px,1.5vw,21px)", color: "var(--dark)", lineHeight: 1.2,
                   }}>
-                    {entry.title}
+                    {(() => {
+                      const t = entry.title;
+                      const i = t.indexOf(': ');
+                      return i !== -1
+                        ? <>{t.slice(0, i + 1)}<br/>{t.slice(i + 2)}</>
+                        : <>{t}</>;
+                    })()}
                     {entry.external && entry.published &&
-                      <span style={{ fontSize: 12, marginLeft: 7, color: "var(--faint)", fontStyle: "normal" }}>↗</span>
+                      <span style={{ fontSize: 12, marginLeft: 7, color: "var(--faint)" }}>↗</span>
                     }
                   </span>
                   <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.16em", color: "var(--faint)" }}>
@@ -192,10 +198,18 @@ export default function Words() {
                   {hovered.tag.toUpperCase()} · {hovered.date}
                 </div>
                 <div style={{
-                  fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                  fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
                   fontSize: "clamp(18px,1.6vw,22px)", color: "var(--dark)",
                   lineHeight: 1.25, marginBottom: 20,
-                }}>{hovered.title}</div>
+                }}>
+                  {(() => {
+                    const t = hovered.title;
+                    const i = t.indexOf(': ');
+                    return i !== -1
+                      ? <>{t.slice(0, i + 1)}<br/>{t.slice(i + 2)}</>
+                      : <>{t}</>;
+                  })()}
+                </div>
                 <p style={{
                   fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
                   fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)", lineHeight: 1.75,

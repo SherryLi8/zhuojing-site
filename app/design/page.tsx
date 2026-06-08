@@ -12,6 +12,15 @@ const TAG_LABELS: Record<string, Record<string, string>> = {
   zh: { "brand-identity": "品牌设计", "editorial": "出版物设计", "typography": "字体设计", "packaging": "包装设计", "uxui": "交互设计", "product": "产品设计", "creative": "创意设计", "motion": "动态" },
 };
 
+// ─── Helper: break title at first colon ───────────────────────────────────────
+function renderBreakTitle(t: string): React.ReactNode {
+  const i = t.indexOf(': ');
+  if (i !== -1) return <>{t.slice(0, i + 1)}<br/>{t.slice(i + 2)}</>;
+  const j = t.indexOf('：');
+  if (j !== -1) return <>{t.slice(0, j + 1)}<br/>{t.slice(j + 1)}</>;
+  return <>{t}</>;
+}
+
 // ─── Image entry types ────────────────────────────────────────────────────────
 // string = normal image
 // [string, string] = side-by-side pair
@@ -133,7 +142,7 @@ export const works = [
       "/Images/ICH/主图.jpg",
       "/Images/ICH/电脑端.png",
       "/Images/ICH/手机端.png",
-      "/Images/ICH/社媒+工牌.jpg",
+      "/Images/ICH/社媒%2B工牌.jpg",
       "/Images/ICH/T恤.png",
       "/Images/ICH/地广.jpg",
       "/Images/ICH/地广2.png",
@@ -197,6 +206,14 @@ export const works = [
       "/Images/八月花神/盘子3_%E5%89%AF%E6%9C%AC.png",
       "/Images/八月花神/盘子4_%E5%89%AF%E6%9C%AC.png",
     ] as ImageEntry[],
+  },
+  {
+    num: "14", title: "UToypia",
+    tag: "brand-identity", tagLabel: "Brand Identity", year: "2023",
+    award: "TDC Young Ones — Shortlist, 2023",
+    awardZh: "TDC Young Ones 入围 2023",
+    note: "",
+    img: "",
   },
 ];
 
@@ -267,9 +284,9 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
         fontSize: "clamp(20px,1.8vw,26px)", color: "var(--dark)",
         lineHeight: 1.2, marginBottom: 16,
       }}>
-        {lang === "en" && "titleEn" in work
+        {renderBreakTitle(lang === "en" && "titleEn" in work
           ? (work as typeof work & { titleEn: string }).titleEn
-          : work.title}
+          : work.title)}
       </div>
 
       {/* Meta */}
@@ -480,9 +497,9 @@ export default function Design() {
                     fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
                     fontSize: "clamp(18px,1.6vw,22px)", color: "var(--dark)",
                   }}>
-                    {lang === "en" && "titleEn" in work
+                    {renderBreakTitle(lang === "en" && "titleEn" in work
                       ? (work as typeof work & { titleEn: string }).titleEn
-                      : work.title}
+                      : work.title)}
                   </span>
 
                   {/* Tag */}
