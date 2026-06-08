@@ -43,6 +43,26 @@ function IconInstagram() {
   );
 }
 
+function IconXiaohongshu() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+      <rect x="1.5" y="1.5" width="21" height="21" rx="5"/>
+      <line x1="7" y1="7" x2="17" y2="17" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+      <line x1="17" y1="7" x2="7" y2="17" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+      <line x1="12" y1="5" x2="12" y2="19" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+      <line x1="5" y1="12" x2="19" y2="12" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function IconDouyin() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19 3.5c-1.5 0-2.8.6-3.7 1.6V14a3.5 3.5 0 1 1-3.5-3.5c.36 0 .7.05 1.03.14V6.5A7.5 7.5 0 1 0 20.5 14V7.2A8.46 8.46 0 0 0 19 7.5V3.5z"/>
+    </svg>
+  );
+}
+
 function IconWechat() {
   return (
     <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
@@ -170,6 +190,8 @@ const data = {
     ],
     emailLabel: "EMAIL",
     igLabel: "INSTAGRAM",
+    xhsLabel: "XIAOHONGSHU",
+    douyinLabel: "DOUYIN",
     wcLabel: "WECHAT",
     wcSub: "Click to scan",
   },
@@ -239,6 +261,8 @@ const data = {
     ],
     emailLabel: "邮箱",
     igLabel: "Instagram",
+    xhsLabel: "小红书",
+    douyinLabel: "抖音",
     wcLabel: "微信",
     wcSub: "点击扫码",
   },
@@ -433,6 +457,20 @@ export default function About() {
                     <span style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(14px,1.2vw,16px)" }}>@jingfinity_</span>
                   </div>
                 </a>
+                <a href="https://xhslink.com/m/3zIvelzABOD" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+                  <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.2em", color: "var(--faint)", marginBottom: 6 }}>{c.xhsLabel}</div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 9, color: "var(--dim)" }}>
+                    <IconXiaohongshu />
+                    <span style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(14px,1.2vw,16px)" }}>@jingfinity_</span>
+                  </div>
+                </a>
+                <div>
+                  <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.2em", color: "var(--faint)", marginBottom: 6 }}>{c.douyinLabel}</div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 9, color: "var(--dim)" }}>
+                    <IconDouyin />
+                    <span style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(14px,1.2vw,16px)" }}>gaobiebingshan</span>
+                  </div>
+                </div>
                 <button onClick={() => setWechatOpen(true)}
                   style={{ background: "none", border: "none", cursor: "pointer", padding: 0, textAlign: "left" }}>
                   <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.2em", color: "var(--faint)", marginBottom: 6 }}>{c.wcLabel}</div>

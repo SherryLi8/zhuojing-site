@@ -53,7 +53,7 @@ export const works = [
   },
   {
     num: "02", title: "Seasons",
-    tag: "brand-identity", tagLabel: "Brand Identity", year: "2022",
+    tag: "brand-identity", tagLabel: "Brand Identity", year: "2023",
     note: "Seasons is a flower shop. The concept begins with watching flowers bloom and fade — where blossoming and withering are themselves the shape of time.\n\nThe name comes from the turning of the seasons: in every one of them, something is in bloom. Buying flowers is usually treated as an accessory to holidays and relationships. Seasons redefines it as a form of everyday self-care. The inspiration is the opening line of Mrs Dalloway — \"Mrs. Dalloway said she would buy the flowers herself.\" The brand wants to say to every woman: flowers needn't wait for someone to give them; you can buy them for yourself, to please yourself.\n\nWhat it stands for is a free, independent life. The tone throughout is elegant, relaxed, and quiet — never loud. Visually it's positioned as a contemporary take on Art Deco: drawing on its geometry and proportion, then simplified and brought up to date.",
     noteZh: "Seasons 是一间花店，概念始于\"观花开花落，体会生命的循环\"——盛放与凋零，本身就是时间的形状。\n\n品牌名源于四季流转：每一季，都有花在开。买花，常被当作节日与关系的附属。Seasons 把它重新定义为一种日常的自我照料。灵感来自《达洛维夫人》的开篇——\"Mrs. Dalloway said she would buy the flowers herself.\" 品牌想对每一个女性说：花不必等谁来送，你可以买给自己、取悦自己。\n\n它倡导的是一种自由而独立的生活。整体调性优雅、松弛，不喧哗。视觉定位为当代化的装饰艺术（Art Deco）：参考其几何结构与比例，再作简化与现代处理。",
     img: "/Images/Seasons/主图.jpeg",
