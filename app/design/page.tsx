@@ -139,7 +139,10 @@ export const works = [
   {
     num: "09", title: "ICH Museum",
     tag: "uxui", tagLabel: "UX/UI", year: "2022",
-    note: "Digital experience bridging living tradition and contemporary archiving.",
+    tagDisplay: "Branding · UX/UI",
+    tagDisplayZh: "品牌 · 交互",
+    note: "ICH Museum is a platform-scale online museum of intangible cultural heritage, bringing immersive experience and a sustainable archive into one — so that heritage with no fixed form can be both watched immersively and preserved, searched, and carried forward in a systematic way.\n\nDigital tools are reshaping how culture is transmitted: content platforms widen its reach, immersive technology expands what an experience can be, and the public is increasingly willing to explore culture as an everyday interest. Yet existing projects tend to stall in three places: information is fragmented; they are watch-only, making sustained participation hard; and intangible heritage is shown as a finished object rather than a living process still unfolding. The demand is real; what's missing is a system to connect it all.\n\nICH Museum lets a single platform carry four things at once: preservation (digital archiving and an entry system), understanding (learning paths that lower the threshold), participation (moving from watching to interactive exploration), and connection (cross-entry links woven into a cultural network).\n\nThe main flow is direct: users enter, explore entries through categories and filters, and read on the entry page; the system then uses related recommendations to connect entries and draw users back. Immersive entry sets up ICH context first; curated guidance gives a clear way in; a classification structure keeps entries extensible; filters and unified cards raise retrieval efficiency.\n\nThe survival of intangible heritage depends on its continued happening and participation. The platform adds an Events calendar updated in real time with ICH activities around the world; VR offers a more embodied way to experience distant cultures, carrying online immersion toward offline practice — a sustainable path of participation.\n\nVisually, the system deliberately avoids regionalized decoration and symbolic appropriation, using a neutral International Typographic Style to carry diverse cultural content. The typeface is Helvetica Now Display; color stays black-and-white. The core symbol is a \"cultural window\": a horizontal rectangular frame — a metaphor for the display window and an echo of the cross-regional tools within ICH practice itself.",
+    noteZh: "ICH Museum 是一座平台级的非遗线上博物馆，把"沉浸式体验"与"可持续档案"合为一体，让无形的文化遗产，既能被沉浸地观看，也能被系统地保存、检索与延续。\n\n数字化正在重塑文化传播：内容平台扩大了覆盖面，沉浸技术提升了体验的可能，公众也越来越愿意把文化当作一种日常兴趣持续探索。但现有项目普遍卡在三处：信息碎片化，缺少体系化的理解路径；以"看"为主，难以形成持续参与；非遗被当成一件"成物"来展示，而非一个仍在发生的活态过程。需求真实存在，缺的是一个把它们接起来的系统。\n\nICH Museum 用一个平台同时承担四件事：保存（数字化归档与条目体系）、理解（建立学习路径、降低门槛）、参与（从观看走向互动探索）、连接（跨条目关联，织成一张文化网络）。\n\n主流程很直接：用户进入后，在集合页以分类与筛选探索条目，在条目页完成阅读；系统再以关联推荐，实现跨条目的联通与回流。沉浸式入口先建立非遗语境，推荐导览给出明确的理解入口，分类结构保证条目可扩展，筛选与卡片提升检索效率。\n\n非遗的延续依赖持续的发生与参与。平台新增 Events 活动日历，实时更新世界各地正在进行的非遗活动，用户可发现并参与工作坊；VR 为"远方的文化"提供更具身体感的体验，把线上沉浸引向线下实践，形成可持续的参与路径。\n\n视觉上，刻意避开地域化装饰与符号挪用，以中性的国际主义设计风格承载多元文化内容。字体选用 Helvetica Now Display，色彩以黑白降低地域性。核心符号是一个"文化窗口"：横向长方形框体，既是展示窗口的隐喻，也呼应非遗实践里跨地域的传统工具——宣纸的抄纸框、织机的框架。",
     img: "/Images/ICH/主图.jpg",
     images: [
       "/Images/ICH/主图.jpg",
@@ -211,12 +214,19 @@ export const works = [
       "/Images/八月花神/盘子3_%E5%89%AF%E6%9C%AC.png",
       "/Images/八月花神/盘子4_%E5%89%AF%E6%9C%AC.png",
     ] as ImageEntry[],
+    sourceLink: { href: "https://www.dpm.org.cn/collection/music/233230.html", label: "VIEW SOURCE OBJECT →", labelZh: "查看故宫馆藏原件 →" },
   },
   {
     num: "14", title: "UToypia",
     tag: "brand-identity", tagLabel: "Brand Identity", year: "2023",
     award: "TDC Young Ones — Shortlist, 2023",
     awardZh: "TDC Young Ones 入围 2023",
+    note: "",
+    img: "",
+  },
+  {
+    num: "15", title: "The Moon Going Through My Body",
+    tag: "creative", tagLabel: "Creative", year: "2023",
     note: "",
     img: "",
   },
@@ -298,7 +308,13 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
       <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
         <div style={{ display: "flex", gap: 24 }}>
           <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52 }}>{labels.type}</span>
-          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>{TAG_LABELS[lang][work.tag]}</span>
+          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>
+            {lang === "zh" && "tagDisplayZh" in work
+              ? (work as typeof work & { tagDisplayZh: string }).tagDisplayZh
+              : "tagDisplay" in work
+              ? (work as typeof work & { tagDisplay: string }).tagDisplay
+              : TAG_LABELS[lang][work.tag]}
+          </span>
         </div>
         <div style={{ display: "flex", gap: 24 }}>
           <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52 }}>{labels.year}</span>
@@ -347,6 +363,17 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
           ? (work as typeof work & { noteZh: string }).noteZh
           : work.note}
       </p>
+
+      {/* Source link */}
+      {"sourceLink" in work && (work as typeof work & { sourceLink?: { href: string; label: string; labelZh: string } }).sourceLink && (
+        <a href={(work as typeof work & { sourceLink: { href: string; label: string; labelZh: string } }).sourceLink.href}
+          target="_blank" rel="noopener noreferrer"
+          style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.18em", color: "var(--dim)", textDecoration: "none", display: "inline-block", marginBottom: 8 }}>
+          {lang === "zh"
+            ? (work as typeof work & { sourceLink: { href: string; label: string; labelZh: string } }).sourceLink.labelZh
+            : (work as typeof work & { sourceLink: { href: string; label: string; labelZh: string } }).sourceLink.label} ↗
+        </a>
+      )}
 
       {/* PDF link */}
       {"pdf" in work && (work as typeof work & { pdf?: string }).pdf && (
@@ -511,7 +538,13 @@ export default function Design() {
                   <span style={{
                     fontFamily: "var(--font-geist),sans-serif",
                     fontSize: 9, letterSpacing: "0.16em", color: "var(--faint)",
-                  }}>{TAG_LABELS[lang][work.tag]}</span>
+                  }}>
+                    {lang === "zh" && "tagDisplayZh" in work
+                      ? (work as typeof work & { tagDisplayZh: string }).tagDisplayZh
+                      : "tagDisplay" in work
+                      ? (work as typeof work & { tagDisplay: string }).tagDisplay
+                      : TAG_LABELS[lang][work.tag]}
+                  </span>
 
                 </div>
               );
