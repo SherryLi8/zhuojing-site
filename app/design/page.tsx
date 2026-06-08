@@ -233,6 +233,36 @@ export const works = [
     note: "",
     img: "",
   },
+  {
+    num: "16", title: "'Twenty-Four Solar Terms of 2025'", titleEn: "'Twenty-Four Solar Terms of 2025'",
+    tag: "editorial", tagLabel: "Editorial", year: "2025",
+    tagDisplay: "Movie Calendar Postcards",
+    tagDisplayZh: "电影日历明信片",
+    note: "",
+    img: "",
+  },
+  {
+    num: "17", title: "Self Portrait Sculpture", titleEn: "Self Portrait Sculpture",
+    tag: "creative", tagLabel: "Creative", year: "2023",
+    note: "",
+    img: "",
+  },
+  {
+    num: "18", title: "Steen Lab", titleEn: "Steen Lab",
+    tag: "brand-identity", tagLabel: "Brand Identity", year: "2023",
+    tagDisplay: "Visual Identity",
+    tagDisplayZh: "品牌视觉",
+    note: "",
+    img: "",
+  },
+  {
+    num: "19", title: "'Shaxian'", titleEn: "'Shaxian' — Shaxian Delicacies (沙县小吃) in USA",
+    tag: "brand-identity", tagLabel: "Brand Identity", year: "2023",
+    tagDisplay: "Rebrand",
+    tagDisplayZh: "品牌重塑",
+    note: "",
+    img: "",
+  },
 ];
 
 // ─── Detail panel ─────────────────────────────────────────────────────────────
