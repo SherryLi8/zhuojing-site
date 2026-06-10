@@ -198,6 +198,7 @@ export const works = [
     credits: [
       { role: "PHOTO", name: "Rebecca", href: "https://www.instagram.com/un_coz_/", name2: "小红书 @Nixuy", href2: "https://xhslink.com/m/1ciUK7MvEDa" },
     ],
+    sourceLink: { href: "https://hiiibrand.com/winners/1b00c0e23d7f47dea1f6bef3aa624d68", label: "HIIIBRAND AWARDS 2026 →", labelZh: "Hiiibrand Awards 2026 →" },
     writingLink: "/words",
   },
   {
