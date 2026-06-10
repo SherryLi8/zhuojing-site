@@ -187,7 +187,8 @@ const works = [
     lpImages: ["/Images/月经体/月经体%20主图.jpg"],
   },
   {
-    title: "形存意减", category: "Editorial", categoryZh: "出版物设计", year: "2025–2026",
+    title: "形存意减", titleEn: "The Persistence of Form",
+    category: "Editorial", categoryZh: "出版物设计", year: "2025–2026",
     note: "Form stays. Meaning leaks away.",
     noteZh: "形留下来，意义在途中流失。",
     img: "/Images/龙鳞装/主图.JPG",
@@ -195,7 +196,8 @@ const works = [
     slug: "the-persistence-of-form-visual-simplification-and-contextual-loss",
   },
   {
-    title: "八月花神", category: "Product Design", categoryZh: "产品设计", year: "2026",
+    title: "八月花神", titleEn: "August Offering",
+    category: "Product Design", categoryZh: "产品设计", year: "2026",
     note: "A robe worn once a year — fullness, year after year.",
     noteZh: "戏服一年穿一次，圆满可以年年端上桌。",
     img: "/Images/八月花神/主图.png",
@@ -294,7 +296,9 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                     {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {lang === "zh" ? works[workIdx].categoryZh : works[workIdx].category}
                   </div>
                   <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(32px,3.8vw,56px)", color: "var(--dark)", lineHeight: 1.05, marginBottom: 6 }}>
-                    {works[workIdx].title}
+                    {lang === "en" && "titleEn" in works[workIdx]
+                      ? (works[workIdx] as typeof works[0] & { titleEn: string }).titleEn
+                      : works[workIdx].title}
                   </div>
                   <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)", lineHeight: 1.7, marginBottom: 28 }}>
                     {lang === "zh" ? works[workIdx].noteZh : works[workIdx].note}
