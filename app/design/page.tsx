@@ -127,13 +127,15 @@ export const works = [
   {
     num: "07", title: "Fractal Font",
     tag: "typography", tagLabel: "Typography", year: "2022",
-    note: "Self-similarity scaled from glyph to composition.",
+    note: "Fractal Font is a type experiment that extends from my previous project, Program Error. The inspiration came from the rich textures that emerged during that process — particularly the layered, glitch-like surfaces generated through code.\n\nI extracted and refined these textures into visual modules, then pushed them further through iterative design and generative scripting in Processing. The result is a complete type system that embraces unpredictability, texture, and digital fragmentation — where each character feels more like a living, shifting form than a static letter.\n\nThis project follows a learning by doing approach, embracing all the possibilities that arise during the design process. It helped me deeply understand what learning by doing truly means and shifted the way I approach design — moving from fixed outcomes to open-ended exploration.\n\nThe final typeface was used in a silkscreen-printed poster for the USC Roski Graduate Program's 2025 Open House.",
+    noteZh: "Fractal Font 是延伸自我此前项目 Program Error 的字体实验。灵感来自那个过程中涌现出的丰富纹理——尤其是通过代码生成的那些层叠的、故障感的表面。\n\n我将这些纹理提取和提炼为视觉模块，再经由 Processing 中的迭代设计与生成脚本进一步发展，最终构建出一套完整的字体系统，拥抱不可预测性、纹理感与数字碎片化——每个字符都更像一种活的、变动的形态，而非静止的字母。\n\n这个项目遵循\"做中学\"的理念，拥抱设计过程中涌现的一切可能性。它帮助我深入理解了\"做中学\"的真正含义，也改变了我对待设计的方式——从追求固定结果转向开放式探索。\n\n最终字体被应用于 USC Roski 研究生项目 2025 年开放日的丝网印刷海报。",
     img: "",
   },
   {
     num: "08", title: "Program Error",
     tag: "creative", tagLabel: "Creative", year: "2022",
-    note: "Digital glitch as aesthetic language.",
+    note: "Program Error is an experimental fractal typography project created during Ramon Tejada's workshop. Inspired by the textured surface of a Marshall speaker, I developed eight sets of modular forms that evolved iteratively. Using Processing, I generated eight experimental typefaces, exploring texture variations, color shifts, and unexpected shapes — some even resembling small animals.\n\nThis project embraces uncertainty and the open-ended nature of process-driven design, allowing forms to emerge organically through exploration and play.",
+    noteZh: "Program Error 是在 Ramon Tejada 的工作坊中创作的实验性分形字体项目。灵感来自 Marshall 音箱表面的纹理，我发展出八组模块化形态，并以迭代方式逐步演化。通过 Processing，我生成了八套实验性字体，探索纹理变化、色彩转换与意外形态——其中一些甚至形似小动物。\n\n这个项目拥抱不确定性与过程导向设计的开放性，让形态在探索与游戏中自然生长。",
     img: "",
   },
   {
@@ -231,7 +233,8 @@ export const works = [
   {
     num: "15", title: "The Moon Going Through My Body",
     tag: "creative", tagLabel: "Creative", year: "2025",
-    note: "",
+    note: "Menstrual pain is commonly acknowledged as discomfort, but for those who haven't experienced it, the true sensation is difficult to imagine. To bridge this gap, I created a series of 2.5D visual posters that depict the different types of menstrual pain. I then assembled these individual pieces into a large infographic, offering a comprehensive and impactful representation of the experience. By visualizing menstrual pain, this project aims to foster empathy and understanding, while celebrating the strength embedded in the menstrual cycle.\n\nTo further enrich the project, I designed a booklet titled The Moon Going Through My Body, which poetically expresses the sensations of menstrual pain. The booklet highlights how menstruation is not merely a symbol of weakness but also of strength, resilience, and the unique power women demonstrate throughout their cycles.\n\n2.5D Posters: Visual representations of various forms of menstrual pain, giving shape and texture to an otherwise intangible experience. Infographic: A large-scale compilation of all the posters, creating a striking and cohesive visual narrative. Booklet: A poetic exploration of menstrual pain, shifting the perception from weakness to a testament of resilience.",
+    noteZh: "经痛常被认定为\"不适\"，但对未曾亲历的人而言，它真实的感受难以想象。为了弥合这一鸿沟，我制作了一系列 2.5D 视觉海报，描绘不同类型的经痛，再将其整合为一张大型信息图，呈现这段经历的全貌与冲击力。通过视觉化经痛，本项目旨在激发共情与理解，同时颂扬月经周期中蕴含的力量。\n\n为进一步丰富项目，我设计了一本名为《The Moon Going Through My Body》的手册，以诗意的语言表达经痛的感受。手册着力传达：月经不只是软弱的象征，更是力量、韧性与女性独特能量的体现。\n\n2.5D 海报：对各类经痛的视觉化呈现，为这段难以言说的体验赋予形态与质感。信息图：所有海报的大型汇集，构成震撼而完整的视觉叙事。手册：对经痛的诗意探索，将这段经历从软弱的标签转化为韧性的见证。",
     img: "",
   },
   {
@@ -239,7 +242,8 @@ export const works = [
     tag: "editorial", tagLabel: "Editorial", year: "2025",
     tagDisplay: "Movie Calendar Postcards",
     tagDisplayZh: "电影日历明信片",
-    note: "",
+    note: "The Twenty-Four Solar Terms are an essential part of the traditional Chinese calendar, dividing the year based on the sun's movement. Each term reflects seasonal changes, agricultural activities, and cultural traditions.\n\nThis set of 2025 Twenty-Four Solar Terms Calendar Postcards, designed for Beijing HugoEast Media Co., serves as both a tribute to this ancient system and a unique record of cinema. Each postcard corresponds to a solar term, documenting 24 films HugoEast introduced from overseas over the past year and recommending them to the public. The design captures the passage of time and the memory of films, making each postcard not only a time marker but also an echo of cinematic experiences.",
+    noteZh: "二十四节气是中国传统历法不可或缺的一部分，以太阳运动为基础，将一年划分为二十四个节点。每个节气折射出时节变换、农事活动与文化传统。\n\n这套《2025年二十四节气电影日历明信片》受北京好有才文化传媒有限公司委托设计，既是对这一古老历法体系的致敬，也是一份独特的电影记忆留存。每张明信片对应一个节气，记录了好有才过去一年从海外引进的 24 部影片，并将它们推荐给公众。设计捕捉时间流逝与电影记忆，使每张明信片不仅成为时间的刻度，也成为观影体验的回响。",
     img: "",
   },
   {
@@ -253,15 +257,8 @@ export const works = [
     tag: "brand-identity", tagLabel: "Brand Identity", year: "2023",
     tagDisplay: "Visual Identity",
     tagDisplayZh: "品牌视觉",
-    note: "",
-    img: "",
-  },
-  {
-    num: "19", title: "'Shaxian'", titleEn: "'Shaxian' — Shaxian Delicacies (沙县小吃) in USA",
-    tag: "brand-identity", tagLabel: "Brand Identity", year: "2023",
-    tagDisplay: "Rebrand",
-    tagDisplayZh: "品牌重塑",
-    note: "",
+    note: "Steen Lab, led by microbial ecologist Dr. Andrew Steen at the University of Tennessee, explores how heterotrophic microbes influence the carbon cycle and the transformation of organic matter in aquatic environments. Their work blends environmental science, data modeling, and a deep belief in open science.\n\nThis identity project transforms the lab's philosophy into a visual system rooted in curiosity and evolution. The logo, inspired by molecular diagrams and ripple patterns, forms a shifting S — evoking connection, rationality, and openness to change. The bright orange node breaks symmetry, symbolizing the spark of discovery that drives research forward.\n\nThe brand system is modular and human-centered. From digital interface to scientific poster, it invites both experts and curious minds into the lab's world — redefining scientific communication as transparent, inclusive, and alive.\n\nCollaboration with Claire Dong and Cyrus Wang.",
+    noteZh: "Steen Lab 由田纳西大学微生物生态学家 Andrew Steen 博士领导，专注于研究异养微生物如何影响碳循环，以及水生环境中有机物的转化过程。他们的工作融合了环境科学、数据建模与对开放科学的深切信念。\n\n这套视觉识别项目将实验室的理念转化为一套根植于好奇心与进化的视觉系统。标志灵感来自分子结构图与涟漪图案，构成一个流动的 S 形——唤起连接、理性与对变化的开放。鲜亮的橙色节点打破对称，象征推动研究前行的发现之火花。\n\n品牌系统模块化、以人为中心。从数字界面到科研海报，它邀请专家与好奇者共同进入实验室的世界——重新定义科学传播：透明、包容、有生命力。\n\n与 Claire Dong、Cyrus Wang 合作完成。",
     img: "",
   },
 ];
