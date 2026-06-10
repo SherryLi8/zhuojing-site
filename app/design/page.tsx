@@ -8,8 +8,8 @@ import { useLang } from "../context/lang";
 
 // ─── i18n ─────────────────────────────────────────────────────────────────────
 const TAG_LABELS: Record<string, Record<string, string>> = {
-  en: { "brand-identity": "Branding", "editorial": "Editorial", "typography": "Typography", "packaging": "Packaging", "uxui": "UX/UI", "product": "Product", "creative": "Creative", "motion": "Motion" },
-  zh: { "brand-identity": "品牌设计", "editorial": "出版物设计", "typography": "字体设计", "packaging": "包装设计", "uxui": "交互设计", "product": "产品设计", "creative": "创意设计", "motion": "动态" },
+  en: { "brand-identity": "Branding", "editorial": "Editorial", "typography": "Typography", "packaging": "Packaging", "uxui": "UX/UI", "product": "Product", "creative": "Creative", "motion": "Motion", "logo": "Logo" },
+  zh: { "brand-identity": "品牌设计", "editorial": "出版物设计", "typography": "字体设计", "packaging": "包装设计", "uxui": "交互设计", "product": "产品设计", "creative": "创意设计", "motion": "动态", "logo": "Logo" },
 };
 
 // ─── Helper: break title at first colon ───────────────────────────────────────
@@ -129,9 +129,8 @@ export const works = [
     tag: "typography", tagLabel: "Typography", year: "2022",
     note: "Fractal Font is a type experiment that extends from my previous project, Program Error. The inspiration came from the rich textures that emerged during that process — particularly the layered, glitch-like surfaces generated through code.\n\nI extracted and refined these textures into visual modules, then pushed them further through iterative design and generative scripting in Processing. The result is a complete type system that embraces unpredictability, texture, and digital fragmentation — where each character feels more like a living, shifting form than a static letter.\n\nThis project follows a learning by doing approach, embracing all the possibilities that arise during the design process. It helped me deeply understand what learning by doing truly means and shifted the way I approach design — moving from fixed outcomes to open-ended exploration.\n\nThe final typeface was used in a silkscreen-printed poster for the USC Roski Graduate Program's 2025 Open House.",
     noteZh: "Fractal Font 是延伸自我此前项目 Program Error 的字体实验。灵感来自那个过程中涌现出的丰富纹理——尤其是通过代码生成的那些层叠的、故障感的表面。\n\n我将这些纹理提取和提炼为视觉模块，再经由 Processing 中的迭代设计与生成脚本进一步发展，最终构建出一套完整的字体系统，拥抱不可预测性、纹理感与数字碎片化——每个字符都更像一种活的、变动的形态，而非静止的字母。\n\n这个项目遵循\"做中学\"的理念，拥抱设计过程中涌现的一切可能性。它帮助我深入理解了\"做中学\"的真正含义，也改变了我对待设计的方式——从追求固定结果转向开放式探索。\n\n最终字体被应用于 USC Roski 研究生项目 2025 年开放日的丝网印刷海报。",
-    img: "/Images/Fractal%20Font/处理后_副本.png",
+    img: "/Images/Fractal%20Font/Formal%20Fonts-02_副本.png",
     images: [
-      "/Images/Fractal%20Font/处理后_副本.png",
       "/Images/Fractal%20Font/Formal%20Fonts-02_副本.png",
       "/Images/Fractal%20Font/Formal%20Fonts-03_副本.png",
       "/Images/Fractal%20Font/Formal%20Fonts-04_副本.png",
@@ -143,7 +142,7 @@ export const works = [
     tag: "creative", tagLabel: "Creative", year: "2022",
     note: "Program Error is an experimental fractal typography project created during Ramon Tejada's workshop. Inspired by the textured surface of a Marshall speaker, I developed eight sets of modular forms that evolved iteratively. Using Processing, I generated eight experimental typefaces, exploring texture variations, color shifts, and unexpected shapes — some even resembling small animals.\n\nThis project embraces uncertainty and the open-ended nature of process-driven design, allowing forms to emerge organically through exploration and play.",
     noteZh: "Program Error 是在 Ramon Tejada 的工作坊中创作的实验性分形字体项目。灵感来自 Marshall 音箱表面的纹理，我发展出八组模块化形态，并以迭代方式逐步演化。通过 Processing，我生成了八套实验性字体，探索纹理变化、色彩转换与意外形态——其中一些甚至形似小动物。\n\n这个项目拥抱不确定性与过程导向设计的开放性，让形态在探索与游戏中自然生长。",
-    img: "/Images/Program%20Error/Fractals%201_副本.jpg",
+    img: "/Images/Program%20Error/IMG_0518_副本.jpeg",
     images: [
       "/Images/Program%20Error/Fractals%201_副本.jpg",
       "/Images/Program%20Error/Fractals_画板%201-02_副本.jpg",
@@ -244,22 +243,24 @@ export const works = [
   {
     num: "14", title: "UToypia",
     tag: "brand-identity", tagLabel: "Brand Identity", year: "2023",
+    tagDisplay: "App Design",
+    tagDisplayZh: "App 设计",
     award: "TDC Young Ones — Shortlist, 2023",
     awardZh: "TDC Young Ones 入围 2023",
-    note: "",
-    img: "/Images/UTpypia/首图.jpg",
+    note: "The name UToypia comes from the combination of Utopia and Toy. UToypia is a custom toy app designed for children aged 12 and above, as well as adults. It provides users with a private and independent space that goes beyond reality. Users can create their own toys through this app and purchase their own designs.\n\nCo-designed with Aixue Wang.",
+    noteZh: "UToypia 这个名字由 Utopia（乌托邦）与 Toy（玩具）组合而成。UToypia 是一款专为 12 岁以上青少年及成年人设计的自定义玩具 App，为用户提供一个超越现实的私密独立空间。用户可以通过这款 App 创作属于自己的玩具，并将自己的设计购买出来。\n\n与王爱雪（Aixue Wang）联合设计。",
+    img: "/Images/UTpypia/page_01.jpg",
     images: [
-      "/Images/UTpypia/首图.jpg",
-      "/Images/UTpypia/28_副本.jpg",
-      "/Images/UTpypia/30_副本.jpg",
-      "/Images/UTpypia/31_副本.jpg",
-      "/Images/UTpypia/313_副本.jpg",
       "/Images/UTpypia/page_01.jpg",
       "/Images/UTpypia/page_02.jpg",
       "/Images/UTpypia/page_03.jpg",
       "/Images/UTpypia/page_04.jpg",
       "/Images/UTpypia/page_05.jpg",
       "/Images/UTpypia/page_06.jpg",
+      "/Images/UTpypia/28_副本.jpg",
+      "/Images/UTpypia/30_副本.jpg",
+      "/Images/UTpypia/31_副本.jpg",
+      "/Images/UTpypia/313_副本.jpg",
     ] as ImageEntry[],
   },
   {
@@ -339,11 +340,17 @@ export const works = [
     tagDisplayZh: "品牌视觉",
     note: "Steen Lab, led by microbial ecologist Dr. Andrew Steen at the University of Tennessee, explores how heterotrophic microbes influence the carbon cycle and the transformation of organic matter in aquatic environments. Their work blends environmental science, data modeling, and a deep belief in open science.\n\nThis identity project transforms the lab's philosophy into a visual system rooted in curiosity and evolution. The logo, inspired by molecular diagrams and ripple patterns, forms a shifting S — evoking connection, rationality, and openness to change. The bright orange node breaks symmetry, symbolizing the spark of discovery that drives research forward.\n\nThe brand system is modular and human-centered. From digital interface to scientific poster, it invites both experts and curious minds into the lab's world — redefining scientific communication as transparent, inclusive, and alive.\n\nCollaboration with Claire Dong and Cyrus Wang.",
     noteZh: "Steen Lab 由田纳西大学微生物生态学家 Andrew Steen 博士领导，专注于研究异养微生物如何影响碳循环，以及水生环境中有机物的转化过程。他们的工作融合了环境科学、数据建模与对开放科学的深切信念。\n\n这套视觉识别项目将实验室的理念转化为一套根植于好奇心与进化的视觉系统。标志灵感来自分子结构图与涟漪图案，构成一个流动的 S 形——唤起连接、理性与对变化的开放。鲜亮的橙色节点打破对称，象征推动研究前行的发现之火花。\n\n品牌系统模块化、以人为中心。从数字界面到科研海报，它邀请专家与好奇者共同进入实验室的世界——重新定义科学传播：透明、包容、有生命力。\n\n与 Claire Dong、Cyrus Wang 合作完成。",
+    pdf: "/Images/Steen%20Lab/SteenLab%20Brandbook.pdf",
+    pdfLabel: "VIEW BRANDBOOK →",
+    pdfLabelZh: "查看品牌手册 →",
     img: "/Images/Steen%20Lab/24.png",
     images: [
       "/Images/Steen%20Lab/24.png",
       "/Images/Steen%20Lab/25.png",
       "/Images/Steen%20Lab/26.png",
+      "/Images/Steen%20Lab/3.png",
+      "/Images/Steen%20Lab/4.png",
+      "/Images/Steen%20Lab/B-1.png",
       "/Images/Steen%20Lab/Slide%2016_9%20-%2048.png",
       "/Images/Steen%20Lab/Slide%2016_9%20-%2051.png",
       "/Images/Steen%20Lab/Slide%2016_9%20-%2052.png",
@@ -373,6 +380,18 @@ export const works = [
       "/Images/Waves/IMG_0181_副本.jpg",
       "/Images/Waves/IMG_0193_副本.jpg",
       "/Images/Waves/IMG_0202_副本.jpg",
+    ] as ImageEntry[],
+  },
+  {
+    num: "20", title: "Jessica Kao Workshop Poster",
+    tag: "typography", tagLabel: "Typography", year: "2024",
+    tagDisplay: "Poster · Silkscreen",
+    tagDisplayZh: "海报 · 丝网印刷",
+    note: "This poster was created for Jessica Kao's workshop at USC Roski. The design uses Grandson, a typeface designed by Jessica, and explores its expressive qualities through bold composition and layered texture.\n\nThe final piece was silkscreen printed, highlighting the typeface's tactile potential and paying homage to analog processes in a digital design context.",
+    noteZh: "这张海报为 Jessica Kao 在 USC Roski 举办的工作坊而作。设计使用了 Grandson——一款由 Jessica 设计的字体，并通过大胆的版式构成与层叠纹理探索其表现潜力。\n\n最终作品以丝网印刷方式输出，彰显了字体的触感质地，也是对数字设计语境中模拟印刷工艺的一次致敬。",
+    img: "/Images/Fractal%20Font/处理后_副本.png",
+    images: [
+      "/Images/Fractal%20Font/处理后_副本.png",
     ] as ImageEntry[],
   },
 ];
@@ -524,7 +543,9 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
       {"pdf" in work && (work as typeof work & { pdf?: string }).pdf && (
         <a href={(work as typeof work & { pdf: string }).pdf} target="_blank" rel="noopener noreferrer"
           style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.18em", color: "var(--dim)", textDecoration: "none", display: "inline-block", marginBottom: 8 }}>
-          {lang === "zh" ? "查看杂志 PDF →" : "VIEW MAGAZINE PDF →"}
+          {lang === "zh"
+            ? ("pdfLabelZh" in work ? (work as typeof work & { pdfLabelZh: string }).pdfLabelZh : "查看杂志 PDF →")
+            : ("pdfLabel" in work ? (work as typeof work & { pdfLabel: string }).pdfLabel : "VIEW MAGAZINE PDF →")}
         </a>
       )}
 
