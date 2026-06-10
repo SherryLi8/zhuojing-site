@@ -52,16 +52,32 @@ const artWorks = [
     images: ["/Images/消失.JPG"] as ImageEntry[],
   },
   {
-    num: "04", title: "油画", titleEn: "Paintings",
+    num: "04", title: "", titleEn: "",
     medium: "painting", year: "2024",
     note: "",
     img: "/Images/油画1.jpg",
-    images: [
-      "/Images/油画1.jpg",
-      "/Images/油画2.jpg",
-      "/Images/油画3.jpg",
-      "/Images/油画4.jpeg",
-    ] as ImageEntry[],
+    images: ["/Images/油画1.jpg"] as ImageEntry[],
+  },
+  {
+    num: "04b", title: "", titleEn: "",
+    medium: "painting", year: "2024",
+    note: "",
+    img: "/Images/油画2.jpg",
+    images: ["/Images/油画2.jpg"] as ImageEntry[],
+  },
+  {
+    num: "04c", title: "", titleEn: "",
+    medium: "painting", year: "2024",
+    note: "",
+    img: "/Images/油画3.jpg",
+    images: ["/Images/油画3.jpg"] as ImageEntry[],
+  },
+  {
+    num: "04d", title: "", titleEn: "",
+    medium: "painting", year: "2024",
+    note: "",
+    img: "/Images/油画4.jpeg",
+    images: ["/Images/油画4.jpeg"] as ImageEntry[],
   },
   {
     num: "05", title: "素描", titleEn: "Sketches",
@@ -152,13 +168,15 @@ function Lightbox({ work, onClose }: { work: typeof artWorks[0]; onClose: () => 
 
         {/* Meta */}
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.12)", paddingTop: 24 }}>
-          <div style={{
-            fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-            fontSize: "clamp(20px,1.8vw,26px)", color: "rgba(255,255,255,0.88)",
-            lineHeight: 1.2, marginBottom: 16,
-          }}>
-            {displayTitle}
-          </div>
+          {displayTitle && (
+            <div style={{
+              fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+              fontSize: "clamp(20px,1.8vw,26px)", color: "rgba(255,255,255,0.88)",
+              lineHeight: 1.2, marginBottom: 16,
+            }}>
+              {displayTitle}
+            </div>
+          )}
           <div style={{ display: "flex", gap: 32, marginBottom: 20 }}>
             <div style={{ display: "flex", gap: 12 }}>
               <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "rgba(255,255,255,0.35)" }}>
@@ -288,22 +306,25 @@ export default function Art() {
                 transition={{ duration: 0.2 }}
                 style={{
                   position: "absolute", inset: 0,
-                  background: "rgba(0,0,0,0.38)",
+                  background: "rgba(0,0,0,0.58)",
                   display: "flex", flexDirection: "column",
-                  justifyContent: "flex-end", padding: "12px 14px",
+                  justifyContent: "flex-end", padding: "14px 16px",
                 }}
               >
-                <span style={{
-                  fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-                  fontSize: 14, color: "rgba(255,255,255,0.9)", lineHeight: 1.2,
-                }}>
-                  {lang === "en" && "titleEn" in work
+                {(() => {
+                  const t = lang === "en" && "titleEn" in work
                     ? (work as typeof work & { titleEn: string }).titleEn
-                    : work.title}
-                </span>
+                    : work.title;
+                  return t ? (
+                    <span style={{
+                      fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                      fontSize: 14, color: "#fff", lineHeight: 1.2, marginBottom: 4,
+                    }}>{t}</span>
+                  ) : null;
+                })()}
                 <span style={{
                   fontFamily: "var(--font-geist),sans-serif", fontSize: 9,
-                  letterSpacing: "0.16em", color: "rgba(255,255,255,0.5)", marginTop: 4,
+                  letterSpacing: "0.18em", color: "rgba(255,255,255,0.75)",
                 }}>
                   {MEDIUM_LABELS[lang][work.medium]}
                 </span>
