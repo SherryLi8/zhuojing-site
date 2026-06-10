@@ -1,14 +1,14 @@
 "use client";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
 import { TOP_BAR_HEIGHT } from "../components/TopBar";
 import { useLang } from "../context/lang";
 
 // ─── Medium labels ────────────────────────────────────────────────────────────
 const MEDIUM_LABELS: Record<string, Record<string, string>> = {
-  en: { ceramic: "Ceramic", sculpture: "Sculpture", painting: "Painting", drawing: "Drawing" },
-  zh: { ceramic: "陶艺",    sculpture: "雕塑",       painting: "绘画",     drawing: "素描"    },
+  en: { ceramic: "Ceramic", sculpture: "Sculpture", painting: "Painting", drawing: "Drawing", riso: "Risograph" },
+  zh: { ceramic: "陶艺",    sculpture: "雕塑",       painting: "绘画",     drawing: "素描",   riso: "Riso 印刷" },
 };
 
 // ─── Image entry type ─────────────────────────────────────────────────────────
@@ -71,7 +71,15 @@ const artWorks = [
     images: [
       "/Images/sketch1.JPG",
       "/Images/sketch2.JPG",
+      "/Images/sketch3.jpg",
     ] as ImageEntry[],
+  },
+  {
+    num: "06", title: "Riso", titleEn: "Risograph",
+    medium: "riso", year: "2024",
+    note: "",
+    img: "/Images/riso.jpg",
+    images: ["/Images/riso.jpg"] as ImageEntry[],
   },
 ];
 
@@ -81,86 +89,108 @@ const FILTERS = [
   { key: "sculpture", en: "Sculpture", zh: "雕塑" },
   { key: "painting",  en: "Painting",  zh: "绘画" },
   { key: "drawing",   en: "Drawing",   zh: "素描" },
+  { key: "riso",      en: "Riso",      zh: "Riso" },
 ] as const;
 
-// ─── Detail panel ─────────────────────────────────────────────────────────────
-function DetailPanel({ work }: { work: typeof artWorks[0] | null }) {
+// ─── Lightbox ─────────────────────────────────────────────────────────────────
+function Lightbox({ work, onClose }: { work: typeof artWorks[0]; onClose: () => void }) {
   const { lang } = useLang();
 
-  if (!work) {
-    return (
-      <div style={{ color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.18em" }}>
-        {lang === "en" ? "CLICK TO VIEW" : "点击查看"}
-      </div>
-    );
-  }
+  // Close on Escape
+  useEffect(() => {
+    const fn = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", fn);
+    return () => window.removeEventListener("keydown", fn);
+  }, [onClose]);
+
+  const displayTitle = lang === "en" && "titleEn" in work
+    ? (work as typeof work & { titleEn: string }).titleEn
+    : work.title;
 
   return (
-    <div>
-      {/* Images */}
-      {"images" in work && (work as typeof work & { images?: ImageEntry[] }).images?.length ? (
-        <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 28 }}>
-          {(work as typeof work & { images: ImageEntry[] }).images.map((entry, i) => {
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, background: "rgba(0,0,0,0.92)",
+        zIndex: 1000, overflowY: "auto",
+        display: "flex", flexDirection: "column",
+      }}
+    >
+      {/* Close button */}
+      <div style={{ position: "sticky", top: 0, display: "flex", justifyContent: "flex-end", padding: "18px 24px", flexShrink: 0, zIndex: 10 }}>
+        <button onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.55)", fontSize: 20, lineHeight: 1, fontFamily: "var(--font-geist),sans-serif", padding: "4px 8px" }}>
+          ✕
+        </button>
+      </div>
+
+      {/* Content — stop propagation so clicking images doesn't close */}
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{ maxWidth: 780, width: "100%", margin: "0 auto", padding: "0 24px 80px" }}
+      >
+        {/* Images */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 32 }}>
+          {(work.images ?? [work.img]).map((entry, i) => {
             if (Array.isArray(entry)) {
               return (
                 <div key={i} style={{ display: "flex", gap: 6 }}>
-                  <img src={entry[0]} alt={`${work.title} ${i + 1}a`} style={{ width: "50%", display: "block", objectFit: "cover", aspectRatio: "3/4" }} />
-                  <img src={entry[1]} alt={`${work.title} ${i + 1}b`} style={{ width: "50%", display: "block", objectFit: "cover", aspectRatio: "3/4" }} />
+                  <img src={entry[0]} alt={`${work.title} ${i}a`} style={{ width: "50%", display: "block", height: "auto" }} />
+                  <img src={entry[1]} alt={`${work.title} ${i}b`} style={{ width: "50%", display: "block", height: "auto" }} />
                 </div>
               );
             }
             if (typeof entry === "object" && "src" in entry) {
-              return <img key={i} src={entry.src} alt={`${work.title} ${i + 1}`} style={{ width: "100%", display: "block", clipPath: `inset(${entry.cropY}px 0 ${entry.cropY}px 0)` }} />;
+              return <img key={i} src={entry.src} alt={`${work.title} ${i}`} style={{ width: "100%", display: "block", clipPath: `inset(${entry.cropY}px 0 ${entry.cropY}px 0)` }} />;
             }
-            return <img key={i} src={entry} alt={`${work.title} ${i + 1}`} style={{ width: "100%", height: "auto", display: "block" }} />;
+            return <img key={i} src={entry as string} alt={`${work.title} ${i}`} style={{ width: "100%", height: "auto", display: "block" }} />;
           })}
         </div>
-      ) : (
-        <div style={{ width: "100%", height: "60vh", background: work.img ? undefined : "var(--placeholder)", marginBottom: 28, overflow: "hidden" }}>
-          {work.img && <img src={work.img} alt={work.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />}
-        </div>
-      )}
 
-      {/* Title */}
-      <div style={{
-        fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-        fontSize: "clamp(20px,1.8vw,26px)", color: "var(--dark)",
-        lineHeight: 1.2, marginBottom: 16,
-      }}>
-        {work.title}
+        {/* Meta */}
+        <div style={{ borderTop: "1px solid rgba(255,255,255,0.12)", paddingTop: 24 }}>
+          <div style={{
+            fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+            fontSize: "clamp(20px,1.8vw,26px)", color: "rgba(255,255,255,0.88)",
+            lineHeight: 1.2, marginBottom: 16,
+          }}>
+            {displayTitle}
+          </div>
+          <div style={{ display: "flex", gap: 32, marginBottom: 20 }}>
+            <div style={{ display: "flex", gap: 12 }}>
+              <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "rgba(255,255,255,0.35)" }}>
+                {lang === "en" ? "MEDIUM" : "媒介"}
+              </span>
+              <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "rgba(255,255,255,0.55)" }}>
+                {MEDIUM_LABELS[lang][work.medium]}
+              </span>
+            </div>
+            <div style={{ display: "flex", gap: 12 }}>
+              <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "rgba(255,255,255,0.35)" }}>
+                {lang === "en" ? "YEAR" : "年份"}
+              </span>
+              <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "rgba(255,255,255,0.55)" }}>
+                {work.year}
+              </span>
+            </div>
+          </div>
+          {work.note ? (
+            <p style={{
+              fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
+              fontSize: "clamp(13px,1.1vw,15px)", color: "rgba(255,255,255,0.5)",
+              lineHeight: 1.75, whiteSpace: "pre-line",
+            }}>
+              {lang === "zh" && "noteZh" in work
+                ? (work as typeof work & { noteZh: string }).noteZh
+                : work.note}
+            </p>
+          ) : null}
+        </div>
       </div>
-
-      {/* Meta */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
-        <div style={{ display: "flex", gap: 24 }}>
-          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52 }}>
-            {lang === "en" ? "MEDIUM" : "媒介"}
-          </span>
-          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>
-            {MEDIUM_LABELS[lang][work.medium]}
-          </span>
-        </div>
-        <div style={{ display: "flex", gap: 24 }}>
-          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52 }}>
-            {lang === "en" ? "YEAR" : "年份"}
-          </span>
-          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>
-            {work.year}
-          </span>
-        </div>
-      </div>
-
-      {/* Description */}
-      {work.note ? (
-        <p style={{
-          fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-          fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)",
-          lineHeight: 1.75, whiteSpace: "pre-line",
-        }}>
-          {lang === "zh" ? work.noteZh || work.note : work.note}
-        </p>
-      ) : null}
-    </div>
+    </motion.div>
   );
 }
 
@@ -168,7 +198,6 @@ function DetailPanel({ work }: { work: typeof artWorks[0] | null }) {
 export default function Art() {
   const { lang } = useLang();
   const [activeFilter, setActiveFilter] = useState<string>("all");
-  const [hovered,  setHovered]  = useState<typeof artWorks[0] | null>(null);
   const [selected, setSelected] = useState<typeof artWorks[0] | null>(null);
 
   const filtered = activeFilter === "all"
@@ -179,114 +208,117 @@ export default function Art() {
     <div style={{ minHeight: "100dvh", background: "var(--bg)", display: "flex", paddingTop: TOP_BAR_HEIGHT }}>
       <Nav />
 
-      <div style={{
-        marginLeft: NAV_WIDTH, flex: 1,
-        display: "grid",
-        gridTemplateColumns: "min(50%, 600px) 1fr",
-        minHeight: "100dvh",
-      }}>
+      <div style={{ marginLeft: NAV_WIDTH, flex: 1, padding: "48px 40px 80px 40px" }}>
 
-        {/* ── Left: list ── */}
-        <div style={{ borderRight: "1px solid var(--line)", padding: "48px 32px 80px 32px" }}>
-          {/* Header */}
-          <div style={{
-            display: "flex", alignItems: "center", justifyContent: "space-between",
-            marginBottom: 40, paddingBottom: 20, borderBottom: "1px solid var(--line)",
-          }}>
-            <h1 style={{
-              fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-              fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
-            }}>{lang === "en" ? "Art" : "艺术"}</h1>
+        {/* Header + filters */}
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          marginBottom: 40, paddingBottom: 20, borderBottom: "1px solid var(--line)",
+        }}>
+          <h1 style={{
+            fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+            fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
+          }}>{lang === "en" ? "Art" : "艺术"}</h1>
 
-            {/* Filters */}
-            <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "flex-end" }}>
-              {[{ key: "all", en: "ALL", zh: "全部" }, ...FILTERS].map((f) => {
-                const isActive = activeFilter === f.key;
-                return (
-                  <button key={f.key}
-                    onClick={() => setActiveFilter(isActive && f.key !== "all" ? "all" : f.key)}
-                    style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
-                  >
-                    <span style={{
-                      display: "inline-block", position: "relative", paddingBottom: 4,
-                      fontFamily: "var(--font-geist),sans-serif",
-                      fontSize: 9, letterSpacing: "0.2em",
-                      color: isActive ? "var(--dark)" : "var(--faint)",
-                      transition: "color 0.2s",
-                    }}>
-                      {"zh" in f ? (lang === "en" ? (f as { key: string; en: string; zh: string }).en : (f as { key: string; en: string; zh: string }).zh) : (lang === "en" ? "ALL" : "全部")}
-                      <motion.div
-                        initial={false}
-                        animate={{ scaleX: isActive ? 1 : 0 }}
-                        transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                        style={{
-                          position: "absolute", bottom: 0, left: 0, right: 0,
-                          height: 1, background: "var(--dark)", transformOrigin: "left center",
-                        }}
-                      />
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Rows */}
-          <div>
-            {filtered.map((work) => {
-              const isSelected = selected?.num === work.num;
-              const isDimmed = selected ? !isSelected : (hovered ? hovered.num !== work.num : false);
+          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "flex-end" }}>
+            {[{ key: "all", en: "ALL", zh: "全部" }, ...FILTERS].map((f) => {
+              const isActive = activeFilter === f.key;
               return (
-                <div
-                  key={work.num}
-                  onMouseEnter={() => setHovered(work)}
-                  onMouseLeave={() => setHovered(null)}
-                  onClick={() => setSelected(isSelected ? null : work)}
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "36px 1fr max-content",
-                    alignItems: "baseline", gap: "0 32px",
-                    padding: "18px 0", borderBottom: "1px solid var(--line)",
-                    cursor: "pointer",
-                    opacity: isDimmed ? 0.15 : 1, transition: "opacity 0.15s",
-                  }}
+                <button key={f.key}
+                  onClick={() => setActiveFilter(isActive && f.key !== "all" ? "all" : f.key)}
+                  style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
                 >
                   <span style={{
+                    display: "inline-block", position: "relative", paddingBottom: 4,
                     fontFamily: "var(--font-geist),sans-serif",
-                    fontSize: isSelected ? 16 : 9, letterSpacing: "0.2em",
-                    color: isSelected ? "var(--dark)" : "var(--faint)",
-                    lineHeight: 1, transition: "color 0.15s, font-size 0.15s",
-                  }}>{isSelected ? "—" : work.num}</span>
-
-                  <span style={{
-                    fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-                    fontSize: "clamp(18px,1.6vw,22px)", color: "var(--dark)",
+                    fontSize: 9, letterSpacing: "0.2em",
+                    color: isActive ? "var(--dark)" : "var(--faint)",
+                    transition: "color 0.2s",
                   }}>
-                    {lang === "en" && "titleEn" in work
-                      ? (work as typeof work & { titleEn: string }).titleEn
-                      : work.title}
+                    {"zh" in f
+                      ? (lang === "en" ? (f as { key: string; en: string; zh: string }).en : (f as { key: string; en: string; zh: string }).zh)
+                      : (lang === "en" ? "ALL" : "全部")}
+                    <motion.div
+                      initial={false}
+                      animate={{ scaleX: isActive ? 1 : 0 }}
+                      transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                      style={{
+                        position: "absolute", bottom: 0, left: 0, right: 0,
+                        height: 1, background: "var(--dark)", transformOrigin: "left center",
+                      }}
+                    />
                   </span>
-
-                  <span style={{
-                    fontFamily: "var(--font-geist),sans-serif",
-                    fontSize: 9, letterSpacing: "0.16em", color: "var(--faint)",
-                  }}>{MEDIUM_LABELS[lang][work.medium]}</span>
-                </div>
+                </button>
               );
             })}
           </div>
         </div>
 
-        {/* ── Right: detail panel ── */}
-        <div style={{
-          position: "sticky", top: TOP_BAR_HEIGHT,
-          height: `calc(100vh - ${TOP_BAR_HEIGHT}px)`,
-          overflowY: "auto", padding: "48px 40px 80px",
-        }}>
-          <DetailPanel work={selected} />
+        {/* Masonry grid — CSS columns */}
+        <div style={{ columns: "3 280px", columnGap: 12 }}>
+          {filtered.map((work) => (
+            <motion.div
+              key={work.num}
+              layout
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setSelected(work)}
+              style={{
+                breakInside: "avoid",
+                marginBottom: 12,
+                cursor: "pointer",
+                position: "relative",
+              }}
+            >
+              {work.img ? (
+                <img
+                  src={work.img}
+                  alt={work.title}
+                  style={{ width: "100%", height: "auto", display: "block" }}
+                />
+              ) : (
+                <div style={{ width: "100%", paddingBottom: "120%", background: "var(--placeholder)" }} />
+              )}
+              {/* Caption on hover */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.2 }}
+                style={{
+                  position: "absolute", inset: 0,
+                  background: "rgba(0,0,0,0.38)",
+                  display: "flex", flexDirection: "column",
+                  justifyContent: "flex-end", padding: "12px 14px",
+                }}
+              >
+                <span style={{
+                  fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+                  fontSize: 14, color: "rgba(255,255,255,0.9)", lineHeight: 1.2,
+                }}>
+                  {lang === "en" && "titleEn" in work
+                    ? (work as typeof work & { titleEn: string }).titleEn
+                    : work.title}
+                </span>
+                <span style={{
+                  fontFamily: "var(--font-geist),sans-serif", fontSize: 9,
+                  letterSpacing: "0.16em", color: "rgba(255,255,255,0.5)", marginTop: 4,
+                }}>
+                  {MEDIUM_LABELS[lang][work.medium]}
+                </span>
+              </motion.div>
+            </motion.div>
+          ))}
         </div>
-
       </div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {selected && (
+          <Lightbox work={selected} onClose={() => setSelected(null)} />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
