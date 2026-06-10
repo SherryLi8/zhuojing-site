@@ -7,8 +7,8 @@ import { useLang } from "../context/lang";
 
 // ─── Medium labels ────────────────────────────────────────────────────────────
 const MEDIUM_LABELS: Record<string, Record<string, string>> = {
-  en: { ceramic: "Ceramic", sculpture: "Sculpture", painting: "Painting" },
-  zh: { ceramic: "陶艺",    sculpture: "雕塑",       painting: "绘画"     },
+  en: { ceramic: "Ceramic", sculpture: "Sculpture", painting: "Painting", drawing: "Drawing" },
+  zh: { ceramic: "陶艺",    sculpture: "雕塑",       painting: "绘画",     drawing: "素描"    },
 };
 
 // ─── Image entry type ─────────────────────────────────────────────────────────
@@ -34,7 +34,44 @@ const artWorks = [
     num: "02", title: "Self Portrait Sculpture",
     medium: "sculpture", year: "2023",
     note: "",
-    img: "",
+    img: "/Images/Self-%20Portrait%20Sculpture/主图.JPG",
+    images: [
+      "/Images/Self-%20Portrait%20Sculpture/主图.JPG",
+      "/Images/Self-%20Portrait%20Sculpture/DSCF2323_%E5%89%AF%E6%9C%AC.JPG",
+      "/Images/Self-%20Portrait%20Sculpture/DSCF2329_%E5%89%AF%E6%9C%AC.JPG",
+      "/Images/Self-%20Portrait%20Sculpture/DSCF2331_%E5%89%AF%E6%9C%AC.JPG",
+      "/Images/Self-%20Portrait%20Sculpture/DSCF2346_%E5%89%AF%E6%9C%AC.JPG",
+      "/Images/Self-%20Portrait%20Sculpture/DSCF2353_%E5%89%AF%E6%9C%AC.JPG",
+    ] as ImageEntry[],
+  },
+  {
+    num: "03", title: "消失", titleEn: "Disappearance",
+    medium: "painting", year: "2024",
+    note: "",
+    img: "/Images/消失.JPG",
+    images: ["/Images/消失.JPG"] as ImageEntry[],
+  },
+  {
+    num: "04", title: "油画", titleEn: "Paintings",
+    medium: "painting", year: "2024",
+    note: "",
+    img: "/Images/油画1.jpg",
+    images: [
+      "/Images/油画1.jpg",
+      "/Images/油画2.jpg",
+      "/Images/油画3.jpg",
+      "/Images/油画4.jpeg",
+    ] as ImageEntry[],
+  },
+  {
+    num: "05", title: "素描", titleEn: "Sketches",
+    medium: "drawing", year: "2024",
+    note: "",
+    img: "/Images/sketch1.JPG",
+    images: [
+      "/Images/sketch1.JPG",
+      "/Images/sketch2.JPG",
+    ] as ImageEntry[],
   },
 ];
 
@@ -43,6 +80,7 @@ const FILTERS = [
   { key: "ceramic",   en: "Ceramic",   zh: "陶艺" },
   { key: "sculpture", en: "Sculpture", zh: "雕塑" },
   { key: "painting",  en: "Painting",  zh: "绘画" },
+  { key: "drawing",   en: "Drawing",   zh: "素描" },
 ] as const;
 
 // ─── Detail panel ─────────────────────────────────────────────────────────────
@@ -223,7 +261,11 @@ export default function Art() {
                   <span style={{
                     fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
                     fontSize: "clamp(18px,1.6vw,22px)", color: "var(--dark)",
-                  }}>{work.title}</span>
+                  }}>
+                    {lang === "en" && "titleEn" in work
+                      ? (work as typeof work & { titleEn: string }).titleEn
+                      : work.title}
+                  </span>
 
                   <span style={{
                     fontFamily: "var(--font-geist),sans-serif",

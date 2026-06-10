@@ -186,6 +186,22 @@ const works = [
     img: "/Images/月经体/月经体%20主图.jpg",
     lpImages: ["/Images/月经体/月经体%20主图.jpg"],
   },
+  {
+    title: "形存意减", category: "Editorial", categoryZh: "出版物设计", year: "2025–2026",
+    note: "Form stays. Meaning leaks away.",
+    noteZh: "形留下来，意义在途中流失。",
+    img: "/Images/龙鳞装/主图.JPG",
+    lpImages: ["/Images/龙鳞装/主图.JPG"],
+    slug: "the-persistence-of-form-visual-simplification-and-contextual-loss",
+  },
+  {
+    title: "八月花神", category: "Product Design", categoryZh: "产品设计", year: "2026",
+    note: "A robe worn once a year — fullness, year after year.",
+    noteZh: "戏服一年穿一次，圆满可以年年端上桌。",
+    img: "/Images/八月花神/主图.png",
+    lpImages: ["/Images/八月花神/主图.png"],
+    slug: "august-offering",
+  },
 ];
 
 const P = "/Images/Photos";
@@ -211,9 +227,9 @@ const awards = [
   { award: "Shortlist",            org: "TDC Young Ones",            year: "2023", project: "UToypia" },
 ];
 
-// Sub-sections: Work=3, Photos=5, Writing=1 → total 9 × 100vh
+// Sub-sections: Work=5, Photos=5, Writing=1 → total 11 × 100vh
 const SUBS_CONFIG = [
-  { key: "Work",    slots: 3 },
+  { key: "Work",    slots: 5 },
   { key: "Photos",  slots: 5 },
   { key: "Writing", slots: 1 },
 ];
@@ -234,14 +250,14 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
 
   const handleScroll = useCallback((v: number) => {
     const slot = Math.min(v * TOTAL_SLOTS, TOTAL_SLOTS - 0.001);
-    // Work = 0-2, Photos = 3-7, Writing = 8
-    if (slot < 3) {
+    // Work = 0-4, Photos = 5-9, Writing = 10
+    if (slot < 5) {
       setSub(0);
       setWorkIdx(Math.min(Math.floor(slot), works.length - 1));
       onSectionChange(2);
-    } else if (slot < 8) {
+    } else if (slot < 10) {
       setSub(1);
-      setPhotoIdx(Math.min(Math.floor(slot - 3), photos.length - 1));
+      setPhotoIdx(Math.min(Math.floor(slot - 5), photos.length - 1));
       onSectionChange(3);
     } else {
       setSub(2);
@@ -283,7 +299,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                   <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)", lineHeight: 1.7, marginBottom: 28 }}>
                     {lang === "zh" ? works[workIdx].noteZh : works[workIdx].note}
                   </div>
-                  <Link href={`/design?project=${works[workIdx].title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`} style={{ fontSize: 10, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
+                  <Link href={`/design?project=${"slug" in works[workIdx] ? (works[workIdx] as typeof works[0] & { slug: string }).slug : works[workIdx].title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`} style={{ fontSize: 10, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
                     {lang === "zh" ? "查看项目 →" : "VIEW PROJECT →"}
                   </Link>
                 </div>

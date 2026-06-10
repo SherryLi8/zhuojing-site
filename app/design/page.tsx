@@ -30,6 +30,50 @@ type ImageEntry = string | [string, string] | { src: string; cropY: number };
 // ─── Works data ───────────────────────────────────────────────────────────────
 export const works = [
   {
+    num: "12",
+    title: "形存意减：视觉简化与语境流失",
+    titleEn: "The Persistence of Form: Visual Simplification and Contextual Loss",
+    tag: "editorial", tagLabel: "Editorial", year: "2025–2026",
+    tagDisplay: "Editorial",
+    tagDisplayZh: "出版物",
+    note: "Clarifying visual structures does not necessarily imply an enrichment of symbolic meaning. When symbols are translated into easily readable visual structures, the original contextual depth tends to be diluted in the process.\n\nThe project grew out of an uncertainty about my own design identity: my cultural upbringing took place in China, my design training in the United States. Contemporary Chinese visual design leans toward heavy symbolization — a single motif is asked to stand for an entire cultural identity; the design I learned in the US leans toward the International Style: restraint, clear hierarchy, grid order. Caught between the two, I began to ask: is contemporary design truly understanding culture, or merely using it? The book's central claim is that design cannot be a neutral conduit that merely passes culture along — it is a site where cultural meaning is re-inscribed. When a symbol is translated into a more readable visual structure, its original contextual depth tends to be diluted: the form remains, but meaning leaks away along the way. I call this process the re-inscription of cultural meaning — an ongoing act of selection, transformation, and reconstruction.\n\nThe research borrows a set of concepts as lenses: Geertz's notion of culture as a public system of meaning; Stuart Hall's representation and encoding/decoding; Saussure's signifier/signified; Barthes's myth and second-order meaning; Benjamin's \"translation as transformation\" and mechanical reproduction; Venuti's domestication/foreignization; Baudrillard's simulacra; Bourdieu's taste and cultural capital; Kress & van Leeuwen's grammar of visual design. In the Chinese context, I use the saying \"Seeing a mountain as a mountain; seeing a mountain not as a mountain; seeing a mountain still as a mountain\" to describe how the same form yields different layers of meaning according to the viewer's context.\n\nThe book is grounded in practice-based research: design practice itself is treated as a primary mode of knowledge production, not the after-the-fact application of theory. The problem comes before the framework — beginning from uncertainties in practice, closing in through a cycle of make → reflect → introduce theory → revise. I am both researcher and practitioner, taking my cross-cultural \"in-between\" position as the starting point of the method.\n\nThe work began with an assumption — that simplification equals greater clarity and legibility. Practice quickly overturned it. As I kept paring traditional patterns down, they drifted toward a generic geometric vocabulary — no longer local, yet not truly arrived in the contemporary either. I came to realize that my preference for \"clarity and order,\" shaped by US training, was not neutral: it was pushing Chinese symbols toward homogenization. The question shifted from \"how to make this more modern\" to \"what is simplification itself doing — when a symbol is compressed into a more efficient form, does it also lose the complexity through which meaning is generated?\"\n\nI chose the crane — a symbol of layered, accumulated meaning: a bird in the natural world → Daoist immortality and longevity → the literati ideal of lofty solitude → the rank badge of first-rank civil officials in the Ming and Qing → and, in the modern era, at once auspicious, a death metaphor (\"riding the crane westward\"), and a flattened generic marker of \"the East.\" I abandoned the traditional line drawing — itself already compressed by history — and turned to digital painting: starting from photographs of real red-crowned cranes, building a volume close to nature, then stripping detail away layer by layer. For the pose I chose the moment between takeoff and ascent — a forward-shifting center of gravity, direction unresolved.\n\nColor is a variable for tuning the intensity of recognition — Qihei (lacquer black), Yubai (jade white), Tenghuang (vine yellow), Danhuo, Qingbai, Hedinghong. Two are deliberate semantic traps. Qingbai is not the crane's actual plumage; laid over the warm tones like a glaze, it reminds the viewer that this crane has long been defined by culture, projected upon by wish and imagination. Hedinghong, in today's Chinese, is first of all the name of a deadly poison — a color name derived from the crane's red crown that drifted into a word for \"poison\" — yet once translated or read as an ordinary color name, that death metaphor instantly collapses. This collapse — change the context, and the meaning changes — is exactly what the book sets out to observe.\n\nLonglin zhuang sits between the scroll and the codex, its pages adhered in staggered, overlapping layers that resemble dragon scales — today, almost a \"peripheral tradition.\" Its way of being read: turning is not page by page but a continuous lifting, pushing, and settling of layer upon layer, turning \"gradual change\" into the act of viewing itself — the crane's form moves from complex to simple as the pages turn, and that simplification happens only when the reader physically drives it; simplification ceases to be the designer's decision alone and becomes a jointly enacted process.\n\nThe book sets the two languages in parallel: Chinese is set vertically in Shoujin-ti (Slender Gold Script), English horizontally in Goudy Old Style. Both unfold right-to-left — for readers used to reading left-to-right, the direction is itself a slight resistance, deliberately slowing both languages. Both typefaces are \"writing from moments of transition\": Shoujin-ti was born within Song court power and labeled a \"script of a fallen dynasty\" after the fall of Northern Song; Goudy was born when mechanical typesetting was maturing yet still kept the proportions of the hand. The front and back of each page run in opposite directions: on the front, the image moves from complex to simple; on the back, text and illustration accumulate from simple to complex — understanding cannot be completed on one side; it has to be built by turning back and forth.\n\nLooking back over all these decisions exposes another layer: the judgments I treated as \"structural stability\" or \"skeleton first\" came not only from the object, but from the cultural training that has long shaped me. While revealing how meaning is lost, I was also producing a new order of meaning. So this book is less a conclusion than a reminder: behind every design decision that looks natural, it is worth asking one more time why, and being aware of which cultural structure one is drawing on.",
+    noteZh: "视觉结构的清晰化，并不必然意味着符号意义的充盈。当符号被转译为易读的视觉结构，其原有的语境厚度也会随之被稀释。\n\n项目源自我对自己设计身份的困惑：我的文化教养在中国完成，设计训练在美国完成。中国当代视觉设计倾向高度符号化——一个母题就要代表一整个文化身份；而我在美国所学的设计偏向国际主义的克制、清晰层级与网格秩序。当我发现自己夹在两者之间时，我开始追问：当代设计究竟是在理解文化，还是只是在使用文化？本书的核心主张是：设计不能只是中立地传递文化的\"传声筒\"，设计应该是文化意义被再书写的现场。当符号被转译成更易读的视觉结构，它原有的语境厚度往往随之被稀释——形被留下，意义却在途中流失。我把这一过程命名为\"文化意义再书写\"：一个持续选择、转化、重构的过程。\n\n研究借一组概念作为透镜：克利福德·格尔茨的\"文化即公共的意义系统\"；斯图亚特·霍尔的表征与编码/解码；费尔迪南·德·索绪尔的能指/所指；罗兰·巴特的神话与二级意义；瓦尔特·本雅明的\"翻译即转化\"与机械复制；劳伦斯·韦努蒂的归化/异化；让·鲍德里亚的拟像；皮埃尔·布尔迪厄的品味与文化资本；冈特·克瑞斯与西奥·范·勒文的视觉语法。中文语境里，我用\"见山是山，见山不是山，见山还是山\"来描述同一形式如何随观看者的语境生出不同的意义层。\n\n本书建立在实践导向研究之上：把设计实践本身当作首要的知识生产方式，而非理论的事后应用。问题先于框架——从实践中的困惑出发，在\"做→反思→引入理论→修正\"的循环里逐步逼近。我既是研究者也是实践者，把自己跨文化的居间位置当作方法的起点。\n\n作品始于一个假设：简化＝更清晰、更易懂。但实践很快推翻了它。当我把传统纹样不断抽简，它们并没有被\"翻译\"进新的视觉语言，而是漂向通用的几何词汇——既不再是本地的，也没真正进入当代，停在一种土不土、洋不洋的悬置状态。我由此意识到，那套被美式训练塑造的\"清晰、秩序\"偏好并不中立，它正把中国符号推向同质化。问题于是从\"如何更现代\"转向\"简化本身在做什么：当符号被压成更高效的形式，是否也丢掉了生成意义的复杂性？\"\n\n我选择仙鹤——一个语义层层累积的符号：自然之鸟 → 道家求仙与长寿 → 文人的孤高清远 → 明清一品文官补子的等级标识 → 现代既是吉祥、又是\"驾鹤西去\"的死亡隐喻、也被简化成泛化的\"东方\"标记。正因为它在简化中仍能保留清晰的比例轴与轮廓骨架，被削去的语义层才变得可被感知。我放弃了本身已被历史压缩过的传统白描，改用数字绘画：从真实丹顶鹤的照片出发，先建立接近自然的体量，再逐层剥除细节。姿态取\"起飞与腾飞之间\"的瞬间——重心前移、方向未定的张力。\n\n色彩是调节\"识别强度\"的变量——漆黑、玉白、藤黄、丹雘、青白、鹤顶红。其中两处是有意埋的语义机关：青白并非丹顶鹤真实的羽色，像釉一样覆在暖色之上，提醒观者这只鹤不是生物摄影里的鹤，而是被文化长期定义、被祝愿与想象投射过的鹤；而背景的鹤顶红，在今天的中文里首先是一味剧毒之名，一旦被翻译或当成普通色名来读，这层死亡隐喻就瞬间塌缩——\"语境一变、意义就变\"的这种塌缩，正是整本书要观察的现象。\n\n龙鳞装介于卷轴与册页之间，页面层层错位叠贴、形如龙鳞，在今天近乎一种\"边缘的传统\"。它把\"渐变\"变成了观看动作本身——鹤的形态随翻页由繁到简，而简化必须由读者亲手推动才会发生；简化于是不再是设计者单方面的决定，而成为被共同完成的过程。\n\n全书双语并置：中文用瘦金体竖排，英文用 Goudy Old Style 横排。二者都沿龙鳞装自右向左展开——对习惯从左读起的人，这方向本身就是一道轻微阻力。两款字体都诞生在旧秩序与新秩序交错的节点，文字本身也成了\"文化权力与历史再语境化\"的可视线索。页面正反两面构成相反推进：正面图像由繁到简，背面文字与插画由简到繁——理解无法在单面完成，必须靠来回翻动建立。\n\n回看所有决策，暴露出另一层问题：那些被我当作\"结构稳定\"\"骨架优先\"的判断，既来自对象，也来自我长期受训的文化背景。在揭示意义如何流失的同时，我也在制造一种新的意义秩序。所以这本书与其说是结论，不如说是一种提醒：在每一个看似自然的设计决定背后，都值得再多问一句\"为什么\"，并意识到自己正在调用哪一套文化结构。",
+    img: "/Images/龙鳞装/主图.JPG",
+    images: [
+      "/Images/龙鳞装/主图.JPG",
+      "/Images/龙鳞装/2.JPG",
+      "/Images/龙鳞装/3.JPG",
+      "/Images/龙鳞装/4.JPG",
+      "/Images/龙鳞装/5.JPG",
+      "/Images/龙鳞装/6.JPG",
+      "/Images/龙鳞装/7.JPG",
+    ] as ImageEntry[],
+    credits: [
+      { role: "PHOTO", name: "Rebecca", href: "https://www.instagram.com/un_coz_/", name2: "小红书 @Nixuy", href2: "https://xhslink.com/m/1ciUK7MvEDa" },
+    ],
+    sourceLink: { href: "https://hiiibrand.com/winners/1b00c0e23d7f47dea1f6bef3aa624d68", label: "HIIIBRAND AWARDS 2026 →", labelZh: "Hiiibrand Awards 2026 →" },
+    writingLink: "/words",
+  },
+  {
+    num: "13", title: "八月花神", titleEn: "August Offering",
+    tag: "product", tagLabel: "Product Design", year: "2026",
+    note: "August Offering is a gift set of cultural products drawn from the Palace Museum collection. Its source is a Qing-dynasty opera robe: a green satin robe embroidered with osmanthus, jade rabbits, and gilt \"ball-flower\" roundels — the August Flower-Deity robe — a garment worn only once a year. Each Mid-Autumn, the Qing court staged chengying performances: ritual operas mounted by the palace troupe on imperial command, with a fixed repertoire, fixed roles, and fixed costumes. The August Flower-Deity robe is what the Flower Deity wears in the final act of that program, as she ascends the tower of the immortals — a ceremonial garment that belongs to the night of Mid-Autumn alone, to the final act alone, to the role of the Flower Deity alone.\n\nChengying (承应) is a Qing court term: to fulfill a command and meet the occasion, as custom requires. That logic — once a year, for this moment alone — sits exactly with the spirit of Mid-Autumn itself: the mooncake eaten once a year, the reunion longed for once a year, the chengying opera performed once a year. The gift set rewrites chengying (承应) as chengyue (承月) — receiving the moonlight, bearing reunion. It is itself a seasonal gift given once a year, just as the robe is worn once a year; but the plates inside it can be used again and again in daily life.\n\nAnd the plate is the moon. A round plate is already the form of the full moon: one, two, or four set out on the table, each one reads as fullness — a meaning the object's form carries on its own.\n\nIn pattern, three core elements are drawn from the robe — its overall palette, the osmanthus and jade rabbit, and the eight-lobed ruyi cartouche; the garment's original decorative language is kept, and rearranged into the composition of a round plate. In material, there is a quiet act of translation, turning silk thread into mother-of-pearl: the robe's three-tone blue silk becomes abalone-shell inlay; the white silk of the rabbit becomes white-lip pearl-shell inlay. The sheen once embroidered onto an opera costume, in a different material, settles back onto an object.\n\nA robe worn once a year — a fullness you can set on the table, year after year.",
+    noteZh: "August Offering（八月花神）是一组以故宫藏品为源的文创礼盒。源头是一件清代戏服：绿色缎绣桂花玉兔金皮球花纹\"八月花神衣\"，一件一年只穿一次的衣服。清宫每逢中秋设\"承应戏\"：宫廷戏班奉旨为中秋定制的仪式性演出，有固定的剧目、角色与服装。八月花神衣，正是这套承应戏最后一幕里、花神登仙楼时所穿——专属于中秋之夜、专属于最终一幕、专属于花神一角的仪式之衣。\n\n\"承应\"是清宫词汇，意为按惯例承命应节。这种\"一年一次、专属此刻\"的仪式逻辑，恰好与中秋的气质相合：月饼一年吃一次，团圆一年盼一次，承应戏一年演一次。礼盒由此把\"承应\"转写为\"承月\"——承接月光，承载团圆。它本身是一年一度的节令之礼，如同戏服一年只穿一次；但盒中的盘子，可以在日常里反复使用。\n\n而盘，即是月。圆盘本就是圆月的形态：一只、两只、四只摆在桌上，都是\"圆满\"——这是器物形态自带的文化语义。\n\n纹样上，从花神衣中提取三组核心元素——整体配色、桂花与玉兔、八合如意开光框；保留原衣的装饰语言，重新编排进圆盘构图。材质上做了一层巧妙的转译，把丝线翻译成螺钿：花神衣的三蓝丝线，对应鲍鱼壳螺钿；白兔身上的白丝线，对应白蝶贝螺钿。原本绣在戏服上的光泽，换一种材料，落回到了器物上。\n\n戏服一年穿一次，圆满可以年年端上桌。",
+    img: "/Images/八月花神/主图.png",
+    images: [
+      "/Images/八月花神/主图.png",
+      "/Images/八月花神/2.png",
+      "/Images/八月花神/3.png",
+      "/Images/八月花神/4.png",
+      "/Images/八月花神/5.png",
+      "/Images/八月花神/盘子1_%E5%89%AF%E6%9C%AC.png",
+      "/Images/八月花神/盘子2_%E5%89%AF%E6%9C%AC.png",
+      "/Images/八月花神/盘子3_%E5%89%AF%E6%9C%AC.png",
+      "/Images/八月花神/盘子4_%E5%89%AF%E6%9C%AC.png",
+    ] as ImageEntry[],
+    sourceLink: { href: "https://www.dpm.org.cn/collection/music/233230.html", label: "VIEW SOURCE OBJECT →", labelZh: "查看故宫馆藏原件 →" },
+  },
+  {
     num: "01", title: "Zentea",
     tag: "brand-identity", tagLabel: "Brand Identity", year: "2024",
     note: "As life spins faster, people find themselves longing again for slowness, stability, and repose. Zentea comes from that. It believes Zen and tea are of one taste, placing the two side by side so that drinking tea becomes a daily practice again. The brand language grows out of negative space; its sense of ritual is carried by restraint rather than decoration. Every brew is a stretch of time, deliberately slowed.\n\nZENTEA takes the six tea categories as its through-line, reordering the flavors of fine teas from around the world. Ten representative teas cover the six categories, in two formats: pouches for everyday buying, boxes for collecting and gifting.\n\nThe color system unfolds along the fermentation gradient of the six categories, building a continuous scale — translating tea type and flavor level into a recognizable visual structure, and keeping the whole series consistent and extensible.",
@@ -197,50 +241,6 @@ export const works = [
     ] as ImageEntry[],
   },
   {
-    num: "12",
-    title: "形存意减：视觉简化与语境流失",
-    titleEn: "The Persistence of Form: Visual Simplification and Contextual Loss",
-    tag: "editorial", tagLabel: "Editorial", year: "2025–2026",
-    tagDisplay: "Editorial",
-    tagDisplayZh: "出版物",
-    note: "Clarifying visual structures does not necessarily imply an enrichment of symbolic meaning. When symbols are translated into easily readable visual structures, the original contextual depth tends to be diluted in the process.\n\nThe project grew out of an uncertainty about my own design identity: my cultural upbringing took place in China, my design training in the United States. Contemporary Chinese visual design leans toward heavy symbolization — a single motif is asked to stand for an entire cultural identity; the design I learned in the US leans toward the International Style: restraint, clear hierarchy, grid order. Caught between the two, I began to ask: is contemporary design truly understanding culture, or merely using it? The book's central claim is that design cannot be a neutral conduit that merely passes culture along — it is a site where cultural meaning is re-inscribed. When a symbol is translated into a more readable visual structure, its original contextual depth tends to be diluted: the form remains, but meaning leaks away along the way. I call this process the re-inscription of cultural meaning — an ongoing act of selection, transformation, and reconstruction.\n\nThe research borrows a set of concepts as lenses: Geertz's notion of culture as a public system of meaning; Stuart Hall's representation and encoding/decoding; Saussure's signifier/signified; Barthes's myth and second-order meaning; Benjamin's \"translation as transformation\" and mechanical reproduction; Venuti's domestication/foreignization; Baudrillard's simulacra; Bourdieu's taste and cultural capital; Kress & van Leeuwen's grammar of visual design. In the Chinese context, I use the saying \"Seeing a mountain as a mountain; seeing a mountain not as a mountain; seeing a mountain still as a mountain\" to describe how the same form yields different layers of meaning according to the viewer's context.\n\nThe book is grounded in practice-based research: design practice itself is treated as a primary mode of knowledge production, not the after-the-fact application of theory. The problem comes before the framework — beginning from uncertainties in practice, closing in through a cycle of make → reflect → introduce theory → revise. I am both researcher and practitioner, taking my cross-cultural \"in-between\" position as the starting point of the method.\n\nThe work began with an assumption — that simplification equals greater clarity and legibility. Practice quickly overturned it. As I kept paring traditional patterns down, they drifted toward a generic geometric vocabulary — no longer local, yet not truly arrived in the contemporary either. I came to realize that my preference for \"clarity and order,\" shaped by US training, was not neutral: it was pushing Chinese symbols toward homogenization. The question shifted from \"how to make this more modern\" to \"what is simplification itself doing — when a symbol is compressed into a more efficient form, does it also lose the complexity through which meaning is generated?\"\n\nI chose the crane — a symbol of layered, accumulated meaning: a bird in the natural world → Daoist immortality and longevity → the literati ideal of lofty solitude → the rank badge of first-rank civil officials in the Ming and Qing → and, in the modern era, at once auspicious, a death metaphor (\"riding the crane westward\"), and a flattened generic marker of \"the East.\" I abandoned the traditional line drawing — itself already compressed by history — and turned to digital painting: starting from photographs of real red-crowned cranes, building a volume close to nature, then stripping detail away layer by layer. For the pose I chose the moment between takeoff and ascent — a forward-shifting center of gravity, direction unresolved.\n\nColor is a variable for tuning the intensity of recognition — Qihei (lacquer black), Yubai (jade white), Tenghuang (vine yellow), Danhuo, Qingbai, Hedinghong. Two are deliberate semantic traps. Qingbai is not the crane's actual plumage; laid over the warm tones like a glaze, it reminds the viewer that this crane has long been defined by culture, projected upon by wish and imagination. Hedinghong, in today's Chinese, is first of all the name of a deadly poison — a color name derived from the crane's red crown that drifted into a word for \"poison\" — yet once translated or read as an ordinary color name, that death metaphor instantly collapses. This collapse — change the context, and the meaning changes — is exactly what the book sets out to observe.\n\nLonglin zhuang sits between the scroll and the codex, its pages adhered in staggered, overlapping layers that resemble dragon scales — today, almost a \"peripheral tradition.\" Its way of being read: turning is not page by page but a continuous lifting, pushing, and settling of layer upon layer, turning \"gradual change\" into the act of viewing itself — the crane's form moves from complex to simple as the pages turn, and that simplification happens only when the reader physically drives it; simplification ceases to be the designer's decision alone and becomes a jointly enacted process.\n\nThe book sets the two languages in parallel: Chinese is set vertically in Shoujin-ti (Slender Gold Script), English horizontally in Goudy Old Style. Both unfold right-to-left — for readers used to reading left-to-right, the direction is itself a slight resistance, deliberately slowing both languages. Both typefaces are \"writing from moments of transition\": Shoujin-ti was born within Song court power and labeled a \"script of a fallen dynasty\" after the fall of Northern Song; Goudy was born when mechanical typesetting was maturing yet still kept the proportions of the hand. The front and back of each page run in opposite directions: on the front, the image moves from complex to simple; on the back, text and illustration accumulate from simple to complex — understanding cannot be completed on one side; it has to be built by turning back and forth.\n\nLooking back over all these decisions exposes another layer: the judgments I treated as \"structural stability\" or \"skeleton first\" came not only from the object, but from the cultural training that has long shaped me. While revealing how meaning is lost, I was also producing a new order of meaning. So this book is less a conclusion than a reminder: behind every design decision that looks natural, it is worth asking one more time why, and being aware of which cultural structure one is drawing on.",
-    noteZh: "视觉结构的清晰化，并不必然意味着符号意义的充盈。当符号被转译为易读的视觉结构，其原有的语境厚度也会随之被稀释。\n\n项目源自我对自己设计身份的困惑：我的文化教养在中国完成，设计训练在美国完成。中国当代视觉设计倾向高度符号化——一个母题就要代表一整个文化身份；而我在美国所学的设计偏向国际主义的克制、清晰层级与网格秩序。当我发现自己夹在两者之间时，我开始追问：当代设计究竟是在理解文化，还是只是在使用文化？本书的核心主张是：设计不能只是中立地传递文化的\"传声筒\"，设计应该是文化意义被再书写的现场。当符号被转译成更易读的视觉结构，它原有的语境厚度往往随之被稀释——形被留下，意义却在途中流失。我把这一过程命名为\"文化意义再书写\"：一个持续选择、转化、重构的过程。\n\n研究借一组概念作为透镜：克利福德·格尔茨的\"文化即公共的意义系统\"；斯图亚特·霍尔的表征与编码/解码；费尔迪南·德·索绪尔的能指/所指；罗兰·巴特的神话与二级意义；瓦尔特·本雅明的\"翻译即转化\"与机械复制；劳伦斯·韦努蒂的归化/异化；让·鲍德里亚的拟像；皮埃尔·布尔迪厄的品味与文化资本；冈特·克瑞斯与西奥·范·勒文的视觉语法。中文语境里，我用\"见山是山，见山不是山，见山还是山\"来描述同一形式如何随观看者的语境生出不同的意义层。\n\n本书建立在实践导向研究之上：把设计实践本身当作首要的知识生产方式，而非理论的事后应用。问题先于框架——从实践中的困惑出发，在\"做→反思→引入理论→修正\"的循环里逐步逼近。我既是研究者也是实践者，把自己跨文化的居间位置当作方法的起点。\n\n作品始于一个假设：简化＝更清晰、更易懂。但实践很快推翻了它。当我把传统纹样不断抽简，它们并没有被\"翻译\"进新的视觉语言，而是漂向通用的几何词汇——既不再是本地的，也没真正进入当代，停在一种土不土、洋不洋的悬置状态。我由此意识到，那套被美式训练塑造的\"清晰、秩序\"偏好并不中立，它正把中国符号推向同质化。问题于是从\"如何更现代\"转向\"简化本身在做什么：当符号被压成更高效的形式，是否也丢掉了生成意义的复杂性？\"\n\n我选择仙鹤——一个语义层层累积的符号：自然之鸟 → 道家求仙与长寿 → 文人的孤高清远 → 明清一品文官补子的等级标识 → 现代既是吉祥、又是\"驾鹤西去\"的死亡隐喻、也被简化成泛化的\"东方\"标记。正因为它在简化中仍能保留清晰的比例轴与轮廓骨架，被削去的语义层才变得可被感知。我放弃了本身已被历史压缩过的传统白描，改用数字绘画：从真实丹顶鹤的照片出发，先建立接近自然的体量，再逐层剥除细节。姿态取\"起飞与腾飞之间\"的瞬间——重心前移、方向未定的张力。\n\n色彩是调节\"识别强度\"的变量——漆黑、玉白、藤黄、丹雘、青白、鹤顶红。其中两处是有意埋的语义机关：青白并非丹顶鹤真实的羽色，像釉一样覆在暖色之上，提醒观者这只鹤不是生物摄影里的鹤，而是被文化长期定义、被祝愿与想象投射过的鹤；而背景的鹤顶红，在今天的中文里首先是一味剧毒之名，一旦被翻译或当成普通色名来读，这层死亡隐喻就瞬间塌缩——\"语境一变、意义就变\"的这种塌缩，正是整本书要观察的现象。\n\n龙鳞装介于卷轴与册页之间，页面层层错位叠贴、形如龙鳞，在今天近乎一种\"边缘的传统\"。它把\"渐变\"变成了观看动作本身——鹤的形态随翻页由繁到简，而简化必须由读者亲手推动才会发生；简化于是不再是设计者单方面的决定，而成为被共同完成的过程。\n\n全书双语并置：中文用瘦金体竖排，英文用 Goudy Old Style 横排。二者都沿龙鳞装自右向左展开——对习惯从左读起的人，这方向本身就是一道轻微阻力。两款字体都诞生在旧秩序与新秩序交错的节点，文字本身也成了\"文化权力与历史再语境化\"的可视线索。页面正反两面构成相反推进：正面图像由繁到简，背面文字与插画由简到繁——理解无法在单面完成，必须靠来回翻动建立。\n\n回看所有决策，暴露出另一层问题：那些被我当作\"结构稳定\"\"骨架优先\"的判断，既来自对象，也来自我长期受训的文化背景。在揭示意义如何流失的同时，我也在制造一种新的意义秩序。所以这本书与其说是结论，不如说是一种提醒：在每一个看似自然的设计决定背后，都值得再多问一句\"为什么\"，并意识到自己正在调用哪一套文化结构。",
-    img: "/Images/龙鳞装/主图.JPG",
-    images: [
-      "/Images/龙鳞装/主图.JPG",
-      "/Images/龙鳞装/2.JPG",
-      "/Images/龙鳞装/3.JPG",
-      "/Images/龙鳞装/4.JPG",
-      "/Images/龙鳞装/5.JPG",
-      "/Images/龙鳞装/6.JPG",
-      "/Images/龙鳞装/7.JPG",
-    ] as ImageEntry[],
-    credits: [
-      { role: "PHOTO", name: "Rebecca", href: "https://www.instagram.com/un_coz_/", name2: "小红书 @Nixuy", href2: "https://xhslink.com/m/1ciUK7MvEDa" },
-    ],
-    sourceLink: { href: "https://hiiibrand.com/winners/1b00c0e23d7f47dea1f6bef3aa624d68", label: "HIIIBRAND AWARDS 2026 →", labelZh: "Hiiibrand Awards 2026 →" },
-    writingLink: "/words",
-  },
-  {
-    num: "13", title: "八月花神", titleEn: "August Offering",
-    tag: "product", tagLabel: "Product Design", year: "2026",
-    note: "August Offering is a gift set of cultural products drawn from the Palace Museum collection. Its source is a Qing-dynasty opera robe: a green satin robe embroidered with osmanthus, jade rabbits, and gilt \"ball-flower\" roundels — the August Flower-Deity robe — a garment worn only once a year. Each Mid-Autumn, the Qing court staged chengying performances: ritual operas mounted by the palace troupe on imperial command, with a fixed repertoire, fixed roles, and fixed costumes. The August Flower-Deity robe is what the Flower Deity wears in the final act of that program, as she ascends the tower of the immortals — a ceremonial garment that belongs to the night of Mid-Autumn alone, to the final act alone, to the role of the Flower Deity alone.\n\nChengying (承应) is a Qing court term: to fulfill a command and meet the occasion, as custom requires. That logic — once a year, for this moment alone — sits exactly with the spirit of Mid-Autumn itself: the mooncake eaten once a year, the reunion longed for once a year, the chengying opera performed once a year. The gift set rewrites chengying (承应) as chengyue (承月) — receiving the moonlight, bearing reunion. It is itself a seasonal gift given once a year, just as the robe is worn once a year; but the plates inside it can be used again and again in daily life.\n\nAnd the plate is the moon. A round plate is already the form of the full moon: one, two, or four set out on the table, each one reads as fullness — a meaning the object's form carries on its own.\n\nIn pattern, three core elements are drawn from the robe — its overall palette, the osmanthus and jade rabbit, and the eight-lobed ruyi cartouche; the garment's original decorative language is kept, and rearranged into the composition of a round plate. In material, there is a quiet act of translation, turning silk thread into mother-of-pearl: the robe's three-tone blue silk becomes abalone-shell inlay; the white silk of the rabbit becomes white-lip pearl-shell inlay. The sheen once embroidered onto an opera costume, in a different material, settles back onto an object.\n\nA robe worn once a year — a fullness you can set on the table, year after year.",
-    noteZh: "August Offering（八月花神）是一组以故宫藏品为源的文创礼盒。源头是一件清代戏服：绿色缎绣桂花玉兔金皮球花纹\"八月花神衣\"，一件一年只穿一次的衣服。清宫每逢中秋设\"承应戏\"：宫廷戏班奉旨为中秋定制的仪式性演出，有固定的剧目、角色与服装。八月花神衣，正是这套承应戏最后一幕里、花神登仙楼时所穿——专属于中秋之夜、专属于最终一幕、专属于花神一角的仪式之衣。\n\n\"承应\"是清宫词汇，意为按惯例承命应节。这种\"一年一次、专属此刻\"的仪式逻辑，恰好与中秋的气质相合：月饼一年吃一次，团圆一年盼一次，承应戏一年演一次。礼盒由此把\"承应\"转写为\"承月\"——承接月光，承载团圆。它本身是一年一度的节令之礼，如同戏服一年只穿一次；但盒中的盘子，可以在日常里反复使用。\n\n而盘，即是月。圆盘本就是圆月的形态：一只、两只、四只摆在桌上，都是\"圆满\"——这是器物形态自带的文化语义。\n\n纹样上，从花神衣中提取三组核心元素——整体配色、桂花与玉兔、八合如意开光框；保留原衣的装饰语言，重新编排进圆盘构图。材质上做了一层巧妙的转译，把丝线翻译成螺钿：花神衣的三蓝丝线，对应鲍鱼壳螺钿；白兔身上的白丝线，对应白蝶贝螺钿。原本绣在戏服上的光泽，换一种材料，落回到了器物上。\n\n戏服一年穿一次，圆满可以年年端上桌。",
-    img: "/Images/八月花神/主图.png",
-    images: [
-      "/Images/八月花神/主图.png",
-      "/Images/八月花神/2.png",
-      "/Images/八月花神/3.png",
-      "/Images/八月花神/4.png",
-      "/Images/八月花神/5.png",
-      "/Images/八月花神/盘子1_%E5%89%AF%E6%9C%AC.png",
-      "/Images/八月花神/盘子2_%E5%89%AF%E6%9C%AC.png",
-      "/Images/八月花神/盘子3_%E5%89%AF%E6%9C%AC.png",
-      "/Images/八月花神/盘子4_%E5%89%AF%E6%9C%AC.png",
-    ] as ImageEntry[],
-    sourceLink: { href: "https://www.dpm.org.cn/collection/music/233230.html", label: "VIEW SOURCE OBJECT →", labelZh: "查看故宫馆藏原件 →" },
-  },
-  {
     num: "14", title: "UToypia",
     tag: "brand-identity", tagLabel: "Brand Identity", year: "2023",
     tagDisplay: "App Design",
@@ -291,9 +291,10 @@ export const works = [
   },
   {
     num: "16", title: "'Twenty-Four Solar Terms of 2025'", titleEn: "'Twenty-Four Solar Terms of 2025'",
+    titleZh: "24节气电影日历明信片",
     tag: "editorial", tagLabel: "Editorial", year: "2025",
-    tagDisplay: "Movie Calendar Postcards",
-    tagDisplayZh: "电影日历明信片",
+    tagDisplay: "Product Design",
+    tagDisplayZh: "产品设计",
     note: "The Twenty-Four Solar Terms are an essential part of the traditional Chinese calendar, dividing the year based on the sun's movement. Each term reflects seasonal changes, agricultural activities, and cultural traditions.\n\nThis set of 2025 Twenty-Four Solar Terms Calendar Postcards, designed for Beijing HugoEast Media Co., serves as both a tribute to this ancient system and a unique record of cinema. Each postcard corresponds to a solar term, documenting 24 films HugoEast introduced from overseas over the past year and recommending them to the public. The design captures the passage of time and the memory of films, making each postcard not only a time marker but also an echo of cinematic experiences.",
     noteZh: "二十四节气是中国传统历法不可或缺的一部分，以太阳运动为基础，将一年划分为二十四个节点。每个节气折射出时节变换、农事活动与文化传统。\n\n这套《2025年二十四节气电影日历明信片》受北京好有才文化传媒有限公司委托设计，既是对这一古老历法体系的致敬，也是一份独特的电影记忆留存。每张明信片对应一个节气，记录了好有才过去一年从海外引进的 24 部影片，并将它们推荐给公众。设计捕捉时间流逝与电影记忆，使每张明信片不仅成为时间的刻度，也成为观影体验的回响。",
     img: "/Images/24节气明信片/首图.jpg",
@@ -339,11 +340,11 @@ export const works = [
     pdfLabelZh: "查看品牌手册 →",
     img: "/Images/Steen%20Lab/24.png",
     images: [
+      "/Images/Steen%20Lab/3.png",
+      "/Images/Steen%20Lab/4.png",
       "/Images/Steen%20Lab/24.png",
       "/Images/Steen%20Lab/25.png",
       "/Images/Steen%20Lab/26.png",
-      "/Images/Steen%20Lab/3.png",
-      "/Images/Steen%20Lab/4.png",
       "/Images/Steen%20Lab/B-1.png",
       "/Images/Steen%20Lab/Slide%2016_9%20-%2048.png",
       "/Images/Steen%20Lab/Slide%2016_9%20-%2051.png",
@@ -377,6 +378,7 @@ export const works = [
 // ─── Detail panel ─────────────────────────────────────────────────────────────
 function DetailPanel({ work }: { work: typeof works[0] | null }) {
   const { lang } = useLang();
+  const [pdfOpen, setPdfOpen] = useState(false);
   const labels = {
     empty: lang === "en" ? "CLICK TO VIEW" : "点击查看设计",
     type:  lang === "en" ? "TYPE"  : "类型",
@@ -441,9 +443,13 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
         fontSize: "clamp(20px,1.8vw,26px)", color: "var(--dark)",
         lineHeight: 1.2, marginBottom: 16,
       }}>
-        {renderBreakTitle(lang === "en" && "titleEn" in work
-          ? (work as typeof work & { titleEn: string }).titleEn
-          : work.title)}
+        {renderBreakTitle(
+          lang === "zh" && "titleZh" in work
+            ? (work as typeof work & { titleZh: string }).titleZh
+            : lang === "en" && "titleEn" in work
+            ? (work as typeof work & { titleEn: string }).titleEn
+            : work.title
+        )}
       </div>
 
       {/* Meta */}
@@ -517,14 +523,32 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
         </a>
       )}
 
-      {/* PDF link */}
+      {/* PDF modal trigger */}
       {"pdf" in work && (work as typeof work & { pdf?: string }).pdf && (
-        <a href={(work as typeof work & { pdf: string }).pdf} target="_blank" rel="noopener noreferrer"
-          style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.18em", color: "var(--dim)", textDecoration: "none", display: "inline-block", marginBottom: 8 }}>
+        <button onClick={() => setPdfOpen(true)}
+          style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.18em", color: "var(--dim)", background: "none", border: "none", padding: 0, cursor: "pointer", display: "inline-block", marginBottom: 8, textAlign: "left" }}>
           {lang === "zh"
             ? ("pdfLabelZh" in work ? (work as typeof work & { pdfLabelZh: string }).pdfLabelZh : "查看杂志 PDF →")
             : ("pdfLabel" in work ? (work as typeof work & { pdfLabel: string }).pdfLabel : "VIEW MAGAZINE PDF →")}
-        </a>
+        </button>
+      )}
+
+      {/* PDF modal overlay */}
+      {pdfOpen && "pdf" in work && (
+        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.9)", zIndex: 1000, display: "flex", flexDirection: "column" }}
+          onClick={(e) => { if (e.target === e.currentTarget) setPdfOpen(false); }}>
+          <div style={{ display: "flex", justifyContent: "flex-end", padding: "14px 20px", flexShrink: 0 }}>
+            <button onClick={() => setPdfOpen(false)}
+              style={{ background: "none", border: "none", cursor: "pointer", color: "white", fontSize: 22, lineHeight: 1, fontFamily: "var(--font-geist),sans-serif", opacity: 0.7 }}>
+              ✕
+            </button>
+          </div>
+          <iframe
+            src={(work as typeof work & { pdf: string }).pdf}
+            style={{ flex: 1, border: "none", width: "100%" }}
+            title="PDF viewer"
+          />
+        </div>
       )}
 
       {/* Writing link */}
@@ -561,8 +585,10 @@ export default function Design() {
   useEffect(() => {
     const slug = new URLSearchParams(window.location.search).get("project");
     if (!slug) return;
+    const toSlug = (s: string) => s.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
     const match = works.find(w =>
-      w.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "") === slug
+      toSlug(w.title) === slug ||
+      ("titleEn" in w && toSlug((w as typeof w & { titleEn: string }).titleEn) === slug)
     );
     if (match) setSelected(match);
   }, []);
