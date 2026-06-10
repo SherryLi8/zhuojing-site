@@ -7,6 +7,7 @@ import { TOP_BAR_HEIGHT } from "../lib/constants";
 // ─── Shared site structure ────────────────────────────────────────────────────
 export const SITE_NAV = [
   { id: "design",  href: "/design", label: { en: "Design",  zh: "设计" } },
+  { id: "art",     href: "/art",    label: { en: "Art",     zh: "艺术" } },
   { id: "writing", href: "/words",  label: { en: "Writing", zh: "文字" } },
   { id: "photos",  href: "/photos", label: { en: "Photos",  zh: "摄影" } },
   { id: "about",   href: "/about",  label: { en: "About",   zh: "关于" } },
