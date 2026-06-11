@@ -231,13 +231,14 @@ const awards = [
   { award: "Shortlist",            org: "TDC Young Ones",            year: "2023", project: "UToypia" },
 ];
 
-// Sub-sections: Work=5, Photos=5, Writing=1 → total 11 × 100vh
+// Sub-sections: Work=5, Photos=5, Writing=1, Art=1 → total 12 × 100vh
 const SUBS_CONFIG = [
   { key: "Work",    slots: 5 },
   { key: "Photos",  slots: 5 },
   { key: "Writing", slots: 1 },
+  { key: "Art",     slots: 1 },
 ];
-const TOTAL_SLOTS = SUBS_CONFIG.reduce((a, c) => a + c.slots, 0); // 9
+const TOTAL_SLOTS = SUBS_CONFIG.reduce((a, c) => a + c.slots, 0); // 12
 
 // ─── Big sticky content block ─────────────────────────────────────────────────
 // fromanother: one huge sticky container, left = sub-nav, right = content
@@ -255,7 +256,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
 
   const handleScroll = useCallback((v: number) => {
     const slot = Math.min(v * TOTAL_SLOTS, TOTAL_SLOTS - 0.001);
-    // Work = 0-4, Photos = 5-9, Writing = 10
+    // Work = 0-4, Photos = 5-9, Writing = 10, Art = 11
     if (slot < 5) {
       setSub(0);
       setWorkIdx(Math.min(Math.floor(slot), works.length - 1));
@@ -264,9 +265,12 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
       setSub(1);
       setPhotoIdx(Math.min(Math.floor(slot - 5), photos.length - 1));
       onSectionChange(3);
-    } else {
+    } else if (slot < 11) {
       setSub(2);
       onSectionChange(4);
+    } else {
+      setSub(3);
+      onSectionChange(5);
     }
   }, [onSectionChange]);
 
@@ -432,6 +436,60 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
               </motion.div>
             )}
 
+            {/* ── Art ── same pattern as Photos: text left, images right ── */}
+            {sub === 3 && (
+              <motion.div key="art"
+                style={{ ...contentStyle, justifyContent: "space-between", alignItems: "center", gap: "4vw" }}
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.65, ease: [0.25, 0, 0, 1] }}
+              >
+                {/* Left: metadata */}
+                <div style={{ flexShrink: 0, width: 148 }}>
+                  <div style={{ fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 28 }}>
+                    {lang === "zh" ? "艺术" : "ART"}
+                  </div>
+                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(20px,2vw,28px)", color: "var(--dark)", lineHeight: 1.1, marginBottom: 12 }}>
+                    {lang === "zh" ? "消失 · 自画像" : "Disappearance · Self Portrait"}
+                  </div>
+                  <div style={{ fontSize: 8, letterSpacing: "0.24em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 36 }}>
+                    {lang === "zh" ? "绘画 · 雕塑" : "PAINTING · SCULPTURE"}
+                  </div>
+                  <Link href="/art" style={{ fontSize: 9, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
+                    {lang === "zh" ? "查看全部 →" : "VIEW ALL →"}
+                  </Link>
+                </div>
+
+                {/* Right: two images, offset vertically */}
+                <div style={{ flex: 1, display: "flex", alignItems: "flex-start", gap: "2vw", maxHeight: "80vh" }}>
+                  {/* 消失 — left, natural height */}
+                  <motion.div
+                    initial={{ clipPath: "inset(6% 0 6% 0)" }}
+                    animate={{ clipPath: "inset(0% 0 0% 0)" }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ flexShrink: 0 }}
+                  >
+                    <img
+                      src="/Images/消失.JPG"
+                      alt="消失"
+                      style={{ maxHeight: "70vh", maxWidth: "26vw", width: "auto", height: "auto", display: "block" }}
+                    />
+                  </motion.div>
+                  {/* Sculpture — right, offset down */}
+                  <motion.div
+                    initial={{ clipPath: "inset(6% 0 6% 0)" }}
+                    animate={{ clipPath: "inset(0% 0 0% 0)" }}
+                    transition={{ duration: 0.9, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ flexShrink: 0, marginTop: "8vh" }}
+                  >
+                    <img
+                      src="/Images/Self-%20Portrait%20Sculpture/主图.JPG"
+                      alt="Self Portrait Sculpture"
+                      style={{ maxHeight: "58vh", maxWidth: "20vw", width: "auto", height: "auto", display: "block" }}
+                    />
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
 
           </AnimatePresence>
         </div>
@@ -449,91 +507,6 @@ const indexLinks = [
   { label: "Writing", labelZh: "文字",  desc: "essays · research",                         descZh: "随笔 · 研究",                               href: "/words"  },
   { label: "About",   labelZh: "关于",  desc: "Everything about me",                       descZh: "关于我的一切",                               href: "/about"  },
 ];
-
-// ─── Art block ────────────────────────────────────────────────────────────────
-function ArtBlock() {
-  const { lang } = useLang();
-  const isMobile = useIsMobile();
-  const { ref, vis } = useInView(0.2);
-
-  return (
-    <div ref={ref} style={{ width: "100%", maxWidth: 900 }}>
-      {/* Label */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={vis ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        style={{
-          fontFamily: "var(--font-geist),sans-serif",
-          fontSize: 9, letterSpacing: "0.22em", color: "var(--faint)",
-          marginBottom: 32,
-        }}
-      >
-        {lang === "zh" ? "06 — 艺术" : "06 — Art"}
-      </motion.div>
-
-      {/* Two images */}
-      <div style={{
-        display: "flex",
-        flexDirection: isMobile ? "column" : "row",
-        gap: isMobile ? 16 : 24,
-        alignItems: "flex-start",
-      }}>
-        {/* 消失 */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={vis ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          style={{ flex: "0 0 42%", maxWidth: isMobile ? "100%" : "42%" }}
-        >
-          <Link href="/art" style={{ display: "block", textDecoration: "none" }}>
-            <img
-              src="/Images/消失.JPG"
-              alt="消失"
-              style={{ width: "100%", height: "auto", display: "block" }}
-            />
-          </Link>
-        </motion.div>
-
-        {/* Sculpture */}
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={vis ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.85, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            flex: "0 0 38%", maxWidth: isMobile ? "72%" : "38%",
-            marginTop: isMobile ? 0 : "6vw",
-            alignSelf: "flex-start",
-          }}
-        >
-          <Link href="/art" style={{ display: "block", textDecoration: "none" }}>
-            <img
-              src="/Images/Self-%20Portrait%20Sculpture/主图.JPG"
-              alt="Self Portrait Sculpture"
-              style={{ width: "100%", height: "auto", display: "block" }}
-            />
-          </Link>
-        </motion.div>
-      </div>
-
-      {/* Link */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={vis ? { opacity: 1 } : {}}
-        transition={{ duration: 0.5, delay: 0.6 }}
-        style={{ marginTop: 32 }}
-      >
-        <Link href="/art" style={{
-          fontFamily: "var(--font-geist),sans-serif",
-          fontSize: 10, letterSpacing: "0.18em", color: "var(--dim)",
-          textDecoration: "none",
-        }}>
-          {lang === "zh" ? "查看全部 →" : "VIEW ALL →"}
-        </Link>
-      </motion.div>
-    </div>
-  );
-}
 
 function FinalNav() {
   const { lang } = useLang();
@@ -752,17 +725,6 @@ export default function Home() {
 
         {/* 03–07 — BIG STICKY CONTENT BLOCK */}
         <ContentBlock onSectionChange={setActiveNav}/>
-
-        {/* 06 — ART */}
-        <section data-sec="5" style={{
-          minHeight: "100vh", background: "var(--bg)",
-          display: "flex", alignItems: "center",
-          padding: isMobile ? "80px 6vw" : "0 8vw 0 18vw",
-          borderTop: "1px solid var(--line)",
-          cursor: "none",
-        }}>
-          <ArtBlock/>
-        </section>
 
         {/* 07 — INDEX */}
         <section data-sec="6" style={{
