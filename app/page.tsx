@@ -444,6 +444,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
 const indexLinks = [
   { label: "Design",  labelZh: "设计",  desc: "Branding · Editorial · Packaging · Typography · UX/UI · Product · Creative · Motion", descZh: "品牌 · 交互 · 出版物 · 包装 · 字体 · 产品 · 创意 · 动态", href: "/design" },
   { label: "Photos",  labelZh: "摄影",  desc: "observation · travel",                      descZh: "观察 · 旅行",                               href: "/photos" },
+  { label: "Art",     labelZh: "艺术",  desc: "ceramic · sculpture · painting · drawing · riso", descZh: "陶艺 · 雕塑 · 绘画 · 素描 · Riso",    href: "/art"    },
   { label: "Writing", labelZh: "文字",  desc: "essays · research",                         descZh: "随笔 · 研究",                               href: "/words"  },
   { label: "About",   labelZh: "关于",  desc: "Everything about me",                       descZh: "关于我的一切",                               href: "/about"  },
 ];
