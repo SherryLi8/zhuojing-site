@@ -217,6 +217,11 @@ const photos = [
   { id: "yosemite",    title: "Yosemite",    titleZh: "优胜美地",  series: "Exposure",    seriesZh: "曝光",   year: "2023", img: `${P}/Yosemite/000236660001_副本.jpg` },
 ];
 
+const artPieces = [
+  { title: "消失", titleEn: "Disappearance", medium: "Painting", mediumZh: "绘画", year: "2024", img: "/Images/消失.JPG" },
+  { title: "自画像雕塑", titleEn: "Self Portrait Sculpture", medium: "Sculpture", mediumZh: "雕塑", year: "2023", img: "/Images/Self-%20Portrait%20Sculpture/主图.JPG" },
+];
+
 const writings = [
   { title: "Reinscription of Cultural Meaning Through Design: How Visual and Material Transformations Reshape Meaning", titleZh: "以设计重写文化意义：视觉与物质转化如何重塑意义", tag: "Thesis", tagZh: "论文", date: "2024", href: "https://digitallibrary.usc.edu/asset-management/2A3BF1M2SUNBE", pub: true },
   { title: "以观看为方法",                                       titleZh: "以观看为方法",       tag: "随笔",   tagZh: "随笔", date: "2025", href: "#", pub: false },
@@ -236,9 +241,9 @@ const SUBS_CONFIG = [
   { key: "Work",    slots: 5 },
   { key: "Photos",  slots: 5 },
   { key: "Writing", slots: 1 },
-  { key: "Art",     slots: 1 },
+  { key: "Art",     slots: 2 },
 ];
-const TOTAL_SLOTS = SUBS_CONFIG.reduce((a, c) => a + c.slots, 0); // 12
+const TOTAL_SLOTS = SUBS_CONFIG.reduce((a, c) => a + c.slots, 0); // 13
 
 // ─── Big sticky content block ─────────────────────────────────────────────────
 // fromanother: one huge sticky container, left = sub-nav, right = content
@@ -250,13 +255,14 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
   const [sub, setSub] = useState(0);
   const [workIdx, setWorkIdx] = useState(0);
   const [photoIdx, setPhotoIdx] = useState(0);
+  const [artIdx, setArtIdx] = useState(0);
   const [hovWrite, setHovWrite] = useState<number|null>(null);
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
   const handleScroll = useCallback((v: number) => {
     const slot = Math.min(v * TOTAL_SLOTS, TOTAL_SLOTS - 0.001);
-    // Work = 0-4, Photos = 5-9, Writing = 10, Art = 11
+    // Work = 0-4, Photos = 5-9, Writing = 10, Art = 11-12
     if (slot < 5) {
       setSub(0);
       setWorkIdx(Math.min(Math.floor(slot), works.length - 1));
@@ -270,6 +276,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
       onSectionChange(4);
     } else {
       setSub(3);
+      setArtIdx(Math.min(Math.floor(slot - 11), 1));
       onSectionChange(5);
     }
   }, [onSectionChange]);
@@ -436,59 +443,45 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
               </motion.div>
             )}
 
-            {/* ── Art ── same pattern as Photos: text left, images right ── */}
+            {/* ── Art ── same pattern as Photos: 01/02 paging ── */}
             {sub === 3 && (
-              <motion.div key="art"
-                style={{ ...contentStyle, justifyContent: "space-between", alignItems: "center", gap: "4vw" }}
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                transition={{ duration: 0.65, ease: [0.25, 0, 0, 1] }}
-              >
-                {/* Left: metadata */}
-                <div style={{ flexShrink: 0, width: 148 }}>
-                  <div style={{ fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 28 }}>
-                    {lang === "zh" ? "艺术" : "ART"}
+              <AnimatePresence mode="wait">
+                <motion.div key={`art-${artIdx}`}
+                  style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", padding: isMobile ? "0 6vw" : "0 8vw 0 18vw" }}
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5, ease: [0.25, 0, 0, 1] }}
+                >
+                  {/* Left: metadata */}
+                  <div style={{ flexShrink: 0, width: 148, marginRight: "5vw" }}>
+                    <div style={{ fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 28 }}>
+                      {String(artIdx + 1).padStart(2, "0")} / {String(artPieces.length).padStart(2, "0")}
+                    </div>
+                    <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(20px,2vw,28px)", color: "var(--dark)", lineHeight: 1.1, marginBottom: 12 }}>
+                      {lang === "zh" ? artPieces[artIdx].title : artPieces[artIdx].titleEn}
+                    </div>
+                    <div style={{ fontSize: 8, letterSpacing: "0.24em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 36 }}>
+                      {lang === "zh" ? artPieces[artIdx].mediumZh.toUpperCase() : artPieces[artIdx].medium.toUpperCase()} · {artPieces[artIdx].year}
+                    </div>
+                    <Link href="/art" style={{ fontSize: 9, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
+                      {lang === "zh" ? "查看全部 →" : "VIEW ALL →"}
+                    </Link>
                   </div>
-                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(20px,2vw,28px)", color: "var(--dark)", lineHeight: 1.1, marginBottom: 12 }}>
-                    {lang === "zh" ? "消失 · 自画像" : "Disappearance · Self Portrait"}
-                  </div>
-                  <div style={{ fontSize: 8, letterSpacing: "0.24em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 36 }}>
-                    {lang === "zh" ? "绘画 · 雕塑" : "PAINTING · SCULPTURE"}
-                  </div>
-                  <Link href="/art" style={{ fontSize: 9, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
-                    {lang === "zh" ? "查看全部 →" : "VIEW ALL →"}
-                  </Link>
-                </div>
-
-                {/* Right: two images, offset vertically */}
-                <div style={{ flex: 1, display: "flex", alignItems: "flex-start", gap: "2vw", maxHeight: "80vh" }}>
-                  {/* 消失 — left, natural height */}
+                  {/* Right: image */}
                   <motion.div
+                    key={`aimg-${artIdx}`}
                     initial={{ clipPath: "inset(6% 0 6% 0)" }}
                     animate={{ clipPath: "inset(0% 0 0% 0)" }}
                     transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ flexShrink: 0 }}
+                    style={{ flexShrink: 0, maxHeight: "72vh", display: "flex", alignItems: "center" }}
                   >
                     <img
-                      src="/Images/消失.JPG"
-                      alt="消失"
-                      style={{ maxHeight: "70vh", maxWidth: "26vw", width: "auto", height: "auto", display: "block" }}
+                      src={artPieces[artIdx].img}
+                      alt={artPieces[artIdx].title}
+                      style={{ maxHeight: "72vh", maxWidth: "46vw", width: "auto", height: "auto", display: "block" }}
                     />
                   </motion.div>
-                  {/* Sculpture — right, offset down */}
-                  <motion.div
-                    initial={{ clipPath: "inset(6% 0 6% 0)" }}
-                    animate={{ clipPath: "inset(0% 0 0% 0)" }}
-                    transition={{ duration: 0.9, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ flexShrink: 0, marginTop: "8vh" }}
-                  >
-                    <img
-                      src="/Images/Self-%20Portrait%20Sculpture/主图.JPG"
-                      alt="Self Portrait Sculpture"
-                      style={{ maxHeight: "58vh", maxWidth: "20vw", width: "auto", height: "auto", display: "block" }}
-                    />
-                  </motion.div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </AnimatePresence>
             )}
 
           </AnimatePresence>
