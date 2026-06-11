@@ -35,7 +35,8 @@ const NAV_ITEMS = [
   { num: "03", label: "Work" },
   { num: "04", label: "Photos" },
   { num: "05", label: "Writing" },
-  { num: "06", label: "Index" },
+  { num: "06", label: "Art" },
+  { num: "07", label: "Index" },
 ];
 
 function SideNav({ active }: { active: number }) {
@@ -449,6 +450,91 @@ const indexLinks = [
   { label: "About",   labelZh: "关于",  desc: "Everything about me",                       descZh: "关于我的一切",                               href: "/about"  },
 ];
 
+// ─── Art block ────────────────────────────────────────────────────────────────
+function ArtBlock() {
+  const { lang } = useLang();
+  const isMobile = useIsMobile();
+  const { ref, vis } = useInView(0.2);
+
+  return (
+    <div ref={ref} style={{ width: "100%", maxWidth: 900 }}>
+      {/* Label */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={vis ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          fontFamily: "var(--font-geist),sans-serif",
+          fontSize: 9, letterSpacing: "0.22em", color: "var(--faint)",
+          marginBottom: 32,
+        }}
+      >
+        {lang === "zh" ? "06 — 艺术" : "06 — Art"}
+      </motion.div>
+
+      {/* Two images */}
+      <div style={{
+        display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        gap: isMobile ? 16 : 24,
+        alignItems: "flex-start",
+      }}>
+        {/* 消失 */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={vis ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          style={{ flex: "0 0 42%", maxWidth: isMobile ? "100%" : "42%" }}
+        >
+          <Link href="/art" style={{ display: "block", textDecoration: "none" }}>
+            <img
+              src="/Images/消失.JPG"
+              alt="消失"
+              style={{ width: "100%", height: "auto", display: "block" }}
+            />
+          </Link>
+        </motion.div>
+
+        {/* Sculpture */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          animate={vis ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.85, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            flex: "0 0 38%", maxWidth: isMobile ? "72%" : "38%",
+            marginTop: isMobile ? 0 : "6vw",
+            alignSelf: "flex-start",
+          }}
+        >
+          <Link href="/art" style={{ display: "block", textDecoration: "none" }}>
+            <img
+              src="/Images/Self-%20Portrait%20Sculpture/主图.JPG"
+              alt="Self Portrait Sculpture"
+              style={{ width: "100%", height: "auto", display: "block" }}
+            />
+          </Link>
+        </motion.div>
+      </div>
+
+      {/* Link */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={vis ? { opacity: 1 } : {}}
+        transition={{ duration: 0.5, delay: 0.6 }}
+        style={{ marginTop: 32 }}
+      >
+        <Link href="/art" style={{
+          fontFamily: "var(--font-geist),sans-serif",
+          fontSize: 10, letterSpacing: "0.18em", color: "var(--dim)",
+          textDecoration: "none",
+        }}>
+          {lang === "zh" ? "查看全部 →" : "VIEW ALL →"}
+        </Link>
+      </motion.div>
+    </div>
+  );
+}
+
 function FinalNav() {
   const { lang } = useLang();
   const isMobile = useIsMobile();
@@ -667,8 +753,19 @@ export default function Home() {
         {/* 03–07 — BIG STICKY CONTENT BLOCK */}
         <ContentBlock onSectionChange={setActiveNav}/>
 
-        {/* 06 — INDEX */}
+        {/* 06 — ART */}
         <section data-sec="5" style={{
+          minHeight: "100vh", background: "var(--bg)",
+          display: "flex", alignItems: "center",
+          padding: isMobile ? "80px 6vw" : "0 8vw 0 18vw",
+          borderTop: "1px solid var(--line)",
+          cursor: "none",
+        }}>
+          <ArtBlock/>
+        </section>
+
+        {/* 07 — INDEX */}
+        <section data-sec="6" style={{
           minHeight: "100vh", background: "var(--bg)", position: "relative",
           display: "flex", flexDirection: "column", justifyContent: "center",
           cursor: "none", borderTop: "1px solid var(--line)",
