@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
 import { TOP_BAR_HEIGHT } from "../components/TopBar";
 import { useLang } from "../context/lang";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 // ─── Medium labels ────────────────────────────────────────────────────────────
 const MEDIUM_LABELS: Record<string, Record<string, string>> = {
@@ -215,6 +216,7 @@ function Lightbox({ work, onClose }: { work: typeof artWorks[0]; onClose: () => 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function Art() {
   const { lang } = useLang();
+  const isMobile = useIsMobile();
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [selected, setSelected] = useState<typeof artWorks[0] | null>(null);
 
@@ -226,11 +228,13 @@ export default function Art() {
     <div style={{ minHeight: "100dvh", background: "var(--bg)", display: "flex", paddingTop: TOP_BAR_HEIGHT }}>
       <Nav />
 
-      <div style={{ marginLeft: NAV_WIDTH, flex: 1, padding: "48px 40px 80px 40px" }}>
+      <div style={{ marginLeft: isMobile ? 0 : NAV_WIDTH, flex: 1, padding: isMobile ? "48px 20px 80px" : "48px 40px 80px 40px" }}>
 
         {/* Header + filters */}
         <div style={{
-          display: "flex", alignItems: "center", justifyContent: "space-between",
+          display: "flex", alignItems: isMobile ? "flex-start" : "center",
+          flexDirection: isMobile ? "column" : "row",
+          justifyContent: "space-between", gap: isMobile ? 16 : 0,
           marginBottom: 40, paddingBottom: 20, borderBottom: "1px solid var(--line)",
         }}>
           <h1 style={{
@@ -238,7 +242,7 @@ export default function Art() {
             fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
           }}>{lang === "en" ? "Art" : "艺术"}</h1>
 
-          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "flex-end" }}>
+          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: isMobile ? "flex-start" : "flex-end" }}>
             {[{ key: "all", en: "ALL", zh: "全部" }, ...FILTERS].map((f) => {
               const isActive = activeFilter === f.key;
               return (
@@ -273,7 +277,7 @@ export default function Art() {
         </div>
 
         {/* Masonry grid — CSS columns */}
-        <div style={{ columns: "3 280px", columnGap: 12 }}>
+        <div style={{ columns: isMobile ? "2 140px" : "3 280px", columnGap: 12 }}>
           {filtered.map((work) => (
             <motion.div
               key={work.num}

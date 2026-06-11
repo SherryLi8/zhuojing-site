@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
 import { useLang } from "../context/lang";
 import { TOP_BAR_HEIGHT } from "../components/TopBar";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 const DETAIL_WIDTH = 280;
 
@@ -88,6 +89,7 @@ const entries = {
 
 export default function Words() {
   const { lang } = useLang();
+  const isMobile = useIsMobile();
   const list = entries[lang];
   const [hovered, setHovered] = useState<typeof list[0] | null>(null);
 
@@ -96,14 +98,14 @@ export default function Words() {
       <Nav />
 
       <div style={{
-        marginLeft: NAV_WIDTH, flex: 1,
+        marginLeft: isMobile ? 0 : NAV_WIDTH, flex: 1,
         display: "grid",
-        gridTemplateColumns: `1fr ${DETAIL_WIDTH}px`,
+        gridTemplateColumns: isMobile ? "1fr" : `1fr ${DETAIL_WIDTH}px`,
         minHeight: "100dvh",
       }}>
 
         {/* ── Center: article list ── */}
-        <div style={{ borderRight: "1px solid var(--line)", padding: "48px 48px 80px" }}>
+        <div style={{ borderRight: isMobile ? "none" : "1px solid var(--line)", padding: isMobile ? "48px 24px 80px" : "48px 48px 80px" }}>
           <div style={{
             display: "flex", alignItems: "baseline", justifyContent: "space-between",
             marginBottom: 40, paddingBottom: 20, borderBottom: "1px solid var(--line)",
@@ -182,8 +184,8 @@ export default function Words() {
           </div>
         </div>
 
-        {/* ── Right: detail panel ── */}
-        <div style={{ position: "sticky", top: TOP_BAR_HEIGHT, height: `calc(100vh - ${TOP_BAR_HEIGHT}px)`, padding: "48px 32px", overflowY: "auto" }}>
+        {/* ── Right: detail panel — hidden on mobile ── */}
+        {!isMobile && <div style={{ position: "sticky", top: TOP_BAR_HEIGHT, height: `calc(100vh - ${TOP_BAR_HEIGHT}px)`, padding: "48px 32px", overflowY: "auto" }}>
           {/* Detail content — animated on hover change */}
           <AnimatePresence mode="wait">
             {hovered ? (
@@ -235,7 +237,7 @@ export default function Words() {
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
+        </div>}
 
       </div>
     </div>

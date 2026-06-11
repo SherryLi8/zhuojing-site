@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
 import { useLang } from "../context/lang";
 import { TOP_BAR_HEIGHT } from "../components/TopBar";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 // ─── Hooks ────────────────────────────────────────────────────────────────────
 function useOnceInView(threshold = 0.15) {
@@ -271,6 +272,7 @@ const data = {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function About() {
   const { lang } = useLang();
+  const isMobile = useIsMobile();
   const c = data[lang];
   const [wechatOpen, setWechatOpen] = useState(false);
 
@@ -280,9 +282,9 @@ export default function About() {
       <AnimatePresence>{wechatOpen && <WechatModal onClose={() => setWechatOpen(false)} />}</AnimatePresence>
 
       <main style={{
-        marginLeft: NAV_WIDTH,
+        marginLeft: isMobile ? 0 : NAV_WIDTH,
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
+        gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
         minHeight: "100dvh",
       }}>
 
@@ -292,10 +294,11 @@ export default function About() {
           animate={{ opacity: 1, clipPath: "inset(0% 0 0% 0)" }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            position: "sticky", top: TOP_BAR_HEIGHT,
-            height: `calc(100vh - ${TOP_BAR_HEIGHT}px)`,
+            position: isMobile ? "relative" : "sticky",
+            top: TOP_BAR_HEIGHT,
+            height: isMobile ? "55vw" : `calc(100vh - ${TOP_BAR_HEIGHT}px)`,
             display: "flex", alignItems: "center", justifyContent: "center",
-            padding: "48px 40px",
+            padding: isMobile ? "24px 20px" : "48px 40px",
           }}
         >
           <img src="/Images/profile/IMG_2962.JPG" alt="Zhuojing Li"
@@ -303,7 +306,7 @@ export default function About() {
         </motion.div>
 
         {/* Right: content */}
-        <div style={{ padding: "80px 60px 100px 64px" }}>
+        <div style={{ padding: isMobile ? "40px 24px 80px" : "80px 60px 100px 64px" }}>
 
           {/* Name */}
           <div style={{ overflow: "hidden", marginBottom: 20 }}>

@@ -7,6 +7,7 @@ import {
 } from "framer-motion";
 import { useLang } from "./context/lang";
 import { TOP_BAR_HEIGHT } from "./components/TopBar";
+import { useIsMobile } from "./hooks/useIsMobile";
 
 // ─── Cursor ───────────────────────────────────────────────────────────────────
 function Cursor() {
@@ -243,6 +244,7 @@ const TOTAL_SLOTS = SUBS_CONFIG.reduce((a, c) => a + c.slots, 0); // 9
 function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const { lang } = useLang();
+  const isMobile = useIsMobile();
   const [sub, setSub] = useState(0);
   const [workIdx, setWorkIdx] = useState(0);
   const [photoIdx, setPhotoIdx] = useState(0);
@@ -272,7 +274,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
   const contentStyle: React.CSSProperties = {
     position: "absolute", inset: 0,
     display: "flex", alignItems: "center",
-    padding: "0 8vw 0 18vw",
+    padding: isMobile ? "0 6vw" : "0 8vw 0 18vw",
   };
 
   return (
@@ -337,7 +339,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
             {sub === 1 && (
               <AnimatePresence mode="wait">
                 <motion.div key={`photo-${photoIdx}`}
-                  style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", padding: "0 8vw 0 18vw" }}
+                  style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", padding: isMobile ? "0 6vw" : "0 8vw 0 18vw" }}
                   initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                   transition={{ duration: 0.5, ease: [0.25, 0, 0, 1] }}
                 >
@@ -448,9 +450,10 @@ const indexLinks = [
 
 function FinalNav() {
   const { lang } = useLang();
+  const isMobile = useIsMobile();
   const [hov, setHov] = useState<string|null>(null);
   return (
-    <div style={{ width: "100%", padding: "0 8vw 0 18vw" }}>
+    <div style={{ width: "100%", padding: isMobile ? "0 6vw" : "0 8vw 0 18vw" }}>
       <div>
         {indexLinks.map(({ label, labelZh, desc, descZh, href }) => {
           const isAct = hov === label;
@@ -496,6 +499,7 @@ function FinalNav() {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function Home() {
   const { lang } = useLang();
+  const isMobile = useIsMobile();
   const [phase, setPhase]   = useState<"zh"|"both">("zh");
   const [topVis, setTopVis] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -518,9 +522,10 @@ export default function Home() {
   useEffect(() => {
     const fn = () => {
       if (window.scrollY > 40) setScrolled(true);
+      if (!isScrollingRef.current) setCursorImgs([]);   // clear on scroll start
       isScrollingRef.current = true;
       if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
-      scrollTimerRef.current = setTimeout(() => { isScrollingRef.current = false; }, 250);
+      scrollTimerRef.current = setTimeout(() => { isScrollingRef.current = false; }, 500);
     };
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
@@ -573,8 +578,8 @@ export default function Home() {
 
   return (
     <>
-      <Cursor/>
-      <SideNav active={activeNav}/>
+      {!isMobile && <Cursor/>}
+      {!isMobile && <SideNav active={activeNav}/>}
 
       {/* Cursor scatter images — behind content text */}
       <AnimatePresence>
@@ -582,10 +587,10 @@ export default function Home() {
           <motion.img
             key={img.id}
             src={img.src}
-            initial={{ opacity: 0, scale: 0.84, y: 10 }}
+            initial={{ opacity: 0, scale: 0.92, y: 6 }}
             animate={{ opacity: 0.82, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: -6 }}
-            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            exit={{ opacity: 0, scale: 0.97, y: -4 }}
+            transition={{ duration: 0.32, ease: [0.25, 0, 0, 1] }}
             style={{
               position: "fixed",
               left: img.x - 90,
@@ -653,7 +658,7 @@ export default function Home() {
         {/* 02 — ABOUT */}
         <section data-sec="1" style={{
           height: "100vh", display: "flex", alignItems: "center",
-          padding: "0 10vw 0 18vw", background: "var(--bg)",
+          padding: isMobile ? "0 6vw" : "0 10vw 0 18vw", background: "var(--bg)",
         }}>
           <AboutBlock/>
         </section>
@@ -671,7 +676,7 @@ export default function Home() {
           {/* Copyright pinned to bottom */}
           <div style={{
             position: "absolute", bottom: 28, left: 0, right: 0,
-            padding: "0 8vw 0 18vw",
+            padding: isMobile ? "0 6vw" : "0 8vw 0 18vw",
             fontFamily: "var(--font-geist),sans-serif", fontSize: 9,
             letterSpacing: "0.15em", color: "var(--faint)",
           }}>

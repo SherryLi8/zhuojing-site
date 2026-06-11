@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
 import { useLang } from "../context/lang";
 import { TOP_BAR_HEIGHT } from "../lib/constants";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 const P = "/Images/Photos";
 
@@ -81,25 +82,26 @@ const photoGrids: Record<string, { id: string; aspect: string; src: string }[]> 
 // ─── Series data ──────────────────────────────────────────────────────────────
 const seriesData = {
   en: [
-    { id: "new-york",    title: "In Between",  location: "New York",     year: "2022", count: 7,  note: "Everything happens in the margins. The threshold, the pause, the transit." },
-    { id: "guiyang",     title: "Home Ground", location: "Guiyang",      year: "2022", count: 10, note: "The familiar made strange. A hometown seen through borrowed distance." },
-    { id: "los-angeles", title: "Silver",      location: "Los Angeles",  year: "2023", count: 8,  note: "Light that arrives sideways. Film grain as atmosphere." },
-    { id: "usc",         title: "Residency",   location: "USC",          year: "2024", count: 10, note: "The institution as landscape. Weeks at a time, observed in passing." },
-    { id: "yosemite",    title: "Exposure",    location: "Yosemite",     year: "2023", count: 10, note: "Scale that unmakes you. The valley holds everything it needs to." },
-    { id: "florida",     title: "Shore",       location: "Florida",      year: "2022", count: 10, note: "Heat, water, stillness. The south at its most unhurried." },
+    { id: "new-york",    title: "In Between",   location: "New York",     year: "2022", count: 7,  note: "Between arriving and leaving. A city held at arm's length." },
+    { id: "guiyang",     title: "Home Ground",  location: "Guiyang",      year: "2022", count: 10, note: "The familiar made strange. A hometown seen through borrowed distance." },
+    { id: "los-angeles", title: "Silver",       location: "Los Angeles",  year: "2023", count: 8,  note: "Light that arrives sideways. Film grain as atmosphere." },
+    { id: "usc",         title: "On Campus",    location: "USC",          year: "2024", count: 10, note: "Days measured in familiar paths. The campus as a world entire." },
+    { id: "yosemite",    title: "High Country", location: "Yosemite",     year: "2023", count: 10, note: "Above the treeline, the world simplifies. Rock, sky, what persists." },
+    { id: "florida",     title: "Shore",        location: "Florida",      year: "2022", count: 10, note: "Heat, water, stillness. The south at its most unhurried." },
   ],
   zh: [
-    { id: "new-york",    title: "过渡",   location: "纽约",      year: "2022", count: 7,  note: "一切都发生在边缘。阈值、停顿、过渡。" },
+    { id: "new-york",    title: "过渡",   location: "纽约",      year: "2022", count: 7,  note: "到达与离开之间。一座被保持在臂距之外的城市。" },
     { id: "guiyang",     title: "故土",   location: "贵阳",      year: "2022", count: 10, note: "熟悉的陌生感。用借来的距离重新看一座家乡。" },
     { id: "los-angeles", title: "银盐",   location: "洛杉矶",   year: "2023", count: 8,  note: "侧面抵达的光。胶片颗粒作为氛围。" },
-    { id: "usc",         title: "驻留",   location: "南加大",   year: "2024", count: 10, note: "校园作为风景。几周时光，在路过中被观察。" },
-    { id: "yosemite",    title: "曝光",   location: "优胜美地", year: "2023", count: 10, note: "令人失去尺度感的规模。山谷容纳了所需的一切。" },
+    { id: "usc",         title: "校园",   location: "南加大",   year: "2024", count: 10, note: "以熟悉的路途丈量的日子。校园作为一个完整的世界。" },
+    { id: "yosemite",    title: "山中",   location: "优胜美地", year: "2023", count: 10, note: "林木线以上，世界趋于简单。岩石、天空，以及留下来的一切。" },
     { id: "florida",     title: "岸边",   location: "佛罗里达", year: "2022", count: 10, note: "热、水、静。最不慌不忙的南方。" },
   ],
 };
 
 export default function Photos() {
   const { lang } = useLang();
+  const isMobile = useIsMobile();
   const series = seriesData[lang];
   const [activeId, setActiveId] = useState("new-york");
   const activeSeries = series.find(s => s.id === activeId) ?? series[0];
@@ -121,17 +123,21 @@ export default function Photos() {
       <Nav />
 
       <div style={{
-        marginLeft: NAV_WIDTH, flex: 1,
+        marginLeft: isMobile ? 0 : NAV_WIDTH, flex: 1,
         display: "grid",
-        gridTemplateColumns: `1fr 280px`,
+        gridTemplateColumns: isMobile ? "1fr" : `1fr 280px`,
         minHeight: "100dvh",
       }}>
 
         {/* ── Center: photo grid ── */}
-        <div style={{ borderRight: "1px solid var(--line)", padding: "48px 48px 80px" }}>
+        <div style={{ borderRight: isMobile ? "none" : "1px solid var(--line)", padding: isMobile ? "48px 20px 80px" : "48px 48px 80px" }}>
           {/* Section header */}
           <div style={{
-            display: "flex", alignItems: "baseline", justifyContent: "space-between",
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            alignItems: isMobile ? "flex-start" : "baseline",
+            justifyContent: "space-between",
+            gap: isMobile ? 16 : 0,
             marginBottom: 32, paddingBottom: 20, borderBottom: "1px solid var(--line)",
           }}>
             <h1 style={{
@@ -172,6 +178,28 @@ export default function Photos() {
               })}
             </div>
           </div>
+
+          {/* Mobile: inline series note */}
+          {isMobile && (
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeId + "-note"}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                style={{ marginBottom: 28 }}
+              >
+                <p style={{
+                  fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
+                  fontSize: 14, color: "var(--dim)", lineHeight: 1.7,
+                }}>{activeSeries.note}</p>
+                <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", marginTop: 8 }}>
+                  {activeSeries.count} {ui.images}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          )}
 
           {/* Photo grid — AnimatePresence for series switch */}
           <AnimatePresence mode="wait">
@@ -219,8 +247,8 @@ export default function Photos() {
           </AnimatePresence>
         </div>
 
-        {/* ── Right: series detail ── */}
-        <div style={{
+        {/* ── Right: series detail — hidden on mobile (shown inline above grid) ── */}
+        {!isMobile && <div style={{
           position: "sticky", top: TOP_BAR_HEIGHT,
           height: `calc(100vh - ${TOP_BAR_HEIGHT}px)`,
           padding: "48px 32px", overflowY: "auto",
@@ -251,7 +279,7 @@ export default function Photos() {
               </div>
             </motion.div>
           </AnimatePresence>
-        </div>
+        </div>}
 
       </div>
     </div>

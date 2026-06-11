@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Nav, { NAV_WIDTH } from "../components/Nav";
 import { TOP_BAR_HEIGHT } from "../components/TopBar";
 import { useLang } from "../context/lang";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 // ─── i18n ─────────────────────────────────────────────────────────────────────
 const TAG_LABELS: Record<string, Record<string, string>> = {
@@ -567,6 +568,7 @@ const FILTERS = [
 
 export default function Design() {
   const { lang } = useLang();
+  const isMobile = useIsMobile();
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [hovered,  setHovered]  = useState<typeof works[0] | null>(null);
   const [selected, setSelected] = useState<typeof works[0] | null>(null);
@@ -593,23 +595,27 @@ export default function Design() {
     <div style={{ minHeight: "100dvh", background: "var(--bg)", display: "flex", paddingTop: TOP_BAR_HEIGHT }}>
       <Nav />
 
-      {/* ── Three-column layout ── */}
+      {/* ── Layout ── */}
       <div style={{
-        marginLeft: NAV_WIDTH,
+        marginLeft: isMobile ? 0 : NAV_WIDTH,
         flex: 1,
         display: "grid",
-        gridTemplateColumns: "min(50%, 600px) 1fr",
+        gridTemplateColumns: isMobile ? "1fr" : "min(50%, 600px) 1fr",
         minHeight: "100dvh",
       }}>
 
         {/* ── Center: project list ── */}
         <div style={{
-          borderRight: "1px solid var(--line)",
-          padding: "48px 32px 80px 32px",
+          borderRight: isMobile ? "none" : "1px solid var(--line)",
+          padding: isMobile ? "48px 20px 80px" : "48px 32px 80px 32px",
         }}>
           {/* Section header */}
           <div style={{
-            display: "flex", alignItems: "center", justifyContent: "space-between",
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            alignItems: isMobile ? "flex-start" : "center",
+            justifyContent: "space-between",
+            gap: isMobile ? 16 : 0,
             marginBottom: 40, paddingBottom: 20,
             borderBottom: "1px solid var(--line)",
           }}>
@@ -617,8 +623,8 @@ export default function Design() {
               fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
               fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
             }}>{lang === "en" ? "Design" : "设计"}</h1>
-            {/* Filter tabs — 4-col grid → exactly 2 rows of 4 */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, max-content)", gap: "4px 14px" }}>
+            {/* Filter tabs */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 14px" }}>
               {[{ key: "all", en: "ALL", zh: "全部" } as const, ...FILTERS].map((f) => {
                 const isActive = activeFilter === f.key;
                 return (
@@ -712,26 +718,59 @@ export default function Design() {
           </div>
         </div>
 
-        {/* ── Right: detail panel — fade transition on change ── */}
-        <div style={{
-          position: "sticky", top: TOP_BAR_HEIGHT,
-          height: `calc(100vh - ${TOP_BAR_HEIGHT}px)`, overflowY: "auto",
-          padding: "48px 40px 48px 40px",
-          display: "flex", flexDirection: "column",
-        }}>
-          <AnimatePresence mode="wait">
+        {/* ── Right: detail panel — desktop only ── */}
+        {!isMobile && (
+          <div style={{
+            position: "sticky", top: TOP_BAR_HEIGHT,
+            height: `calc(100vh - ${TOP_BAR_HEIGHT}px)`, overflowY: "auto",
+            padding: "48px 40px 48px 40px",
+            display: "flex", flexDirection: "column",
+          }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeWork?.num ?? "empty"}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.32, ease: [0.25, 0, 0, 1] }}
+                style={{ flex: 1 }}
+              >
+                <DetailPanel work={activeWork} />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        )}
+
+        {/* ── Mobile: fullscreen detail overlay ── */}
+        <AnimatePresence>
+          {isMobile && selected && (
             <motion.div
-              key={activeWork?.num ?? "empty"}
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.32, ease: [0.25, 0, 0, 1] }}
-              style={{ flex: 1 }}
+              exit={{ opacity: 0, y: 16 }}
+              transition={{ duration: 0.3, ease: [0.25, 0, 0, 1] }}
+              style={{
+                position: "fixed", inset: 0, zIndex: 300,
+                background: "var(--bg)", overflowY: "auto",
+                paddingTop: TOP_BAR_HEIGHT,
+              }}
             >
-              <DetailPanel work={activeWork} />
+              <button
+                onClick={() => setSelected(null)}
+                style={{
+                  position: "sticky", top: 0, display: "flex", justifyContent: "flex-end",
+                  width: "100%", padding: "12px 20px",
+                  background: "var(--bg)", border: "none", cursor: "pointer",
+                  fontFamily: "var(--font-geist),sans-serif",
+                  fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)",
+                }}
+              >← {lang === "zh" ? "返回" : "BACK"}</button>
+              <div style={{ padding: "0 20px 80px" }}>
+                <DetailPanel work={selected} />
+              </div>
             </motion.div>
-          </AnimatePresence>
-        </div>
+          )}
+        </AnimatePresence>
 
       </div>
     </div>

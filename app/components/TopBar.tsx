@@ -2,10 +2,12 @@
 import Link from "next/link";
 import { useLang } from "../context/lang";
 import { TOP_BAR_HEIGHT } from "../lib/constants";
+import { useIsMobile } from "../hooks/useIsMobile";
 export { TOP_BAR_HEIGHT }; // re-export so existing imports still work
 
 export default function TopBar() {
   const { lang, toggle } = useLang();
+  const isMobile = useIsMobile();
 
   return (
     <div style={{
@@ -13,7 +15,7 @@ export default function TopBar() {
       height: TOP_BAR_HEIGHT, zIndex: 300,
       background: "var(--bg)", borderBottom: "1px solid var(--line)",
       display: "flex", alignItems: "center", justifyContent: "space-between",
-      padding: "0 40px",
+      padding: isMobile ? "0 20px 0 52px" : "0 40px",
     }}>
       {/* Left: name + badge — optically aligned */}
       <div style={{ display: "flex", alignItems: "baseline", gap: 14 }}>
@@ -26,7 +28,7 @@ export default function TopBar() {
             Zhuojing Li
           </span>
         </Link>
-        <span style={{
+        {!isMobile && <span style={{
           display: "inline-flex", alignItems: "center", gap: 6,
           fontSize: 9, letterSpacing: "0.12em", color: "var(--dim)",
           border: "1px solid var(--line)", borderRadius: 20,
@@ -38,7 +40,7 @@ export default function TopBar() {
             background: "#7aab7a", display: "inline-block", flexShrink: 0,
           }}/>
           OPEN TO FREELANCE
-        </span>
+        </span>}
       </div>
 
       {/* Right: language toggle */}
