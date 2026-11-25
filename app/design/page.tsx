@@ -631,32 +631,8 @@ export default function Design() {
               fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
               fontSize: "clamp(34px,3.5vw,50px)", color: "var(--dark)",
             }}>{lang === "en" ? "Design" : "设计"}</h1>
-            {/* Filter: ALL + category menu */}
-            <div style={{ display: "flex", gap: 20, alignItems: "center", position: "relative" }}>
-              <button
-                onClick={() => { setActiveFilter("all"); setMenuOpen(false); }}
-                style={{ background: "none", border: "none", cursor: "pointer", padding: 0, outline: "none" }}
-              >
-                <span style={{
-                  display: "inline-block", position: "relative", paddingBottom: 4,
-                  fontFamily: "var(--font-geist),sans-serif",
-                  fontSize: 11, letterSpacing: "0.2em",
-                  color: activeFilter === "all" ? "var(--dark)" : "var(--faint)",
-                  transition: "color 0.2s",
-                }}>
-                  {lang === "en" ? "ALL" : "全部"}
-                  <motion.div
-                    initial={false}
-                    animate={{ scaleX: activeFilter === "all" ? 1 : 0 }}
-                    transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                    style={{
-                      position: "absolute", bottom: 0, left: 0, right: 0,
-                      height: 1, background: "var(--dark)",
-                      transformOrigin: "left center",
-                    }}
-                  />
-                </span>
-              </button>
+            {/* Filter dropdown — shows current selection + triangle */}
+            <div style={{ position: "relative" }}>
               <button
                 onClick={() => setMenuOpen(o => !o)}
                 style={{ background: "none", border: "none", cursor: "pointer", padding: 0, outline: "none" }}
@@ -665,28 +641,20 @@ export default function Design() {
                   display: "inline-flex", alignItems: "center", gap: 8, position: "relative", paddingBottom: 4,
                   fontFamily: "var(--font-geist),sans-serif",
                   fontSize: 11, letterSpacing: "0.2em",
-                  color: activeFilter !== "all" ? "var(--dark)" : "var(--faint)",
-                  transition: "color 0.2s",
+                  color: "var(--dark)",
                 }}>
                   {(() => {
                     const cat = FILTERS.find(f => f.key === activeFilter);
-                    return cat ? (lang === "en" ? cat.en : cat.zh) : null;
+                    return cat ? (lang === "en" ? cat.en : cat.zh) : (lang === "en" ? "ALL" : "全部");
                   })()}
-                  <span style={{ display: "inline-flex", flexDirection: "column", gap: 3 }}>
-                    {[0, 1, 2].map(i => (
-                      <span key={i} style={{ display: "block", width: 14, height: 1, background: "currentColor" }} />
-                    ))}
-                  </span>
-                  <motion.div
-                    initial={false}
-                    animate={{ scaleX: activeFilter !== "all" ? 1 : 0 }}
-                    transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                    style={{
-                      position: "absolute", bottom: 0, left: 0, right: 0,
-                      height: 1, background: "var(--dark)",
-                      transformOrigin: "left center",
-                    }}
-                  />
+                  <span style={{
+                    width: 0, height: 0,
+                    borderLeft: "4px solid transparent",
+                    borderRight: "4px solid transparent",
+                    borderTop: "5px solid currentColor",
+                    transform: menuOpen ? "rotate(180deg)" : "none",
+                    transition: "transform 0.2s",
+                  }} />
                 </span>
               </button>
               {menuOpen && (
@@ -697,7 +665,7 @@ export default function Design() {
                     background: "#fff", border: "1px solid var(--line)",
                     padding: "6px 0", minWidth: 170, boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
                   }}>
-                    {FILTERS.map(f => (
+                    {[{ key: "all", en: "ALL", zh: "全部" } as const, ...FILTERS].map(f => (
                       <button key={f.key}
                         onClick={() => { setActiveFilter(f.key); setMenuOpen(false); }}
                         style={{
