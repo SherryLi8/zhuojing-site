@@ -6,6 +6,13 @@ import { TOP_BAR_HEIGHT } from "../components/TopBar";
 import { useLang } from "../context/lang";
 import { useIsMobile } from "../hooks/useIsMobile";
 
+// Serve Next.js-optimized copies of the multi-MB originals so pages load fast
+const optSrc = (src: string, w = 1200) => {
+  let clean = src;
+  try { clean = decodeURIComponent(src); } catch { /* keep as-is */ }
+  return `/_next/image?url=${encodeURIComponent(clean)}&w=${w}&q=75`;
+};
+
 // ─── Medium labels ────────────────────────────────────────────────────────────
 const MEDIUM_LABELS: Record<string, Record<string, string>> = {
   en: { ceramic: "Ceramic", sculpture: "Sculpture", painting: "Painting", drawing: "Drawing", riso: "Risograph" },
@@ -155,15 +162,15 @@ function Lightbox({ work, onClose }: { work: typeof artWorks[0]; onClose: () => 
             if (Array.isArray(entry)) {
               return (
                 <div key={i} style={{ display: "flex", gap: 6 }}>
-                  <img src={entry[0]} alt={`${work.title} ${i}a`} style={{ width: "50%", display: "block", height: "auto" }} />
-                  <img src={entry[1]} alt={`${work.title} ${i}b`} style={{ width: "50%", display: "block", height: "auto" }} />
+                  <img src={optSrc(entry[0], 1200)} alt={`${work.title} ${i}a`} style={{ width: "50%", display: "block", height: "auto" }} />
+                  <img src={optSrc(entry[1], 1200)} alt={`${work.title} ${i}b`} style={{ width: "50%", display: "block", height: "auto" }} />
                 </div>
               );
             }
             if (typeof entry === "object" && "src" in entry) {
-              return <img key={i} src={entry.src} alt={`${work.title} ${i}`} style={{ width: "100%", display: "block", clipPath: `inset(${entry.cropY}px 0 ${entry.cropY}px 0)` }} />;
+              return <img key={i} src={optSrc(entry.src, 1200)} alt={`${work.title} ${i}`} style={{ width: "100%", display: "block", clipPath: `inset(${entry.cropY}px 0 ${entry.cropY}px 0)` }} />;
             }
-            return <img key={i} src={entry as string} alt={`${work.title} ${i}`} style={{ width: "100%", height: "auto", display: "block" }} />;
+            return <img key={i} src={optSrc(entry as string, 1200)} alt={`${work.title} ${i}`} style={{ width: "100%", height: "auto", display: "block" }} />;
           })}
         </div>
 
@@ -296,7 +303,7 @@ export default function Art() {
             >
               {work.img ? (
                 <img
-                  src={work.img}
+                  src={optSrc(work.img, 640)}
                   alt={work.title}
                   style={{ width: "100%", height: "auto", display: "block" }}
                 />

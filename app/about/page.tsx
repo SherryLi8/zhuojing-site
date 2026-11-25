@@ -115,6 +115,13 @@ function SLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
+// Serve Next.js-optimized copies of the multi-MB originals so pages load fast
+const optSrc = (src: string, w = 1200) => {
+  let clean = src;
+  try { clean = decodeURIComponent(src); } catch { /* keep as-is */ }
+  return `/_next/image?url=${encodeURIComponent(clean)}&w=${w}&q=75`;
+};
+
 // ─── Content data ─────────────────────────────────────────────────────────────
 const data = {
   en: {
@@ -293,7 +300,7 @@ export default function About() {
             padding: isMobile ? "24px 20px" : "48px 40px",
           }}
         >
-          <img src="/Images/profile/IMG_2962.JPG" alt="Zhuojing Li"
+          <img src={optSrc("/Images/profile/IMG_2962.JPG", 800)} alt="Zhuojing Li"
             style={{ maxHeight: "100%", maxWidth: "100%", width: "auto", height: "auto", display: "block", objectFit: "contain" }} />
         </motion.div>
 

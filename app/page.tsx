@@ -171,10 +171,10 @@ const PROFILE_CURSOR_IMAGES = [
 
 // Trail images render at 190px — serve Next.js-optimized copies (w=384)
 // instead of the multi-MB originals, so the first hover has no download lag
-const trailSrc = (src: string) => {
+const trailSrc = (src: string, w = 384) => {
   let clean = src;
   try { clean = decodeURIComponent(src); } catch { /* keep as-is */ }
-  return `/_next/image?url=${encodeURIComponent(clean)}&w=384&q=75`;
+  return `/_next/image?url=${encodeURIComponent(clean)}&w=${w}&q=75`;
 };
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -354,7 +354,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                   style={{ flexShrink: 0 }}
                 >
                   {works[workIdx].img ? (
-                    <img src={works[workIdx].img} alt={works[workIdx].title}
+                    <img src={trailSrc(works[workIdx].img, 1200)} alt={works[workIdx].title}
                       style={{
                         maxHeight: "calc(100vh - 100px)",
                         maxWidth: "52vw",
@@ -409,7 +409,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                   >
                     {photos[photoIdx].img ? (
                       <img
-                        src={photos[photoIdx].img}
+                        src={trailSrc(photos[photoIdx].img, 1200)}
                         alt={photos[photoIdx].title}
                         style={{ maxHeight: "72vh", maxWidth: "46vw", width: "auto", height: "auto", display: "block" }}
                       />
@@ -497,7 +497,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                     style={{ flexShrink: 0, maxHeight: "72vh", display: "flex", alignItems: "center" }}
                   >
                     <img
-                      src={artPieces[artIdx].img}
+                      src={trailSrc(artPieces[artIdx].img, 1200)}
                       alt={artPieces[artIdx].title}
                       style={{ maxHeight: "72vh", maxWidth: "46vw", width: "auto", height: "auto", display: "block" }}
                     />

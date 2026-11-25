@@ -6,6 +6,13 @@ import { useLang } from "../context/lang";
 import { TOP_BAR_HEIGHT } from "../lib/constants";
 import { useIsMobile } from "../hooks/useIsMobile";
 
+// Serve Next.js-optimized copies of the multi-MB originals so pages load fast
+const optSrc = (src: string, w = 1200) => {
+  let clean = src;
+  try { clean = decodeURIComponent(src); } catch { /* keep as-is */ }
+  return `/_next/image?url=${encodeURIComponent(clean)}&w=${w}&q=75`;
+};
+
 const P = "/Images/Photos";
 
 // ─── Photo grids ──────────────────────────────────────────────────────────────
@@ -219,7 +226,7 @@ export default function Photos() {
                     transition={{ duration: 0.5, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
                   >
                     {p.src ? (
-                      <img src={p.src} alt={`${activeSeries.title} ${i * 2 + 1}`}
+                      <img src={optSrc(p.src, 1200)} alt={`${activeSeries.title} ${i * 2 + 1}`}
                         style={{ width: "100%", height: "auto", display: "block" }} />
                     ) : (
                       <div style={{ aspectRatio: p.aspect, background: "var(--placeholder)" }} />
@@ -235,7 +242,7 @@ export default function Photos() {
                     transition={{ duration: 0.5, delay: 0.05 + i * 0.07, ease: [0.16, 1, 0.3, 1] }}
                   >
                     {p.src ? (
-                      <img src={p.src} alt={`${activeSeries.title} ${i * 2 + 2}`}
+                      <img src={optSrc(p.src, 1200)} alt={`${activeSeries.title} ${i * 2 + 2}`}
                         style={{ width: "100%", height: "auto", display: "block" }} />
                     ) : (
                       <div style={{ aspectRatio: p.aspect, background: "var(--placeholder)" }} />

@@ -7,6 +7,13 @@ import { TOP_BAR_HEIGHT } from "../components/TopBar";
 import { useLang } from "../context/lang";
 import { useIsMobile } from "../hooks/useIsMobile";
 
+// Serve Next.js-optimized copies of the multi-MB originals so pages load fast
+const optSrc = (src: string, w = 1200) => {
+  let clean = src;
+  try { clean = decodeURIComponent(src); } catch { /* keep as-is */ }
+  return `/_next/image?url=${encodeURIComponent(clean)}&w=${w}&q=75`;
+};
+
 // ─── i18n ─────────────────────────────────────────────────────────────────────
 const TAG_LABELS: Record<string, Record<string, string>> = {
   en: { "brand-identity": "Branding", "editorial": "Editorial", "typography": "Typography", "packaging": "Packaging", "uxui": "UX/UI", "product": "Product", "creative": "Creative", "motion": "Motion", "logo": "Logo" },
@@ -395,18 +402,18 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
             if (Array.isArray(entry)) {
               return (
                 <div key={i} style={{ display: "flex", gap: 6, alignItems: "flex-start" }}>
-                  <img src={entry[0]} alt={`${work.title} ${i + 1}a`} style={{ width: "50%", display: "block", objectFit: "cover", aspectRatio: "3/4" }} />
-                  <img src={entry[1]} alt={`${work.title} ${i + 1}b`} style={{ width: "50%", display: "block", objectFit: "cover", aspectRatio: "3/4" }} />
+                  <img src={optSrc(entry[0], 1200)} alt={`${work.title} ${i + 1}a`} style={{ width: "50%", display: "block", objectFit: "cover", aspectRatio: "3/4" }} />
+                  <img src={optSrc(entry[1], 1200)} alt={`${work.title} ${i + 1}b`} style={{ width: "50%", display: "block", objectFit: "cover", aspectRatio: "3/4" }} />
                 </div>
               );
             }
             if (typeof entry === "object" && "src" in entry) {
               return (
-                <img key={i} src={entry.src} alt={`${work.title} ${i + 1}`}
+                <img key={i} src={optSrc(entry.src, 1200)} alt={`${work.title} ${i + 1}`}
                   style={{ width: "100%", display: "block", clipPath: `inset(${entry.cropY}px 0 ${entry.cropY}px 0)` }} />
               );
             }
-            return <img key={i} src={entry} alt={`${work.title} ${i + 1}`} style={{ width: "100%", height: "auto", display: "block" }} />;
+            return <img key={i} src={optSrc(entry, 1200)} alt={`${work.title} ${i + 1}`} style={{ width: "100%", height: "auto", display: "block" }} />;
           })}
         </div>
       ) : (
@@ -415,7 +422,7 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
           background: work.img ? undefined : "var(--placeholder)",
           marginBottom: 28, overflow: "hidden", flexShrink: 0,
         }}>
-          {work.img && <img src={work.img} alt={work.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />}
+          {work.img && <img src={optSrc(work.img, 1200)} alt={work.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />}
         </div>
       )}
 
