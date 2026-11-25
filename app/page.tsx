@@ -584,6 +584,14 @@ export default function Home() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
+  // Preload cursor scatter images so the first hover has no delay
+  useEffect(() => {
+    [...CURSOR_IMAGES, ...PROFILE_CURSOR_IMAGES].forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   // Cursor scatter: section 0 = design images, section 1 = profile images
   useEffect(() => {
     if (!topVis) return;
@@ -667,31 +675,19 @@ export default function Home() {
           paddingTop: TOP_BAR_HEIGHT,
         }}>
 
-          {/* Poem */}
+          {/* Tagline — small and quiet; the poem moved to About */}
           <div style={{ textAlign: "center", marginBottom: "6vh", position: "relative", zIndex: 60 }}>
-            <AnimatePresence mode="wait">
-              {lang === "zh" ? (
-                <motion.div key="zh" initial={{ opacity: 0, filter: "blur(8px)" }}
-                  animate={{ opacity: 1, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, filter: "blur(8px)" }}
-                  transition={{ duration: 0.5, ease: [0.25, 0, 0, 1] }}
-                  style={{ lineHeight: 1.55 }}
-                >
-                  <ML text="以我观物，"        delay={0.1}  s={ps}/>
-                  <ML text="故物皆著我之色彩。" delay={0.45} s={ps}/>
-                </motion.div>
-              ) : (
-                <motion.div key="en" initial={{ opacity: 0, filter: "blur(8px)" }}
-                  animate={{ opacity: 1, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, filter: "blur(8px)" }}
-                  transition={{ duration: 0.5, ease: [0.25, 0, 0, 1] }}
-                  style={{ lineHeight: 1.55 }}
-                >
-                  <ML text="A world,"                        delay={0.1}  s={ps}/>
-                  <ML text="built through my way of seeing." delay={0.45} s={ps}/>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <motion.div
+              initial={{ opacity: 0, filter: "blur(8px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              transition={{ duration: 0.5, ease: [0.25, 0, 0, 1] }}
+              style={{
+                fontFamily: "var(--font-geist),sans-serif",
+                fontSize: 10, letterSpacing: "0.24em", color: "var(--dim)",
+              }}
+            >
+              {lang === "zh" ? "品牌设计 · 包装设计 · UI/UX" : "BRAND IDENTITY · PACKAGING · UI/UX"}
+            </motion.div>
           </div>
 
           {/* Arrow — fades out on scroll */}

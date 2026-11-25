@@ -128,7 +128,9 @@ const data = {
   en: {
     name: "Zhuojing Li",
     tagline: "BRAND IDENTITY · PACKAGING · UI/UX",
-    bio: "A multidisciplinary designer. Born in Guiyang, China, trained in New York and Los Angeles, now based in Beijing. The idea comes first; the medium follows. Design is my honest way of looking at the world.",
+    epigraph: "A world, built through my way of seeing.",
+    epigraphAttr: "— Wang Guowei, Renjian Cihua",
+    bio: "A multidisciplinary designer. Born in Guiyang, China, trained in New York and Los Angeles, now based in Shenzhen. The idea comes first; the medium follows. Design is my honest way of looking at the world.",
     workTitle: "WORK EXPERIENCE",
     projectsTitle: "PROJECTS",
     educationTitle: "EDUCATION",
@@ -136,10 +138,10 @@ const data = {
     contactTitle: "CONTACT",
     work: [
       {
-        org: "Beijing Shangchao Creative Souvenirs Development Co., Ltd.",
-        role: "Product Designer",
-        period: "Jun 2026 — present",
-        desc: "Developing visual concepts and product design for Palace Museum–licensed cultural merchandise. Translating imperial collection imagery into contemporary consumer products — pattern, proportion, and colour adapted for mass-market appeal.",
+        org: "SlashVibe",
+        role: "Product Designer, Founding Team",
+        period: "Sep 2026 — present",
+        desc: "Designer on the founding team of an AI hardware startup. Branding, UI/UX, and packaging across all touchpoints — a physical controller that brings AI agents onto the desk. Kickstarter launched Nov 2026, funded on day one, Project We Love.",
       },
       {
         org: "NocFree",
@@ -149,12 +151,6 @@ const data = {
       },
     ],
     projects: [
-      {
-        org: "SlashVibe",
-        role: "Designer, Founding Team",
-        period: "2026",
-        desc: "Branding, UI/UX, and packaging across all touchpoints. Part of the founding team on the design side — collaborated with one additional designer throughout.",
-      },
       {
         org: "Twentysix Interactive",
         role: "Brand Identity",
@@ -199,7 +195,9 @@ const data = {
   zh: {
     name: "李卓璟",
     tagline: "品牌设计 · 包装设计 · UI/UX",
-    bio: "跨媒介设计师。生于贵阳，中国，求学于纽约与洛杉矶，现居北京。想法先行，媒介随后。做设计是我诚实地注视世界的方式。",
+    epigraph: "以我观物，故物皆著我之色彩。",
+    epigraphAttr: "——王国维《人间词话》",
+    bio: "跨媒介设计师。生于贵阳，中国，求学于纽约与洛杉矶，现居深圳。想法先行，媒介随后。做设计是我诚实地注视世界的方式。",
     workTitle: "工作经历",
     projectsTitle: "项目经历",
     educationTitle: "教育背景",
@@ -207,10 +205,10 @@ const data = {
     contactTitle: "联系方式",
     work: [
       {
-        org: "北京尚潮创意纪念品开发有限公司",
-        role: "产品设计师",
-        period: "2026年6月 — 至今",
-        desc: "为故宫博物院授权文创商品开发视觉概念与产品设计。将故宫藏品图像转化为当代消费产品，在图案、比例与色彩的适配中面向大众市场。",
+        org: "SlashVibe",
+        role: "产品设计师，初创团队",
+        period: "2026年9月 — 至今",
+        desc: "AI 硬件初创团队的设计师，负责品牌、UI/UX、包装与众筹全链路。产品是一款把 AI agent 带回桌面的实体控制器，Kickstarter 2026 年 11 月上线，首日达标并获选 Project We Love。",
       },
       {
         org: "NocFree",
@@ -220,12 +218,6 @@ const data = {
       },
     ],
     projects: [
-      {
-        org: "SlashVibe",
-        role: "设计师，初创团队",
-        period: "2026",
-        desc: "作为初创团队设计方向成员，负责品牌标识、UI/UX 与包装的全链路设计，与另一名设计师协作完成。",
-      },
       {
         org: "二十六游戏工作室",
         role: "品牌视觉",
@@ -319,6 +311,18 @@ export default function About() {
               }}
             >{c.name}</motion.h1>
           </div>
+
+          <FadeUp delay={0.05}>
+            <p style={{
+              fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
+              fontSize: "clamp(17px,1.5vw,21px)", lineHeight: 1.8, color: "var(--dark)",
+              maxWidth: 460, marginBottom: 8,
+            }}>{c.epigraph}</p>
+            <p style={{
+              fontFamily: "var(--font-geist),sans-serif", fontSize: 10,
+              letterSpacing: "0.18em", color: "var(--faint)", marginBottom: 32,
+            }}>{c.epigraphAttr}</p>
+          </FadeUp>
 
           <FadeUp delay={0.1}>
             <p style={{
