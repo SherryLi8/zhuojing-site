@@ -577,6 +577,7 @@ export default function Design() {
   const { lang } = useLang();
   const isMobile = useIsMobile();
   const [activeFilter, setActiveFilter] = useState<string>("all");
+  const [menuOpen, setMenuOpen] = useState(false);
   const [hovered,  setHovered]  = useState<typeof works[0] | null>(null);
   const [selected, setSelected] = useState<typeof works[0] | null>(null);
 
@@ -630,37 +631,90 @@ export default function Design() {
               fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
               fontSize: "clamp(34px,3.5vw,50px)", color: "var(--dark)",
             }}>{lang === "en" ? "Design" : "设计"}</h1>
-            {/* Filter tabs */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 14px" }}>
-              {[{ key: "all", en: "ALL", zh: "全部" } as const, ...FILTERS].map((f) => {
-                const isActive = activeFilter === f.key;
-                return (
-                  <button key={f.key}
-                    onClick={() => setActiveFilter(isActive && f.key !== "all" ? "all" : f.key)}
-                    style={{ background: "none", border: "none", cursor: "pointer", padding: 0, outline: "none" }}
-                  >
-                    <span style={{
-                      display: "inline-block", position: "relative", paddingBottom: 4,
-                      fontFamily: "var(--font-geist),sans-serif",
-                      fontSize: 11, letterSpacing: "0.2em",
-                      color: isActive ? "var(--dark)" : "var(--faint)",
-                      transition: "color 0.2s",
-                    }}>
-                      {"en" in f ? (lang === "en" ? f.en : f.zh) : (lang === "en" ? "ALL" : "全部")}
-                      <motion.div
-                        initial={false}
-                        animate={{ scaleX: isActive ? 1 : 0 }}
-                        transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+            {/* Filter: ALL + category menu */}
+            <div style={{ display: "flex", gap: 20, alignItems: "center", position: "relative" }}>
+              <button
+                onClick={() => { setActiveFilter("all"); setMenuOpen(false); }}
+                style={{ background: "none", border: "none", cursor: "pointer", padding: 0, outline: "none" }}
+              >
+                <span style={{
+                  display: "inline-block", position: "relative", paddingBottom: 4,
+                  fontFamily: "var(--font-geist),sans-serif",
+                  fontSize: 11, letterSpacing: "0.2em",
+                  color: activeFilter === "all" ? "var(--dark)" : "var(--faint)",
+                  transition: "color 0.2s",
+                }}>
+                  {lang === "en" ? "ALL" : "全部"}
+                  <motion.div
+                    initial={false}
+                    animate={{ scaleX: activeFilter === "all" ? 1 : 0 }}
+                    transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                    style={{
+                      position: "absolute", bottom: 0, left: 0, right: 0,
+                      height: 1, background: "var(--dark)",
+                      transformOrigin: "left center",
+                    }}
+                  />
+                </span>
+              </button>
+              <button
+                onClick={() => setMenuOpen(o => !o)}
+                style={{ background: "none", border: "none", cursor: "pointer", padding: 0, outline: "none" }}
+              >
+                <span style={{
+                  display: "inline-flex", alignItems: "center", gap: 8, position: "relative", paddingBottom: 4,
+                  fontFamily: "var(--font-geist),sans-serif",
+                  fontSize: 11, letterSpacing: "0.2em",
+                  color: activeFilter !== "all" ? "var(--dark)" : "var(--faint)",
+                  transition: "color 0.2s",
+                }}>
+                  {(() => {
+                    const cat = FILTERS.find(f => f.key === activeFilter);
+                    return cat ? (lang === "en" ? cat.en : cat.zh) : null;
+                  })()}
+                  <span style={{ display: "inline-flex", flexDirection: "column", gap: 3 }}>
+                    {[0, 1, 2].map(i => (
+                      <span key={i} style={{ display: "block", width: 14, height: 1, background: "currentColor" }} />
+                    ))}
+                  </span>
+                  <motion.div
+                    initial={false}
+                    animate={{ scaleX: activeFilter !== "all" ? 1 : 0 }}
+                    transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                    style={{
+                      position: "absolute", bottom: 0, left: 0, right: 0,
+                      height: 1, background: "var(--dark)",
+                      transformOrigin: "left center",
+                    }}
+                  />
+                </span>
+              </button>
+              {menuOpen && (
+                <>
+                  <div onClick={() => setMenuOpen(false)} style={{ position: "fixed", inset: 0, zIndex: 40 }} />
+                  <div style={{
+                    position: "absolute", top: "calc(100% + 12px)", right: 0, zIndex: 50,
+                    background: "#fff", border: "1px solid var(--line)",
+                    padding: "6px 0", minWidth: 170, boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+                  }}>
+                    {FILTERS.map(f => (
+                      <button key={f.key}
+                        onClick={() => { setActiveFilter(f.key); setMenuOpen(false); }}
                         style={{
-                          position: "absolute", bottom: 0, left: 0, right: 0,
-                          height: 1, background: "var(--dark)",
-                          transformOrigin: "left center",
+                          display: "block", width: "100%", textAlign: "left",
+                          background: "none", border: "none", cursor: "pointer",
+                          padding: "9px 16px",
+                          fontFamily: "var(--font-geist),sans-serif",
+                          fontSize: 11, letterSpacing: "0.2em",
+                          color: activeFilter === f.key ? "var(--dark)" : "var(--faint)",
                         }}
-                      />
-                    </span>
-                  </button>
-                );
-              })}
+                      >
+                        {lang === "en" ? f.en : f.zh}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
