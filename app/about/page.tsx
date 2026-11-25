@@ -300,7 +300,7 @@ export default function About() {
             padding: isMobile ? "24px 20px" : "48px 40px",
           }}
         >
-          <img src={optSrc("/Images/profile/IMG_2962.JPG", 800)} alt="Zhuojing Li"
+          <img src={optSrc("/Images/profile/IMG_2962.JPG", 828)} alt="Zhuojing Li"
             style={{ maxHeight: "100%", maxWidth: "100%", width: "auto", height: "auto", display: "block", objectFit: "contain" }} />
         </motion.div>
 
