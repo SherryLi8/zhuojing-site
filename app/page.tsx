@@ -14,16 +14,30 @@ function Cursor() {
   const x = useMotionValue(-200), y = useMotionValue(-200);
   const sx = useSpring(x, { damping: 20, stiffness: 600, mass: 0.2 });
   const sy = useSpring(y, { damping: 20, stiffness: 600, mass: 0.2 });
+  const [hovering, setHovering] = useState(false);
   useEffect(() => {
     const fn = (e: MouseEvent) => { x.set(e.clientX); y.set(e.clientY); };
     window.addEventListener("mousemove", fn);
     return () => window.removeEventListener("mousemove", fn);
   }, [x, y]);
-  return <motion.div style={{
-    position: "fixed", top: 0, left: 0, pointerEvents: "none", zIndex: 9999,
-    width: 14, height: 14, borderRadius: "50%", background: "var(--dim)",
-    translateX: sx, translateY: sy, x: "-50%", y: "-50%",
-  }}/>;
+  // Over anything clickable the ball grows and turns solid — a CTA hint
+  useEffect(() => {
+    const fn = (e: MouseEvent) => {
+      const t = e.target as HTMLElement | null;
+      setHovering(!!t?.closest("a,button,[role='button']"));
+    };
+    window.addEventListener("mouseover", fn);
+    return () => window.removeEventListener("mouseover", fn);
+  }, []);
+  return <motion.div
+    animate={{ scale: hovering ? 2 : 1 }}
+    transition={{ duration: 0.2, ease: [0.25, 0, 0, 1] }}
+    style={{
+      position: "fixed", top: 0, left: 0, pointerEvents: "none", zIndex: 9999,
+      width: 14, height: 14, borderRadius: "50%",
+      background: hovering ? "var(--dark)" : "var(--dim)",
+      translateX: sx, translateY: sy, x: "-50%", y: "-50%",
+    }}/>;
 }
 
 // ─── Left progress (exact fromanother style) ──────────────────────────────────
@@ -154,6 +168,14 @@ const PROFILE_CURSOR_IMAGES = [
   "/Images/profile/dqs%202025-05-15%20180936.798.JPG",
   "/Images/profile/dqs%202026-05-14%2023030190C30BFD1532.JPG",
 ];
+
+// Trail images render at 190px — serve Next.js-optimized copies (w=384)
+// instead of the multi-MB originals, so the first hover has no download lag
+const trailSrc = (src: string) => {
+  let clean = src;
+  try { clean = decodeURIComponent(src); } catch { /* keep as-is */ }
+  return `/_next/image?url=${encodeURIComponent(clean)}&w=384&q=75`;
+};
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const works = [
@@ -588,7 +610,7 @@ export default function Home() {
   useEffect(() => {
     [...CURSOR_IMAGES, ...PROFILE_CURSOR_IMAGES].forEach((src) => {
       const img = new Image();
-      img.src = src;
+      img.src = trailSrc(src);
     });
   }, []);
 
@@ -613,7 +635,7 @@ export default function Home() {
       const src = pool[Math.floor(Math.random() * pool.length)];
       const rot = (Math.random() - 0.5) * 12;
       const id = ++cursorIdRef.current;
-      setCursorImgs(prev => [...prev.slice(-4), { id, x: e.clientX, y: e.clientY, src, rot }]);
+      setCursorImgs(prev => [...prev.slice(-4), { id, x: e.clientX, y: e.clientY, src: trailSrc(src), rot }]);
       setTimeout(() => setCursorImgs(prev => prev.filter(img => img.id !== id)), 2200);
     };
     window.addEventListener("mousemove", fn);
@@ -641,6 +663,8 @@ export default function Home() {
     <>
       {!isMobile && <Cursor/>}
       {!isMobile && <SideNav active={activeNav}/>}
+      {/* The ball is the cursor — never show the system pointer hand */}
+      <style>{`a,button{cursor:none}`}</style>
 
       {/* Cursor scatter images — behind content text */}
       <AnimatePresence>
@@ -675,19 +699,31 @@ export default function Home() {
           paddingTop: TOP_BAR_HEIGHT,
         }}>
 
-          {/* Tagline — small and quiet; the poem moved to About */}
+          {/* Poem */}
           <div style={{ textAlign: "center", marginBottom: "6vh", position: "relative", zIndex: 60 }}>
-            <motion.div
-              initial={{ opacity: 0, filter: "blur(8px)" }}
-              animate={{ opacity: 1, filter: "blur(0px)" }}
-              transition={{ duration: 0.5, ease: [0.25, 0, 0, 1] }}
-              style={{
-                fontFamily: "var(--font-geist),sans-serif",
-                fontSize: 10, letterSpacing: "0.24em", color: "var(--dim)",
-              }}
-            >
-              {lang === "zh" ? "品牌设计 · 包装设计 · UI/UX" : "BRAND IDENTITY · PACKAGING · UI/UX"}
-            </motion.div>
+            <AnimatePresence mode="wait">
+              {lang === "zh" ? (
+                <motion.div key="zh" initial={{ opacity: 0, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, filter: "blur(8px)" }}
+                  transition={{ duration: 0.5, ease: [0.25, 0, 0, 1] }}
+                  style={{ lineHeight: 1.55 }}
+                >
+                  <ML text="以我观物，"        delay={0.1}  s={ps}/>
+                  <ML text="故物皆著我之色彩。" delay={0.45} s={ps}/>
+                </motion.div>
+              ) : (
+                <motion.div key="en" initial={{ opacity: 0, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, filter: "blur(8px)" }}
+                  transition={{ duration: 0.5, ease: [0.25, 0, 0, 1] }}
+                  style={{ lineHeight: 1.55 }}
+                >
+                  <ML text="A world,"                        delay={0.1}  s={ps}/>
+                  <ML text="built through my way of seeing." delay={0.45} s={ps}/>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Arrow — fades out on scroll */}
