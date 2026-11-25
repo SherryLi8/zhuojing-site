@@ -388,7 +388,7 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
 
   if (!work) {
     return (
-      <div style={{ color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.18em" }}>
+      <div style={{ color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.18em" }}>
         {labels.empty}
       </div>
     );
@@ -438,7 +438,7 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
       {/* Title */}
       <div style={{
         fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-        fontSize: "clamp(20px,1.8vw,26px)", color: "var(--dark)",
+        fontSize: "clamp(22px,1.8vw,28px)", color: "var(--dark)",
         lineHeight: 1.2, marginBottom: 16,
       }}>
         {renderBreakTitle(
@@ -453,8 +453,8 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
       {/* Meta */}
       <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
         <div style={{ display: "flex", gap: 24 }}>
-          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52 }}>{labels.type}</span>
-          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>
+          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, letterSpacing: "0.2em", color: "var(--faint)", width: 52 }}>{labels.type}</span>
+          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.1em", color: "var(--dim)" }}>
             {lang === "zh" && "tagDisplayZh" in work
               ? (work as typeof work & { tagDisplayZh: string }).tagDisplayZh
               : "tagDisplay" in work
@@ -463,14 +463,14 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
           </span>
         </div>
         <div style={{ display: "flex", gap: 24 }}>
-          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52 }}>{labels.year}</span>
-          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>{work.year}</span>
+          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, letterSpacing: "0.2em", color: "var(--faint)", width: 52 }}>{labels.year}</span>
+          <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.1em", color: "var(--dim)" }}>{work.year}</span>
         </div>
         {/* Award */}
         {"award" in work && (
           <div style={{ display: "flex", gap: 24 }}>
-            <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52, flexShrink: 0 }}>{labels.award}</span>
-            <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>
+            <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, letterSpacing: "0.2em", color: "var(--faint)", width: 52, flexShrink: 0 }}>{labels.award}</span>
+            <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.1em", color: "var(--dim)" }}>
               {lang === "zh" && "awardZh" in work
                 ? (work as typeof work & { awardZh: string }).awardZh
                 : (work as typeof work & { award: string }).award}
@@ -480,17 +480,17 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
         {/* Credits */}
         {"credits" in work && (work as typeof work & { credits?: { role: string; name: string; href?: string; name2?: string; href2?: string }[] }).credits?.map((c, i) => (
           <div key={i} style={{ display: "flex", gap: 24 }}>
-            <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", width: 52, flexShrink: 0 }}>{c.role}</span>
+            <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, letterSpacing: "0.2em", color: "var(--faint)", width: 52, flexShrink: 0 }}>{c.role}</span>
             <div style={{ display: "flex", gap: 12, flexWrap: "nowrap", alignItems: "baseline" }}>
               {c.href ? (
-                <a href={c.href} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)", textDecoration: "none" }}>
+                <a href={c.href} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.1em", color: "var(--dim)", textDecoration: "none" }}>
                   {c.name} ↗
                 </a>
               ) : (
-                <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--dim)" }}>{c.name}</span>
+                <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.1em", color: "var(--dim)" }}>{c.name}</span>
               )}
               {c.href2 && (
-                <a href={c.href2} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "var(--faint)", textDecoration: "none" }}>
+                <a href={c.href2} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.1em", color: "var(--faint)", textDecoration: "none" }}>
                   {c.name2} ↗
                 </a>
               )}
@@ -502,7 +502,7 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
       {/* Description */}
       <p style={{
         fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-        fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)",
+        fontSize: "clamp(15px,1.1vw,17px)", color: "var(--dim)",
         lineHeight: 1.75, marginBottom: 24, whiteSpace: "pre-line",
       }}>
         {lang === "zh" && "noteZh" in work
@@ -514,7 +514,7 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
       {"sourceLink" in work && (work as typeof work & { sourceLink?: { href: string; label: string; labelZh: string } }).sourceLink && (
         <a href={(work as typeof work & { sourceLink: { href: string; label: string; labelZh: string } }).sourceLink.href}
           target="_blank" rel="noopener noreferrer"
-          style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.18em", color: "var(--dim)", textDecoration: "none", display: "inline-block", marginBottom: 8 }}>
+          style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, letterSpacing: "0.18em", color: "var(--dim)", textDecoration: "none", display: "inline-block", marginBottom: 8 }}>
           {lang === "zh"
             ? (work as typeof work & { sourceLink: { href: string; label: string; labelZh: string } }).sourceLink.labelZh
             : (work as typeof work & { sourceLink: { href: string; label: string; labelZh: string } }).sourceLink.label}
@@ -524,7 +524,7 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
       {/* PDF modal trigger */}
       {"pdf" in work && (work as typeof work & { pdf?: string }).pdf && (
         <button onClick={() => setPdfOpen(true)}
-          style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.18em", color: "var(--dim)", background: "none", border: "none", padding: 0, cursor: "pointer", display: "inline-block", marginBottom: 8, textAlign: "left" }}>
+          style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, letterSpacing: "0.18em", color: "var(--dim)", background: "none", border: "none", padding: 0, cursor: "pointer", display: "inline-block", marginBottom: 8, textAlign: "left" }}>
           {lang === "zh"
             ? ("pdfLabelZh" in work ? (work as typeof work & { pdfLabelZh: string }).pdfLabelZh : "查看杂志 PDF →")
             : ("pdfLabel" in work ? (work as typeof work & { pdfLabel: string }).pdfLabel : "VIEW MAGAZINE PDF →")}
@@ -537,7 +537,7 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
           onClick={(e) => { if (e.target === e.currentTarget) setPdfOpen(false); }}>
           <div style={{ display: "flex", justifyContent: "flex-end", padding: "14px 20px", flexShrink: 0 }}>
             <button onClick={() => setPdfOpen(false)}
-              style={{ background: "none", border: "none", cursor: "pointer", color: "white", fontSize: 22, lineHeight: 1, fontFamily: "var(--font-geist),sans-serif", opacity: 0.7 }}>
+              style={{ background: "none", border: "none", cursor: "pointer", color: "white", fontSize: 24, lineHeight: 1, fontFamily: "var(--font-geist),sans-serif", opacity: 0.7 }}>
               ✕
             </button>
           </div>
@@ -552,7 +552,7 @@ function DetailPanel({ work }: { work: typeof works[0] | null }) {
       {/* Writing link */}
       {"writingLink" in work && (work as typeof work & { writingLink?: string }).writingLink && (
         <a href={(work as typeof work & { writingLink: string }).writingLink}
-          style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.18em", color: "var(--dim)", textDecoration: "none", display: "block" }}>
+          style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, letterSpacing: "0.18em", color: "var(--dim)", textDecoration: "none", display: "block" }}>
           {lang === "zh" ? "阅读文章 →" : "READ ESSAY →"}
         </a>
       )}
@@ -628,7 +628,7 @@ export default function Design() {
           }}>
             <h1 style={{
               fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-              fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
+              fontSize: "clamp(34px,3.5vw,50px)", color: "var(--dark)",
             }}>{lang === "en" ? "Design" : "设计"}</h1>
             {/* Filter tabs */}
             <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 14px" }}>
@@ -642,7 +642,7 @@ export default function Design() {
                     <span style={{
                       display: "inline-block", position: "relative", paddingBottom: 4,
                       fontFamily: "var(--font-geist),sans-serif",
-                      fontSize: 9, letterSpacing: "0.2em",
+                      fontSize: 11, letterSpacing: "0.2em",
                       color: isActive ? "var(--dark)" : "var(--faint)",
                       transition: "color 0.2s",
                     }}>
@@ -692,7 +692,7 @@ export default function Design() {
                   {/* Number / selection dot */}
                   <span style={{
                     fontFamily: "var(--font-geist),sans-serif",
-                    fontSize: isSelected ? 16 : 9, letterSpacing: "0.2em",
+                    fontSize: isSelected ? 18 : 11, letterSpacing: "0.2em",
                     color: isSelected ? "var(--dark)" : "var(--faint)",
                     lineHeight: 1, transition: "color 0.15s, font-size 0.15s",
                   }}>{isSelected ? "—" : work.num}</span>
@@ -700,7 +700,7 @@ export default function Design() {
                   {/* Title */}
                   <span style={{
                     fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-                    fontSize: "clamp(18px,1.6vw,22px)", color: "var(--dark)",
+                    fontSize: "clamp(20px,1.6vw,24px)", color: "var(--dark)",
                   }}>
                     {renderBreakTitle(lang === "en" && "titleEn" in work
                       ? (work as typeof work & { titleEn: string }).titleEn
@@ -710,7 +710,7 @@ export default function Design() {
                   {/* Tag */}
                   <span style={{
                     fontFamily: "var(--font-geist),sans-serif",
-                    fontSize: 9, letterSpacing: "0.16em", color: "var(--faint)",
+                    fontSize: 11, letterSpacing: "0.16em", color: "var(--faint)",
                   }}>
                     {lang === "zh" && "tagDisplayZh" in work
                       ? (work as typeof work & { tagDisplayZh: string }).tagDisplayZh
@@ -769,7 +769,7 @@ export default function Design() {
                   width: "100%", padding: "12px 20px",
                   background: "var(--bg)", border: "none", cursor: "pointer",
                   fontFamily: "var(--font-geist),sans-serif",
-                  fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)",
+                  fontSize: 11, letterSpacing: "0.2em", color: "var(--faint)",
                 }}
               >← {lang === "zh" ? "返回" : "BACK"}</button>
               <div style={{ padding: "0 20px 80px" }}>

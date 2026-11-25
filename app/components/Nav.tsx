@@ -74,7 +74,7 @@ export default function Nav() {
                   position: "absolute", top: 16, right: 20,
                   background: "none", border: "none", cursor: "pointer",
                   fontFamily: "var(--font-geist),sans-serif",
-                  fontSize: 16, color: "var(--faint)", padding: "6px 10px",
+                  fontSize: 18, color: "var(--faint)", padding: "6px 10px",
                 }}
               >✕</button>
 
@@ -96,7 +96,7 @@ export default function Nav() {
                         <span style={{
                           fontFamily: "var(--font-newsreader),serif",
                           fontStyle: "italic", fontWeight: 200,
-                          fontSize: 32,
+                          fontSize: 34,
                           color: isActive ? "var(--dark)" : "var(--faint)",
                         }}>{cat.label[lang]}</span>
                       </Link>
@@ -141,7 +141,7 @@ export default function Nav() {
                 <span style={{
                   fontFamily: "var(--font-newsreader),serif",
                   fontStyle: "italic", fontWeight: 200,
-                  fontSize: 13,
+                  fontSize: 15,
                   color: isActive ? "var(--dark)" : "var(--faint)",
                   transition: "color 0.3s ease",
                   whiteSpace: "nowrap",

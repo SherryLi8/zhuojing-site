@@ -149,7 +149,7 @@ export default function Photos() {
           }}>
             <h1 style={{
               fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-              fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
+              fontSize: "clamp(34px,3.5vw,50px)", color: "var(--dark)",
             }}>{ui.title}</h1>
 
             {/* Series tabs — animated underline */}
@@ -164,7 +164,7 @@ export default function Photos() {
                     <span style={{
                       display: "inline-block", position: "relative", paddingBottom: 4,
                       fontFamily: "var(--font-geist),sans-serif",
-                      fontSize: 9, letterSpacing: "0.2em",
+                      fontSize: 11, letterSpacing: "0.2em",
                       color: isActive ? "var(--dark)" : "var(--faint)",
                       transition: "color 0.2s",
                     }}>
@@ -199,9 +199,9 @@ export default function Photos() {
               >
                 <p style={{
                   fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                  fontSize: 14, color: "var(--dim)", lineHeight: 1.7,
+                  fontSize: 16, color: "var(--dim)", lineHeight: 1.7,
                 }}>{activeSeries.note}</p>
-                <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)", marginTop: 8 }}>
+                <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, letterSpacing: "0.2em", color: "var(--faint)", marginTop: 8 }}>
                   {activeSeries.count} {ui.images}
                 </div>
               </motion.div>
@@ -269,19 +269,19 @@ export default function Photos() {
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.35, ease: [0.25, 0, 0, 1] }}
             >
-              <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.22em", color: "var(--faint)", marginBottom: 20 }}>
+              <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, letterSpacing: "0.22em", color: "var(--faint)", marginBottom: 20 }}>
                 {activeSeries.location.toUpperCase()}
               </div>
               <div style={{
                 fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-                fontSize: "clamp(20px,1.8vw,26px)", color: "var(--dark)",
+                fontSize: "clamp(22px,1.8vw,28px)", color: "var(--dark)",
                 lineHeight: 1.2, marginBottom: 20,
               }}>{activeSeries.title}</div>
               <p style={{
                 fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)", lineHeight: 1.75, marginBottom: 20,
+                fontSize: "clamp(15px,1.1vw,17px)", color: "var(--dim)", lineHeight: 1.75, marginBottom: 20,
               }}>{activeSeries.note}</p>
-              <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "var(--faint)" }}>
+              <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, letterSpacing: "0.2em", color: "var(--faint)" }}>
                 {activeSeries.count} {ui.images}
               </div>
             </motion.div>

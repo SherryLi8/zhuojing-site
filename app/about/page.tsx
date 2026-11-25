@@ -91,11 +91,11 @@ function WechatModal({ onClose }: { onClose: () => void }) {
       >
         <img src="/Images/wechat.JPG" alt="WeChat QR" width={220} height={220} style={{ display: "block" }} />
         <div style={{
-          fontFamily: "var(--font-geist),sans-serif", fontSize: 10,
+          fontFamily: "var(--font-geist),sans-serif", fontSize: 12,
           letterSpacing: "0.2em", color: "var(--faint)",
         }}>SCAN TO ADD · 扫码添加好友</div>
         <button onClick={onClose} style={{
-          fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.16em",
+          fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.16em",
           color: "var(--faint)", background: "none", border: "none", cursor: "pointer", marginTop: 4,
         }}>CLOSE ×</button>
       </motion.div>
@@ -108,7 +108,7 @@ function SLabel({ children }: { children: React.ReactNode }) {
   return (
     <div style={{
       fontFamily: "var(--font-geist),sans-serif",
-      fontSize: 10, letterSpacing: "0.24em", color: "var(--dark)",
+      fontSize: 12, letterSpacing: "0.24em", color: "var(--dark)",
       marginBottom: 24, paddingBottom: 10,
       borderBottom: "1px solid var(--line)",
     }}>{children}</div>
@@ -314,7 +314,7 @@ export default function About() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-                fontSize: "clamp(36px,4vw,58px)", color: "var(--dark)", lineHeight: 1.05,
+                fontSize: "clamp(38px,4vw,60px)", color: "var(--dark)", lineHeight: 1.05,
               }}
             >{c.name}</motion.h1>
           </div>
@@ -322,7 +322,7 @@ export default function About() {
           <FadeUp delay={0.1}>
             <p style={{
               fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-              fontSize: "clamp(16px,1.45vw,20px)", lineHeight: 1.8, color: "var(--dim)",
+              fontSize: "clamp(18px,1.45vw,22px)", lineHeight: 1.8, color: "var(--dim)",
               maxWidth: 460, marginBottom: 56,
             }}>{c.bio}</p>
           </FadeUp>
@@ -339,20 +339,20 @@ export default function About() {
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 5 }}>
                     <span style={{
                       fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                      fontSize: "clamp(15px,1.3vw,18px)", color: "var(--dark)",
+                      fontSize: "clamp(17px,1.3vw,20px)", color: "var(--dark)",
                     }}>{e.org}</span>
                     <span style={{
-                      fontFamily: "var(--font-geist),sans-serif", fontSize: 10,
+                      fontFamily: "var(--font-geist),sans-serif", fontSize: 12,
                       letterSpacing: "0.12em", color: "var(--faint)", flexShrink: 0, marginLeft: 16,
                     }}>{e.period}</span>
                   </div>
                   <div style={{
-                    fontFamily: "var(--font-geist),sans-serif", fontSize: 10,
+                    fontFamily: "var(--font-geist),sans-serif", fontSize: 12,
                     letterSpacing: "0.16em", color: "var(--faint)", marginBottom: 12,
                   }}>{e.role.toUpperCase()}</div>
                   <p style={{
                     fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                    fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)", lineHeight: 1.75, maxWidth: 440,
+                    fontSize: "clamp(15px,1.1vw,17px)", color: "var(--dim)", lineHeight: 1.75, maxWidth: 440,
                   }}>{e.desc}</p>
                 </div>
               ))}
@@ -369,21 +369,21 @@ export default function About() {
                     <div style={{ display: "flex", alignItems: "baseline", gap: 14, flexWrap: "wrap" }}>
                       <span style={{
                         fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                        fontSize: "clamp(15px,1.3vw,18px)", color: "var(--dark)",
+                        fontSize: "clamp(17px,1.3vw,20px)", color: "var(--dark)",
                       }}>{p.org}</span>
                       <span style={{
-                        fontFamily: "var(--font-geist),sans-serif", fontSize: 10,
+                        fontFamily: "var(--font-geist),sans-serif", fontSize: 12,
                         letterSpacing: "0.14em", color: "var(--faint)",
                       }}>{p.role.toUpperCase()}</span>
                     </div>
                     <span style={{
-                      fontFamily: "var(--font-geist),sans-serif", fontSize: 10,
+                      fontFamily: "var(--font-geist),sans-serif", fontSize: 12,
                       letterSpacing: "0.1em", color: "var(--faint)", flexShrink: 0, marginLeft: 16,
                     }}>{p.period}</span>
                   </div>
                   <p style={{
                     fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                    fontSize: "clamp(13px,1.05vw,15px)", color: "var(--dim)", lineHeight: 1.7, maxWidth: 440,
+                    fontSize: "clamp(15px,1.05vw,17px)", color: "var(--dim)", lineHeight: 1.7, maxWidth: 440,
                   }}>{p.desc}</p>
                 </div>
               ))}
@@ -400,24 +400,24 @@ export default function About() {
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 4 }}>
                       <span style={{
                         fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                        fontSize: "clamp(17px,1.5vw,21px)", color: "var(--dark)",
+                        fontSize: "clamp(19px,1.5vw,23px)", color: "var(--dark)",
                       }}>{e.school}</span>
                       <span style={{
-                        fontFamily: "var(--font-geist),sans-serif", fontSize: 10,
+                        fontFamily: "var(--font-geist),sans-serif", fontSize: 12,
                         letterSpacing: "0.1em", color: "var(--faint)",
                       }}>{e.period}</span>
                     </div>
                     <div style={{
-                      fontFamily: "var(--font-geist),sans-serif", fontSize: 11,
+                      fontFamily: "var(--font-geist),sans-serif", fontSize: 13,
                       letterSpacing: "0.08em", color: "var(--dim)", marginBottom: 3,
                     }}>{e.deg}</div>
                     <div style={{
-                      fontFamily: "var(--font-geist),sans-serif", fontSize: 10,
+                      fontFamily: "var(--font-geist),sans-serif", fontSize: 12,
                       color: "var(--faint)", lineHeight: 1.5,
                     }}>{e.major}</div>
                     {e.note && (
                       <div style={{
-                        fontFamily: "var(--font-geist),sans-serif", fontSize: 10,
+                        fontFamily: "var(--font-geist),sans-serif", fontSize: 12,
                         color: "var(--faint)", borderLeft: "2px solid var(--line)",
                         paddingLeft: 10, marginTop: 8,
                       }}>{e.note}</div>
@@ -436,7 +436,7 @@ export default function About() {
                 {c.recognition.map((r, i) => (
                   <div key={i} style={{
                     fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                    fontSize: "clamp(14px,1.2vw,16px)", color: "var(--dim)", lineHeight: 1.5,
+                    fontSize: "clamp(16px,1.2vw,18px)", color: "var(--dim)", lineHeight: 1.5,
                   }}>{r}</div>
                 ))}
               </div>
@@ -449,29 +449,29 @@ export default function About() {
               <SLabel>{c.contactTitle}</SLabel>
               <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
                 <a href="mailto:sherrylisherry8@gmail.com" style={{ textDecoration: "none" }}>
-                  <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.2em", color: "var(--faint)", marginBottom: 5 }}>{c.emailLabel}</div>
-                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(14px,1.2vw,16px)", color: "var(--dim)" }}>sherrylisherry8@gmail.com</div>
+                  <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.2em", color: "var(--faint)", marginBottom: 5 }}>{c.emailLabel}</div>
+                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(16px,1.2vw,18px)", color: "var(--dim)" }}>sherrylisherry8@gmail.com</div>
                 </a>
                 <a href="https://www.instagram.com/jingfinity_/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                  <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.2em", color: "var(--faint)", marginBottom: 6 }}>{c.igLabel}</div>
+                  <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.2em", color: "var(--faint)", marginBottom: 6 }}>{c.igLabel}</div>
                   <div style={{ display: "flex", alignItems: "center", gap: 9, color: "var(--dim)" }}>
                     <IconInstagram />
-                    <span style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(14px,1.2vw,16px)" }}>@jingfinity_</span>
+                    <span style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(16px,1.2vw,18px)" }}>@jingfinity_</span>
                   </div>
                 </a>
                 <a href="https://xhslink.com/m/3zIvelzABOD" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                  <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.2em", color: "var(--faint)", marginBottom: 6 }}>{c.xhsLabel}</div>
+                  <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.2em", color: "var(--faint)", marginBottom: 6 }}>{c.xhsLabel}</div>
                   <div style={{ display: "flex", alignItems: "center", gap: 9, color: "var(--dim)" }}>
                     <IconXiaohongshu />
-                    <span style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(14px,1.2vw,16px)" }}>@jingfinity_</span>
+                    <span style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(16px,1.2vw,18px)" }}>@jingfinity_</span>
                   </div>
                 </a>
                 <button onClick={() => setWechatOpen(true)}
                   style={{ background: "none", border: "none", cursor: "pointer", padding: 0, textAlign: "left" }}>
-                  <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.2em", color: "var(--faint)", marginBottom: 6 }}>{c.wcLabel}</div>
+                  <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.2em", color: "var(--faint)", marginBottom: 6 }}>{c.wcLabel}</div>
                   <div style={{ display: "flex", alignItems: "center", gap: 9, color: "var(--dim)" }}>
                     <IconWechat />
-                    <span style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(14px,1.2vw,16px)" }}>{c.wcSub}</span>
+                    <span style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(16px,1.2vw,18px)" }}>{c.wcSub}</span>
                   </div>
                 </button>
               </div>

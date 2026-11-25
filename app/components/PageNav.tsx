@@ -24,7 +24,7 @@ export default function PageNav() {
           >
             <span style={{
               fontFamily: "var(--font-geist),sans-serif",
-              fontSize: 9, letterSpacing: "0.22em",
+              fontSize: 11, letterSpacing: "0.22em",
               color: isActive ? "var(--dark)" : "var(--faint)",
               transition: "color 0.15s",
               display: "block",

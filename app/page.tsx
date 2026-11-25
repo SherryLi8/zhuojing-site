@@ -69,7 +69,7 @@ function SideNav({ active }: { active: number }) {
               display: "flex", alignItems: "center",
               padding: "4px 0",
               fontFamily: "var(--font-geist),sans-serif",
-              fontSize: 8, letterSpacing: "0.18em", color: "var(--dim)",
+              fontSize: 10, letterSpacing: "0.18em", color: "var(--dim)",
               whiteSpace: "nowrap",
             }}
           >
@@ -123,7 +123,7 @@ function Wheel({ size = 108, text = "DESIGN · WORDS · PHOTOS · ABOUT · " }: 
       style={{ width: size, height: size }}>
       <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size}>
         <defs><path id="wp" d={d}/></defs>
-        <text style={{ fontSize: 7.5, fill: "var(--faint)", letterSpacing: "0.14em", fontFamily: "var(--font-geist),sans-serif" }}>
+        <text style={{ fontSize: 9.5, fill: "var(--faint)", letterSpacing: "0.14em", fontFamily: "var(--font-geist),sans-serif" }}>
           <textPath href="#wp">{text}</textPath>
         </text>
       </svg>
@@ -328,18 +328,18 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
               >
                 {/* Left: metadata */}
                 <div style={{ flexShrink: 0, maxWidth: 280 }}>
-                  <div style={{ fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}>
+                  <div style={{ fontSize: 10, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 24 }}>
                     {String(workIdx + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")} &nbsp; {lang === "zh" ? works[workIdx].categoryZh : works[workIdx].category}
                   </div>
-                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(32px,3.8vw,56px)", color: "var(--dark)", lineHeight: 1.05, marginBottom: 6 }}>
+                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(34px,3.8vw,58px)", color: "var(--dark)", lineHeight: 1.05, marginBottom: 6 }}>
                     {lang === "en" && "titleEn" in works[workIdx]
                       ? (works[workIdx] as typeof works[0] & { titleEn: string }).titleEn
                       : works[workIdx].title}
                   </div>
-                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)", lineHeight: 1.7, marginBottom: 28 }}>
+                  <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(15px,1.1vw,17px)", color: "var(--dim)", lineHeight: 1.7, marginBottom: 28 }}>
                     {lang === "zh" ? works[workIdx].noteZh : works[workIdx].note}
                   </div>
-                  <Link href={`/design?project=${"slug" in works[workIdx] ? (works[workIdx] as typeof works[0] & { slug: string }).slug : works[workIdx].title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`} style={{ fontSize: 10, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
+                  <Link href={`/design?project=${"slug" in works[workIdx] ? (works[workIdx] as typeof works[0] & { slug: string }).slug : works[workIdx].title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`} style={{ fontSize: 12, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
                     {lang === "zh" ? "查看项目 →" : "VIEW PROJECT →"}
                   </Link>
                 </div>
@@ -380,22 +380,22 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                   {/* Left: metadata */}
                   <div style={{ flexShrink: 0, width: 148, marginRight: "5vw" }}>
                     <div style={{
-                      fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)",
+                      fontSize: 10, letterSpacing: "0.28em", color: "var(--faint)",
                       fontFamily: "var(--font-geist),sans-serif", marginBottom: 28,
                     }}>
                       {String(photoIdx + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}
                     </div>
                     <div style={{
                       fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                      fontSize: "clamp(20px,2vw,28px)", color: "var(--dark)",
+                      fontSize: "clamp(22px,2vw,30px)", color: "var(--dark)",
                       lineHeight: 1.1, marginBottom: 12,
                     }}>{lang === "zh" ? photos[photoIdx].titleZh : photos[photoIdx].title}</div>
                     <div style={{
-                      fontSize: 8, letterSpacing: "0.24em", color: "var(--faint)",
+                      fontSize: 10, letterSpacing: "0.24em", color: "var(--faint)",
                       fontFamily: "var(--font-geist),sans-serif", marginBottom: 36,
                     }}>{lang === "zh" ? photos[photoIdx].seriesZh : photos[photoIdx].series.toUpperCase()}</div>
                     <Link href={`/photos?series=${photos[photoIdx].id}`} style={{
-                      fontSize: 9, letterSpacing: "0.2em", color: "var(--dim)",
+                      fontSize: 11, letterSpacing: "0.2em", color: "var(--dim)",
                       fontFamily: "var(--font-geist),sans-serif",
                     }}>{lang === "zh" ? "查看全部 →" : "VIEW ALL →"}</Link>
                   </div>
@@ -447,7 +447,7 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                     >
                       <span style={{
                         fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                        fontSize: "clamp(18px,1.7vw,24px)", color: "var(--dark)", lineHeight: 1.3,
+                        fontSize: "clamp(20px,1.7vw,26px)", color: "var(--dark)", lineHeight: 1.3,
                       }}>
                         {(() => {
                           const t = lang === "zh" ? w.titleZh : w.title;
@@ -456,9 +456,9 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                             ? <>{parts[0]}:<br/>{parts.slice(1).join(": ")}</>
                             : <>{t}</>;
                         })()}
-                        {w.pub && <span style={{ fontSize: 11, marginLeft: 8, color: "var(--faint)", fontStyle: "normal" }}>↗</span>}
+                        {w.pub && <span style={{ fontSize: 13, marginLeft: 8, color: "var(--faint)", fontStyle: "normal" }}>↗</span>}
                       </span>
-                      <span style={{ fontSize: 8, letterSpacing: "0.18em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", textTransform: "uppercase" }}>{lang === "zh" ? w.tagZh : w.tag}</span>
+                      <span style={{ fontSize: 10, letterSpacing: "0.18em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", textTransform: "uppercase" }}>{lang === "zh" ? w.tagZh : w.tag}</span>
                     </motion.a>
                   ))}
                 </div>
@@ -475,16 +475,16 @@ function ContentBlock({ onSectionChange }: { onSectionChange: (idx: number) => v
                 >
                   {/* Left: metadata */}
                   <div style={{ flexShrink: 0, width: 148, marginRight: "5vw" }}>
-                    <div style={{ fontSize: 8, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 28 }}>
+                    <div style={{ fontSize: 10, letterSpacing: "0.28em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 28 }}>
                       {String(artIdx + 1).padStart(2, "0")} / {String(artPieces.length).padStart(2, "0")}
                     </div>
-                    <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(20px,2vw,28px)", color: "var(--dark)", lineHeight: 1.1, marginBottom: 12 }}>
+                    <div style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(22px,2vw,30px)", color: "var(--dark)", lineHeight: 1.1, marginBottom: 12 }}>
                       {lang === "zh" ? artPieces[artIdx].title : artPieces[artIdx].titleEn}
                     </div>
-                    <div style={{ fontSize: 8, letterSpacing: "0.24em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 36 }}>
+                    <div style={{ fontSize: 10, letterSpacing: "0.24em", color: "var(--faint)", fontFamily: "var(--font-geist),sans-serif", marginBottom: 36 }}>
                       {lang === "zh" ? artPieces[artIdx].mediumZh.toUpperCase() : artPieces[artIdx].medium.toUpperCase()} · {artPieces[artIdx].year}
                     </div>
-                    <Link href="/art" style={{ fontSize: 9, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
+                    <Link href="/art" style={{ fontSize: 11, letterSpacing: "0.2em", color: "var(--dim)", fontFamily: "var(--font-geist),sans-serif" }}>
                       {lang === "zh" ? "查看全部 →" : "VIEW ALL →"}
                     </Link>
                   </div>
@@ -549,17 +549,17 @@ function FinalNav() {
                 <div style={{ display: "flex", alignItems: "baseline", gap: "2.5vw" }}>
                   <span style={{
                     fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                    fontSize: "clamp(26px,2.8vw,40px)", color: "var(--dark)",
+                    fontSize: "clamp(28px,2.8vw,42px)", color: "var(--dark)",
                   }}>{lang === "zh" ? labelZh : label}</span>
                   <span style={{
-                    fontFamily: "var(--font-geist),sans-serif", fontSize: 9,
+                    fontFamily: "var(--font-geist),sans-serif", fontSize: 11,
                     letterSpacing: "0.18em", color: "var(--faint)",
                   }}>{lang === "zh" ? descZh : desc}</span>
                 </div>
                 <motion.span
                   animate={{ opacity: isAct ? 1 : 0, x: isAct ? 0 : -8 }}
                   transition={{ duration: 0.2 }}
-                  style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, color: "var(--dim)" }}
+                  style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 13, color: "var(--dim)" }}
                 >→</motion.span>
               </motion.div>
             </Link>
@@ -656,7 +656,7 @@ export default function Home() {
 
   const ps: React.CSSProperties = {
     fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-    fontSize: "clamp(22px,2.8vw,42px)", color: "var(--dim)", display: "block",
+    fontSize: "clamp(24px,2.8vw,44px)", color: "var(--dim)", display: "block",
   };
 
   return (
@@ -762,7 +762,7 @@ export default function Home() {
           <div style={{
             position: "absolute", bottom: 28, left: 0, right: 0,
             padding: isMobile ? "0 6vw" : "0 8vw 0 18vw",
-            fontFamily: "var(--font-geist),sans-serif", fontSize: 9,
+            fontFamily: "var(--font-geist),sans-serif", fontSize: 11,
             letterSpacing: "0.15em", color: "var(--faint)",
           }}>
             © 2026 · ZHUOJING LI
@@ -803,7 +803,7 @@ function AboutBlock() {
     <div ref={ref} style={{ maxWidth: 680, position: "relative", zIndex: 60 }}>
       <div style={{ overflow: "hidden", marginBottom: 24 }}>
         <motion.div
-          style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(40px,5vw,72px)", color: "var(--dark)", lineHeight: 1.05 }}
+          style={{ fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontSize: "clamp(42px,5vw,74px)", color: "var(--dark)", lineHeight: 1.05 }}
           initial={{ y: "105%" }} animate={vis ? { y: "0%" } : {}}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >{c.name}</motion.div>
@@ -815,7 +815,7 @@ function AboutBlock() {
             <motion.p
               style={{
                 fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                fontSize: "clamp(16px,1.8vw,24px)", lineHeight: 1.65, color: "var(--dim)",
+                fontSize: "clamp(18px,1.8vw,26px)", lineHeight: 1.65, color: "var(--dim)",
                 margin: 0,
               }}
               initial={{ y: "110%" }} animate={vis ? { y: "0%" } : {}}
@@ -830,7 +830,7 @@ function AboutBlock() {
       >
         <Link href="/about" style={{
           fontFamily: "var(--font-geist),sans-serif",
-          fontSize: 10, letterSpacing: "0.18em", color: "var(--dim)",
+          fontSize: 12, letterSpacing: "0.18em", color: "var(--dim)",
         }}>{lang === "zh" ? "完整简介 →" : "FULL BIO →"}</Link>
       </motion.div>
     </div>

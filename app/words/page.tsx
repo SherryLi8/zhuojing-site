@@ -112,9 +112,9 @@ export default function Words() {
           }}>
             <h1 style={{
               fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-              fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
+              fontSize: "clamp(34px,3.5vw,50px)", color: "var(--dark)",
             }}>{lang === "en" ? "Writing" : "文字"}</h1>
-            <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.2em", color: "var(--faint)" }}>
+            <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.2em", color: "var(--faint)" }}>
               {list.filter(e => e.published).length}{lang === "en" ? " PUBLISHED" : " 已发表"}
             </span>
           </div>
@@ -124,7 +124,7 @@ export default function Words() {
             display: "grid", gridTemplateColumns: "1fr 80px",
             padding: "10px 0", borderBottom: "1px solid var(--line)",
             fontFamily: "var(--font-geist),sans-serif",
-            fontSize: 9, letterSpacing: "0.22em", color: "var(--faint)",
+            fontSize: 11, letterSpacing: "0.22em", color: "var(--faint)",
           }}>
             <span>{lang === "en" ? "TITLE" : "标题"}</span>
             <span>{lang === "en" ? "TYPE" : "分类"}</span>
@@ -158,7 +158,7 @@ export default function Words() {
                 >
                   <span style={{
                     fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                    fontSize: "clamp(17px,1.5vw,21px)", color: "var(--dark)", lineHeight: 1.2,
+                    fontSize: "clamp(19px,1.5vw,23px)", color: "var(--dark)", lineHeight: 1.2,
                   }}>
                     {(() => {
                       const t = entry.title;
@@ -168,10 +168,10 @@ export default function Words() {
                         : <>{t}</>;
                     })()}
                     {entry.external && entry.published &&
-                      <span style={{ fontSize: 12, marginLeft: 7, color: "var(--faint)" }}>↗</span>
+                      <span style={{ fontSize: 14, marginLeft: 7, color: "var(--faint)" }}>↗</span>
                     }
                   </span>
-                  <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.16em", color: "var(--faint)" }}>
+                  <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, letterSpacing: "0.16em", color: "var(--faint)" }}>
                     {entry.published ? entry.tag : (lang === "en" ? "COMING SOON" : "敬请期待")}
                   </span>
                 </Tag>
@@ -179,7 +179,7 @@ export default function Words() {
             );
           })}
 
-          <div style={{ marginTop: 36, fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontStyle: "italic", fontSize: 13, color: "var(--faint)" }}>
+          <div style={{ marginTop: 36, fontFamily: "var(--font-newsreader),serif", fontWeight: 200, fontStyle: "italic", fontSize: 15, color: "var(--faint)" }}>
             {lang === "en" ? "Dimmed pieces are in progress or not yet released." : "暗色条目仍在写作中，尚未发表。"}
           </div>
         </div>
@@ -196,12 +196,12 @@ export default function Words() {
                 exit={{ opacity: 0, y: -6 }}
                 transition={{ duration: 0.28, ease: [0.25, 0, 0, 1] }}
               >
-                <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.22em", color: "var(--faint)", marginBottom: 20 }}>
+                <div style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, letterSpacing: "0.22em", color: "var(--faint)", marginBottom: 20 }}>
                   {hovered.tag.toUpperCase()} · {hovered.date}
                 </div>
                 <div style={{
                   fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                  fontSize: "clamp(18px,1.6vw,22px)", color: "var(--dark)",
+                  fontSize: "clamp(20px,1.6vw,24px)", color: "var(--dark)",
                   lineHeight: 1.25, marginBottom: 20,
                 }}>
                   {(() => {
@@ -214,12 +214,12 @@ export default function Words() {
                 </div>
                 <p style={{
                   fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-                  fontSize: "clamp(13px,1.1vw,15px)", color: "var(--dim)", lineHeight: 1.75,
+                  fontSize: "clamp(15px,1.1vw,17px)", color: "var(--dim)", lineHeight: 1.75,
                 }}>{hovered.desc}</p>
                 {hovered.published && (
                   <a href={hovered.href} target={hovered.external ? "_blank" : undefined}
                     rel={hovered.external ? "noopener noreferrer" : undefined}
-                    style={{ display: "block", marginTop: 24, fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.22em", color: "var(--faint)", textDecoration: "none", borderBottom: "1px solid var(--line)", paddingBottom: 2, width: "fit-content" }}>
+                    style={{ display: "block", marginTop: 24, fontFamily: "var(--font-geist),sans-serif", fontSize: 11, letterSpacing: "0.22em", color: "var(--faint)", textDecoration: "none", borderBottom: "1px solid var(--line)", paddingBottom: 2, width: "fit-content" }}>
                     {lang === "zh" ? "阅读 →" : "READ →"}
                   </a>
                 )}
@@ -231,7 +231,7 @@ export default function Words() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.18em", color: "var(--faint)" }}
+                style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.18em", color: "var(--faint)" }}
               >
                 {lang === "zh" ? "悬停查看" : "HOVER AN ENTRY"}
               </motion.div>

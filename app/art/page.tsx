@@ -146,7 +146,7 @@ function Lightbox({ work, onClose }: { work: typeof artWorks[0]; onClose: () => 
     >
       {/* Close button */}
       <div style={{ position: "sticky", top: 0, display: "flex", justifyContent: "flex-end", padding: "18px 24px", flexShrink: 0, zIndex: 10 }}>
-        <button onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.55)", fontSize: 20, lineHeight: 1, fontFamily: "var(--font-geist),sans-serif", padding: "4px 8px" }}>
+        <button onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.55)", fontSize: 22, lineHeight: 1, fontFamily: "var(--font-geist),sans-serif", padding: "4px 8px" }}>
           ✕
         </button>
       </div>
@@ -179,7 +179,7 @@ function Lightbox({ work, onClose }: { work: typeof artWorks[0]; onClose: () => 
           {displayTitle && (
             <div style={{
               fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-              fontSize: "clamp(20px,1.8vw,26px)", color: "rgba(255,255,255,0.88)",
+              fontSize: "clamp(22px,1.8vw,28px)", color: "rgba(255,255,255,0.88)",
               lineHeight: 1.2, marginBottom: 16,
             }}>
               {displayTitle}
@@ -187,18 +187,18 @@ function Lightbox({ work, onClose }: { work: typeof artWorks[0]; onClose: () => 
           )}
           <div style={{ display: "flex", gap: 32, marginBottom: 20 }}>
             <div style={{ display: "flex", gap: 12 }}>
-              <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "rgba(255,255,255,0.35)" }}>
+              <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, letterSpacing: "0.2em", color: "rgba(255,255,255,0.35)" }}>
                 {lang === "en" ? "MEDIUM" : "媒介"}
               </span>
-              <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "rgba(255,255,255,0.55)" }}>
+              <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.1em", color: "rgba(255,255,255,0.55)" }}>
                 {MEDIUM_LABELS[lang][work.medium]}
               </span>
             </div>
             <div style={{ display: "flex", gap: 12 }}>
-              <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 9, letterSpacing: "0.2em", color: "rgba(255,255,255,0.35)" }}>
+              <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 11, letterSpacing: "0.2em", color: "rgba(255,255,255,0.35)" }}>
                 {lang === "en" ? "YEAR" : "年份"}
               </span>
-              <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 10, letterSpacing: "0.1em", color: "rgba(255,255,255,0.55)" }}>
+              <span style={{ fontFamily: "var(--font-geist),sans-serif", fontSize: 12, letterSpacing: "0.1em", color: "rgba(255,255,255,0.55)" }}>
                 {work.year}
               </span>
             </div>
@@ -206,7 +206,7 @@ function Lightbox({ work, onClose }: { work: typeof artWorks[0]; onClose: () => 
           {work.note ? (
             <p style={{
               fontFamily: "var(--font-newsreader),serif", fontWeight: 200,
-              fontSize: "clamp(13px,1.1vw,15px)", color: "rgba(255,255,255,0.5)",
+              fontSize: "clamp(15px,1.1vw,17px)", color: "rgba(255,255,255,0.5)",
               lineHeight: 1.75, whiteSpace: "pre-line",
             }}>
               {lang === "zh" && "noteZh" in work
@@ -246,7 +246,7 @@ export default function Art() {
         }}>
           <h1 style={{
             fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-            fontSize: "clamp(32px,3.5vw,48px)", color: "var(--dark)",
+            fontSize: "clamp(34px,3.5vw,50px)", color: "var(--dark)",
           }}>{lang === "en" ? "Art" : "艺术"}</h1>
 
           <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: isMobile ? "flex-start" : "flex-end" }}>
@@ -260,7 +260,7 @@ export default function Art() {
                   <span style={{
                     display: "inline-block", position: "relative", paddingBottom: 4,
                     fontFamily: "var(--font-geist),sans-serif",
-                    fontSize: 9, letterSpacing: "0.2em",
+                    fontSize: 11, letterSpacing: "0.2em",
                     color: isActive ? "var(--dark)" : "var(--faint)",
                     transition: "color 0.2s",
                   }}>
@@ -329,13 +329,13 @@ export default function Art() {
                   return t ? (
                     <span style={{
                       fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
-                      fontSize: 14, color: "#fff", lineHeight: 1.2, marginBottom: 4,
+                      fontSize: 16, color: "#fff", lineHeight: 1.2, marginBottom: 4,
                       textShadow: "0 1px 10px rgba(0,0,0,0.65)",
                     }}>{t}</span>
                   ) : null;
                 })()}
                 <span style={{
-                  fontFamily: "var(--font-geist),sans-serif", fontSize: 9,
+                  fontFamily: "var(--font-geist),sans-serif", fontSize: 11,
                   letterSpacing: "0.18em", color: "#fff",
                   textShadow: "0 1px 8px rgba(0,0,0,0.65)",
                 }}>

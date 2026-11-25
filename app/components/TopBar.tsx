@@ -22,7 +22,7 @@ export default function TopBar() {
         <Link href="/" style={{ textDecoration: "none" }}>
           <span style={{
             fontFamily: "var(--font-newsreader),serif",
-            fontWeight: 200, fontSize: 13, letterSpacing: "0.14em",
+            fontWeight: 200, fontSize: 15, letterSpacing: "0.14em",
             color: "var(--dark)", lineHeight: 1,
           }}>
             Zhuojing Li
@@ -30,7 +30,7 @@ export default function TopBar() {
         </Link>
         {!isMobile && <span style={{
           display: "inline-flex", alignItems: "center", gap: 6,
-          fontSize: 9, letterSpacing: "0.12em", color: "var(--dim)",
+          fontSize: 11, letterSpacing: "0.12em", color: "var(--dim)",
           border: "1px solid var(--line)", borderRadius: 20,
           padding: "3px 9px", fontFamily: "var(--font-geist),sans-serif",
           verticalAlign: "middle", position: "relative", top: "-1px",
@@ -46,7 +46,7 @@ export default function TopBar() {
       {/* Right: language toggle */}
       <button onClick={toggle} style={{
         fontFamily: "var(--font-geist),sans-serif",
-        fontSize: 11, letterSpacing: "0.1em",
+        fontSize: 13, letterSpacing: "0.1em",
         color: "var(--faint)", border: "1px solid var(--line)", borderRadius: 2,
         padding: "4px 10px", background: "none", cursor: "pointer",
       }}>
