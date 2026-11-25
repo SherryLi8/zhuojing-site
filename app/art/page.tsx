@@ -317,7 +317,7 @@ export default function Art() {
                 transition={{ duration: 0.2 }}
                 style={{
                   position: "absolute", inset: 0,
-                  background: "rgba(0,0,0,0.58)",
+                  background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.28) 100%)",
                   display: "flex", flexDirection: "column",
                   justifyContent: "flex-end", padding: "14px 16px",
                 }}
@@ -330,12 +330,14 @@ export default function Art() {
                     <span style={{
                       fontFamily: "var(--font-newsreader),serif", fontStyle: "italic", fontWeight: 200,
                       fontSize: 14, color: "#fff", lineHeight: 1.2, marginBottom: 4,
+                      textShadow: "0 1px 10px rgba(0,0,0,0.65)",
                     }}>{t}</span>
                   ) : null;
                 })()}
                 <span style={{
                   fontFamily: "var(--font-geist),sans-serif", fontSize: 9,
-                  letterSpacing: "0.18em", color: "rgba(255,255,255,0.75)",
+                  letterSpacing: "0.18em", color: "#fff",
+                  textShadow: "0 1px 8px rgba(0,0,0,0.65)",
                 }}>
                   {MEDIUM_LABELS[lang][work.medium]}
                 </span>
